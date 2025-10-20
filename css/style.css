@@ -276,13 +276,17 @@ textarea:focus
 .caption h3{
 	margin: 20px auto;
 	font-size: 50px;
+	padding-left: 39%;
 }
 
 .caption h1{
 	margin: 20px auto;
-	font-size: 90px;
+	font-size: 85px;
 	position:relative;
-	text-emphasis-position: right;
+	padding-left: 37%;
+	text-emphasis-position: left;
+	word-wrap: break-word;  /* ensure long words wrap */
+	white-space: normal;    /* enable normal wrapping */
 }
 
 .button-scroll{
@@ -1245,7 +1249,7 @@ footer p{
   .caption h3 {
     font-size: 26px !important;
     margin-top: 10px;
-	 position: relative;
+	position: relative;
     top: 150px; /* move text down roughly 1 inch */
   }
 
