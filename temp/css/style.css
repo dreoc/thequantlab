@@ -1261,3 +1261,14 @@ footer p{
   }
 }
 
+.pub-entry {
+  margin-left: 8ch;       /* total indent for the body */
+  text-indent: -8ch;      /* pulls the first line back (so year + dash stick out) */
+  line-height: 1.6em;
+  margin-bottom: 1.5em;
+}
+
+.pub-entry .pub-title {
+  display:contents;
+  margin-left: 8ch;       /* aligns with the rest of the indented text */
+}
