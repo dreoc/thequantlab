@@ -647,6 +647,28 @@ textarea:focus
 	bottom: 0;
 }
 
+/* Give both PI photos the same visible size and crop behavior. */
+.pi-photo {
+  width: 100%;
+  max-width: 370px;
+  height: 370px;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto 18px auto;
+}
+
+/* Nudge Erik's crop slightly upward and in a touch. */
+.pi-photo-erik {
+  object-position: center 1%;
+  transform: scale(1.07);
+}
+
+/* Keep Ben a little less zoomed and slightly high in frame. */
+.pi-photo-ben {
+  object-position: center 1%;
+  transform: scale(1.06);
+}
+
 /* -------------------------------------------------------
                     Numbers
 -------------------------------------------------------- */
