@@ -1,7 +1,0 @@
-Start-Process "~\thequantlab-main\temp\index.html" #start the website locally
-Start-Process "e:\quantlab\thequantlab-main\temp\index.html"
-in index.html#projects, you can add your website pages under <div class="social-icon text-center mb-50">. ive used google.com as a placeholder
-look for <a href="https://google.com" in the people html pages
-contact button directs to say hello section on the bottom
-
-replace sampleLabManual for labmanual button

@@ -127,3 +127,17 @@
     height: 180px;
   }
 }
+
+
+.people-single-page .people-anchor-section {
+  scroll-margin-top: 90px;
+  padding-top: 10px;
+  margin-top: 20px;
+}
+.people-single-page .team-photo-wrapper {
+  margin-bottom: 35px;
+}
+.people-single-page .team-photo-wrapper img {
+  border: 1px solid #d7d8dc;
+  background: #f6f7f9;
+}
