@@ -16,7 +16,8 @@
 .ql-list li, .linked-pubs li { margin-bottom: 10px; line-height: 1.7; }
 .linked-pubs a { color: #222; font-weight: 600; }
 .linked-pubs .pub-year-inline, .pub-authors-inline { color: #666; font-size: 13px; }
-.project-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 24px; }
+/* I am widening the desktop project grid to five columns so the new AI card stays on the same row. */
+.project-grid { display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: 24px; }
 .project-card { background: #fff; border: 1px solid #eee; padding: 20px; margin-bottom: 30px; }
 .project-card img { margin-top: 15px; }
 .person-card { text-align: center; background: #fff; border: 1px solid #eee; padding: 28px 20px; }
@@ -184,3 +185,6 @@ footer p { letter-spacing: 0.4px; }
   .person-card p,
   .people-member-card p { min-height: 0; }
 }
+
+
+/* I am not touching the other card styles here. I only want the new AI image to inherit the same project-card treatment as the rest of the site. */
