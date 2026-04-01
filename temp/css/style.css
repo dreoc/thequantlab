@@ -588,6 +588,26 @@ textarea:focus
 	margin-bottom: 30px;
 }
 
+.client-item .people-photo{
+	max-width: 300px;
+	width: 100%;
+	height: auto;
+	margin: 0 auto;
+	display: block;
+}
+
+@media (max-width: 768px) {
+	.client-item .people-photo {
+		max-width: 250px;
+	}
+}
+
+@media (max-width: 480px) {
+	.client-item .people-photo {
+		max-width: 200px;
+	}
+}
+
 .owl-theme .owl-dots .owl-dot span{
 	width: 7px;
 	height: 7px;
