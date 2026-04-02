@@ -171,12 +171,12 @@
 <section class="clients section-padding" data-scroll-index="4" id="people">
 <div class="container">
 <div class="section-head text-center"><h5 class="tit">People</h5></div>
-<p class="ql-people-intro text-center">Meet the lab through principal investigators, current team members, and alumni.</p>
+<p class="ql-people-intro text-center">Meet the lab! Principal Investigators, current team members, collaborators, and alumni.</p>
 <div class="people-preview-grid">
 <div class="person-card people-preview-card">
 <img alt="Principal Investigators" class="img-responsive img-thumbnail people-photo" src="img/people/pi_overview.jpg"/>
 <h6>Principal Investigators</h6>
-<p>Erik Otárola-Castillo and Ben Schoville. Research leadership, investigator profiles, and direct links to Purdue and Google Scholar.</p>
+<p>Erik Otárola-Castillo and Ben Schoville. Research interests, investigator profiles, and direct links to Purdue and Google Scholar.</p>
 <div class="person-links">
 <a href="pages/people.html#principal-investigators"><button>View profiles</button></a>
 </div>
@@ -212,41 +212,15 @@
 </div>
 <section class="blog section-padding" data-scroll-index="5" id="news">
 <div class="container">
-<div class="section-head text-center"><h5 class="tit">Recent highlights</h5></div>
-<div class="row">
-<div class="col-md-3 col-sm-6">
-<div class="ql-card">
-<h6>AI, education, and public scholarship</h6>
-<div class="subpage-meta">June 2025</div>
-<p>Erik Otárola-Castillo was featured in TIME on AI and education, extending the lab’s quantitative work into public-facing discussions of AI literacy.</p>
-<a href="https://time.com/author/erik-otarola-castillo/" target="_blank"><span>Read more</span></a>
+<div class="section-head text-center"><h5 class="tit">Recent Highlights</h5></div>
+<div class="highlights-search-container">
+<input class="highlights-search-input" id="highlightsSearch" placeholder="Search highlights by title, type, tag, source, or location..." type="text"/>
+<i class="fas fa-search highlights-search-icon"></i>
 </div>
+<div class="highlights-scroll-wrapper">
+<div class="highlights-scroll-track" id="highlightsScrollTrack"></div>
 </div>
-<div class="col-md-3 col-sm-6">
-<div class="ql-card">
-<h6>MIS 5 lithics in the Kalahari</h6>
-<div class="subpage-meta">March 2025</div>
-<p>A new Journal of Human Evolution paper links Ga-Mohana Hill lithic technology to regional social transmission and connectivity across the Kalahari Basin.</p>
-<a href="https://doi.org/10.1016/j.jhevol.2025.103654" target="_blank"><span>Read more</span></a>
-</div>
-</div>
-<div class="col-md-3 col-sm-6">
-<div class="ql-card">
-<h6>Climate and innovation debate</h6>
-<div class="subpage-meta">2024</div>
-<p>Ben Schoville and Jayne Wilkins synthesized competing views on whether climate change drove innovation in Homo sapiens and how that process should be modeled.</p>
-<a href="https://doi.org/10.1016/j.qsa.2024.100179" target="_blank"><span>Read more</span></a>
-</div>
-</div>
-<div class="col-md-3 col-sm-6">
-<div class="ql-card">
-<h6>Nature paper on Kalahari innovation</h6>
-<div class="subpage-meta">2021</div>
-<p>Signature work associated with the Kalahari program showed evidence for innovative Homo sapiens behavior in the interior of southern Africa at 105,000 years ago.</p>
-<a href="https://doi.org/10.1038/s41586-021-03419-0" target="_blank"><span>Read more</span></a>
-</div>
-</div>
-</div>
+<div class="highlights-empty-state" id="highlightsEmptyState" style="display:none;">No highlights match your search.</div>
 </div>
 </section>
 <section class="contact section-padding" data-scroll-index="6" id="contact">
@@ -319,6 +293,8 @@
 <script src="js/particles.min.js"></script>
 <script src="js/app.js"></script>
 <script src="js/validator.js"></script>
+<script src="js/highlights-data.js"></script>
+<script src="js/highlights-scroll.js"></script>
 <script src="js/custom.js"></script>
 </body>
 </html>
