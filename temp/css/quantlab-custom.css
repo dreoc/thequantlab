@@ -337,3 +337,123 @@ footer p { letter-spacing: 0.4px; }
   .ql-highlight-card h6, .ql-highlight-card p { min-height: 0; }
   .highlights-scroll-track::-webkit-scrollbar { height: 10px; }
 }
+
+
+/* Research section redesign */
+.ql-research-section {
+  background: linear-gradient(180deg, #fbfbfb 0%, #f6f7f9 100%);
+}
+.ql-research-top {
+  display: flex;
+  align-items: stretch;
+  margin-bottom: 34px;
+}
+.ql-research-copy {
+  padding-right: 18px;
+}
+.ql-section-kicker {
+  display: inline-block;
+  margin-bottom: 10px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1.8px;
+  color: #8b8b8b;
+  font-weight: 700;
+}
+.ql-research-title {
+  font-size: 34px;
+  line-height: 1.2;
+  margin: 0 0 18px;
+  color: #1f1f1f;
+}
+.ql-research-logo-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: #fff;
+  border: 1px solid #ececec;
+  box-shadow: 0 14px 34px rgba(0,0,0,0.05);
+  padding: 28px 24px;
+}
+.ql-research-logo {
+  width: 250px;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto 16px;
+}
+.ql-logo-caption {
+  color: #666;
+  line-height: 1.7;
+  max-width: 280px;
+  margin: 0 auto;
+}
+.ql-pillars-wrap {
+  margin-top: 10px;
+}
+.ql-pillars-head {
+  margin-bottom: 24px;
+}
+.ql-pillars-head .tit {
+  margin-bottom: 8px;
+}
+.ql-pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+.ql-pillar-card {
+  position: relative;
+  background: #fff;
+  border: 1px solid #ececec;
+  box-shadow: 0 14px 34px rgba(0,0,0,0.05);
+  padding: 28px 26px 24px;
+  min-height: 280px;
+}
+.ql-pillar-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #f5efe3;
+  color: #8d6c2c;
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 18px;
+}
+.ql-pillar-card h4 {
+  font-size: 20px;
+  margin: 0 0 12px;
+}
+.ql-pillar-card p {
+  margin: 0;
+  line-height: 1.8;
+  color: #555;
+}
+.ql-research-actions {
+  justify-content: center;
+  margin-top: 28px;
+}
+@media (max-width: 991px) {
+  .ql-research-copy {
+    padding-right: 0;
+  }
+  .ql-pillars-grid {
+    grid-template-columns: 1fr;
+  }
+  .ql-pillar-card {
+    min-height: 0;
+  }
+  .ql-research-logo-card {
+    margin-top: 22px;
+  }
+}
+@media (max-width: 767px) {
+  .ql-research-title {
+    font-size: 28px;
+  }
+}

@@ -556,6 +556,27 @@ textarea:focus
 	opacity: 1;
 }
 
+.publications-footer-link {
+  width: 100%;
+  text-align: center;
+  margin-top: 1.75rem;
+  padding-bottom: 0.5rem;
+}
+
+.publications-footer-link a {
+  display: inline-block;
+  font-size: 1.9rem;
+  font-weight: 500;
+  color: #5b84c4;
+  text-decoration: none;
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.publications-footer-link a:hover {
+  color: #3f6ea8;
+  opacity: 0.95;
+}
+
 /* -------------------------------------------------------
                     Clients
 -------------------------------------------------------- */

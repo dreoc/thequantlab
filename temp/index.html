@@ -71,27 +71,53 @@
 </div>
 <div class="button-scroll" data-scrollto="research"><span><i aria-hidden="true" class="fa fa-angle-down"></i></span></div>
 </header>
-<section class="hero" data-scroll-index="1" id="research">
+<section class="hero ql-research-section" data-scroll-index="1" id="research">
 <div class="container">
-<div class="row">
-<div class="hero-block">
-<div class="col-sm-7">
-<div class="hero-item">
-<h5 class="mb-20">Quantitative anthropology at Purdue</h5>
-<p class="mb-20 ql-intro">The QuantLab studies human behavior, ecology, and material culture through archaeological science, statistical modeling, and computational anthropology.</p>
-<p class="mb-20 ql-intro">Across work in the Americas, Africa, Australia-linked collaborations, and comparative human evolution, the lab builds explicit models, reproducible workflows, and careful approaches to uncertainty.</p>
-<div class="ql-highlight">Core strengths include Bayesian inference, morphometrics, lithic analysis, zooarchaeology, human evolutionary ecology, and machine learning for archaeological problems.</div>
-<div class="ql-button-group">
+<div class="row ql-research-top">
+<div class="col-md-8 col-sm-7">
+<div class="hero-item ql-research-copy">
+<span class="ql-section-kicker">Research at Purdue University</span>
+<h2 class="ql-research-title">Theory, methods, and empirical science working together</h2>
+<p class="mb-20 ql-intro">The QuantLab at Purdue University studies human evolution, behavior, culture, and ecology through an integrated approach that connects theory, methods, and empirical research.</p>
+<p class="mb-20 ql-intro">The lab develops and uses computational tools, including statistical modeling, artificial intelligence, and machine learning, to build predictive theory, test ideas, and generate new insights about people and social change over time.</p>
+<div class="ql-highlight">Core strengths include the development and application of artificial intelligence, Bayesian inference, morphometrics, and evolutionary theory to address archaeological questions about ancient weaponry and diet.</div>
+</div>
+</div>
+<div class="col-md-4 col-sm-5">
+<div class="ql-research-logo-card">
+<img alt="The Quant Lab Logo" class="ql-research-logo" src="img/quantlablogo1.png"/>
+<p class="ql-logo-caption">An integrated laboratory for quantitative anthropology, archaeology, and computational science.</p>
+</div>
+</div>
+</div>
+<div class="ql-pillars-wrap">
+<div class="section-head text-center ql-pillars-head">
+<h5 class="tit">Research Framework</h5>
+<p class="ql-section-intro">The lab's work is organized around three connected pillars.</p>
+</div>
+<div class="ql-pillars-grid">
+<div class="ql-pillar-card">
+<div class="ql-pillar-number">01</div>
+<h4>Theory Development</h4>
+<p>The lab builds and refines quantitative and predictive theory in human evolutionary biology, ecology, behavior, cultural evolution, and morphology, developing new frameworks for understanding human adaptation, variation, and change.</p>
+</div>
+<div class="ql-pillar-card">
+<div class="ql-pillar-number">02</div>
+<h4>Methods Innovation</h4>
+<p>The lab develops and applies computational statistics, AI, and machine learning to analyze complex anthropological, archaeological, and biological data, making it possible to detect patterns and evaluate competing explanations in new ways.</p>
+</div>
+<div class="ql-pillar-card">
+<div class="ql-pillar-number">03</div>
+<h4>Empirical Testing</h4>
+<p>The lab tests models and hypotheses using archaeological, ecological, ethnographic, and evolutionary biological data, combining fieldwork, experiments, and large-scale quantitative analysis to evaluate and refine theoretical predictions.</p>
+</div>
+</div>
+<!--</div>
+<div class="ql-button-group ql-research-actions">
 <a download="QuantLab_Manual.pdf" href="sampleLabManual.pdf"><button><span><i aria-hidden="true" class="fa fa-download"></i></span> Lab Manual</button></a>
 <a href="pages/pubpage.html"><button>View publications</button></a>
 <button data-scroll-nav="6">Contact the lab</button>
-</div>
-</div>
-</div>
-<div class="col-sm-5" style="text-align:center;">
-<img alt="The Quant Lab Logo" src="img/quantlablogo1.png" style="width:320px;max-width:100%;height:auto;margin:20px auto;display:block;"/>
-</div>
-</div>
+</div>-->
 </div>
 </div>
 </section>
@@ -135,38 +161,55 @@
 </div>
 </section>
 <section class="publications-section section-padding" data-scroll-index="3" id="publications">
-<div class="container">
-<h2 class="section-title">Publications</h2>
-<div class="search-container">
-<input class="search-input" id="publicationSearch" placeholder="Search publications by title, authors, project area, or keywords..." type="text"/>
-<i class="fas fa-search search-icon"></i>
-</div>
-<div class="tabs-container">
-<button class="tab-btn active" data-category="all">All</button>
-<button class="tab-btn" data-category="Americas">Americas</button>
-<button class="tab-btn" data-category="Africa">Africa</button>
-<button class="tab-btn" data-category="Australia">Australia</button><button class="tab-btn" data-category="Human Evolution">Human Evolution</button>
-<button class="tab-btn" data-category="Methods">Methods</button>
-</div>
-<div class="publications-content">
-<div class="carousel-container">
-<div class="publications-carousel" id="publicationsCarousel"></div>
-</div>
-<div class="preview-panel" id="previewPanel">
-<div class="preview-default">
-<i class="fas fa-mouse-pointer preview-icon"></i>
-<p>Select a publication to see a short summary and follow the link to the paper, chapter, or DOI record.</p>
-</div>
-<div class="preview-content" id="previewContent" style="display:none;">
-<h3 class="preview-title" id="previewTitle"></h3>
-<p class="preview-authors" id="previewAuthors"></p>
-<p class="preview-year" id="previewYear"></p>
-<div class="preview-abstract" id="previewAbstract"></div>
-<a class="preview-link" href="#" id="previewLink" target="_blank">View source <i class="fas fa-external-link-alt"></i></a>
-</div>
-</div>
-</div>
-</div>
+  <div class="container">
+    <h2 class="section-title">Publications</h2>
+
+    <div class="search-container">
+      <input
+        class="search-input"
+        id="publicationSearch"
+        placeholder="Search publications by title, authors, project area, or keywords..."
+        type="text"
+      />
+      <i class="fas fa-search search-icon"></i>
+    </div>
+
+    <div class="tabs-container">
+      <button class="tab-btn active" data-category="all">All</button>
+      <button class="tab-btn" data-category="Americas">Americas</button>
+      <button class="tab-btn" data-category="Africa">Africa</button>
+      <button class="tab-btn" data-category="Australia">Australia</button>
+      <button class="tab-btn" data-category="Human Evolution">Human Evolution</button>
+      <button class="tab-btn" data-category="Methods">Methods</button>
+    </div>
+
+    <div class="publications-content">
+      <div class="carousel-container">
+        <div class="publications-carousel" id="publicationsCarousel"></div>
+      </div>
+
+      <div class="preview-panel" id="previewPanel">
+        <div class="preview-default">
+          <i class="fas fa-mouse-pointer preview-icon"></i>
+          <p>Select a publication to see a short summary and follow the link to the paper, chapter, or DOI record.</p>
+        </div>
+
+        <div class="preview-content" id="previewContent" style="display:none;">
+          <h3 class="preview-title" id="previewTitle"></h3>
+          <p class="preview-authors" id="previewAuthors"></p>
+          <p class="preview-year" id="previewYear"></p>
+          <div class="preview-abstract" id="previewAbstract"></div>
+          <a class="preview-link" href="#" id="previewLink" target="_blank" rel="noopener noreferrer">
+            View source <i class="fas fa-external-link-alt"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="publications-footer-link">
+      <a href="pages/pubpage.html">View complete publication list</a>
+    </div>
+  </div>
 </section>
 <section class="clients section-padding" data-scroll-index="4" id="people">
 <div class="container">
