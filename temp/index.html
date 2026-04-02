@@ -267,48 +267,111 @@
 </div>
 </section>
 <section class="contact section-padding" data-scroll-index="6" id="contact">
-<div class="container">
-<div class="section-head text-center"><h5 class="tit">Contact</h5></div>
-<div class="row">
-<div class="col-md-5">
-<div class="cont-info contact-compact">
-<div class="info-item"><div class="icon"><span class="icon-map-pin"></span></div><div class="info-content"><h6>Department</h6><h5>Purdue Anthropology, Stone Hall</h5></div></div>
-<div class="info-item"><div class="icon"><span class="icon-map-pin"></span></div><div class="info-content"><h6>Mailing address</h6><h5>700 Mitch Daniels Blvd., Suite 303<br/>West Lafayette, IN 47907-2059</h5></div></div>
-<div class="info-item"><div class="icon"><span class="icon-phone"></span></div><div class="info-content"><h6>Main office</h6><h5>(765) 496-7400</h5></div></div>
-<div class="info-item"><div class="icon"><span class="icon-envelope"></span></div><div class="info-content"><h6>General / PI contact</h6><h5>anthropology@purdue.edu</h5></div></div>
-</div>
-</div>
-<div class="col-md-7">
-<div class="contact-form">
-<form id="contact-form" method="post" onsubmit="return sendEmail(event)">
-<div class="messages"></div>
-<div class="controls">
-<div class="row">
-<div class="col-md-6"><div class="form-group"><input id="form_name" name="name" placeholder="Name *" required="required" type="text"/></div></div>
-<div class="col-md-6"><div class="form-group"><input id="form_email" name="email" placeholder="Email *" required="required" type="email"/></div></div>
-</div>
-<div class="row"><div class="col-md-12"><div class="form-group"><input id="form_subject" name="subject" placeholder="Subject" type="text"/></div></div></div>
-<div class="row"><div class="col-md-12"><div class="form-group"><textarea id="form_message" name="message" placeholder="Message *" required="required" rows="4"></textarea></div></div><div class="col-sm-4"><input class="button" type="submit" value="Send message"/></div></div>
-</div>
-</form>
-<script>
-          function sendEmail(event) {
-            event.preventDefault();
-            const name = document.getElementById('form_name').value;
-            const email = document.getElementById('form_email').value;
-            const subject = document.getElementById('form_subject').value || 'QuantLab website contact';
-            const message = document.getElementById('form_message').value;
-            const body = 'Name: ' + name + '\nEmail: ' + email + '\n\nMessage:\n' + message;
-            window.location.href = 'mailto:eoc@purdue.edu?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-            document.querySelector('.messages').innerHTML = '<div style="padding:10px;background:#d4edda;color:#155724;border-radius:4px;margin-bottom:15px;">Your email client should open with a pre-filled message.</div>';
-            setTimeout(function() { document.getElementById('contact-form').reset(); }, 800);
-            return false;
-          }
-          </script>
-</div>
-</div>
-</div>
-</div>
+  <div class="container">
+    <div class="section-head text-center">
+      <h5 class="tit">Contact</h5>
+    </div>
+
+    <div class="row">
+      <div class="col-md-5">
+        <div class="cont-info contact-compact">
+
+          <div class="info-item">
+            <div class="icon">
+              <span class="icon-envelope"></span>
+            </div>
+            <div class="info-content">
+              <h6>General contact</h6>
+              <h5>
+                <a href="mailto:anthropology@purdue.edu">anthropology@purdue.edu</a>
+              </h5>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="icon">
+              <span class="icon-profile-male"></span>
+            </div>
+            <div class="info-content">
+              <h6>Prospective students and postdocs</h6>
+              <h5>
+            <p style="margin-bottom:16px;">
+              We are currently recruiting undergraduate and graduate students, and postdoctoral researchers.
+            </p>
+              </h5>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="icon">
+              <span class="icon-map-pin"></span>
+            </div>
+            <div class="info-content">
+              <h6>Department</h6>
+              <h5>Purdue Anthropology, Stone Hall</h5>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="icon">
+              <span class="icon-map-pin"></span>
+            </div>
+            <div class="info-content">
+              <h6>Mailing address</h6>
+              <h5>
+                700 Mitch Daniels Blvd., Suite 303<br/>
+                West Lafayette, IN 47907-2059
+              </h5>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="icon">
+              <span class="icon-phone"></span>
+            </div>
+            <div class="info-content">
+              <h6>Main office</h6>
+              <h5>(765) 496-7400</h5>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="col-md-7">
+        <div class="contact-form">
+          <div style="padding:28px;background:#ffffff;border:1px solid #e5e5e5;border-radius:8px;">
+            <h5 style="margin-top:0;margin-bottom:18px;">Join or collaborate with the lab</h5>
+
+            <p style="margin-bottom:16px;">
+              The QuantLab welcomes inquiries from prospective graduate students,
+              postdoctoral researchers, undergraduate students, and colleagues
+              interested in research collaboration.
+            </p>
+
+            <p style="margin-bottom:16px;">
+              We are especially interested in people working at the intersection of
+              anthropology, archaeology, human evolution, quantitative methods,
+              evolutionary theory, and AI-enabled scientific research.
+            </p>
+
+            <p style="margin-bottom:16px;">
+              For general questions, please email
+              <a href="mailto:anthropology@purdue.edu">anthropology@purdue.edu</a>.
+            </p>
+
+            <p style="margin-bottom:0;">
+              For direct inquiries about joining the lab or discussing research fit,
+              contact
+              <a href="mailto:eoc@purdue.edu">Dr. Erik Otárola-Castillo</a>
+              or
+              <a href="mailto:bschovil@purdue.edu">Dr. Benjamin Schoville</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 <script src="js/publications-infinite-scroll.js"></script>
 <script src="js/pub-tabs.js"></script>
