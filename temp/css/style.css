@@ -247,6 +247,8 @@ textarea:focus
 .navbar .navbar-nav>li>a.active{
 	color: #fff!important;
 	background: none;
+	font-weight: 700;
+	opacity: 1;
 }
 
 /* -------------------------------------------------------

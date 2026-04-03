@@ -538,3 +538,17 @@ footer p { letter-spacing: 0.4px; }
     min-height: 0;
   }
 }
+
+
+/* I keep the homepage blog strip lightweight and data-driven from the shared blog post metadata. */
+.blog-home-empty {
+  max-width: 520px;
+  margin: 0 auto 18px;
+  text-align: left;
+}
+.blog-home-empty h4 {
+  margin-bottom: 12px;
+}
+.blog-home-empty p {
+  margin-bottom: 0;
+}
