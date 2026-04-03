@@ -10,8 +10,8 @@ $(function (){
     $.scrollIt({
       upKey: 38,                // key code to navigate to the next section
       downKey: 40,              // key code to navigate to the previous section
-      easing: 'linear',         // the easing function for animation
-      scrollTime: 600,          // how long (in ms) the animation takes
+      easing: 'swing',         // the easing function for animation
+      scrollTime: 1000,          // how long (in ms) the animation takes
       activeClass: 'active',    // class given to the active nav element
       onPageChange: null,       // function(pageIndex) that is called when page is changed
       topOffset: -60            // offste (in px) for fixed top navigation
@@ -35,17 +35,61 @@ $(function (){
     });
 
 
-    //smooth button scroll
-    $('.button-scroll').on('click', function(){
-      
+    // smooth button scroll
+    $('.button-scroll').on('click', function(e){
+        e.preventDefault();
+
         var scrollTo = $(this).attr('data-scrollTo');
+        var $target = $('#' + scrollTo);
 
-        $('body, html').animate({
-
-        "scrollTop": $('#'+scrollTo).offset().top - 60
-        }, 1000 );
-
+        if ($target.length) {
+            $('html, body').stop().animate({
+                scrollTop: $target.offset().top - 60
+            }, 1000);
+        }
     });
+
+
+    // smooth internal anchor links on the homepage
+    $('a[href*="#"]').on('click', function(e) {
+        var href = $(this).attr('href');
+
+        if (!href) {
+            return;
+        }
+
+        var cleanHref = href.replace(/^\.\.\//, '');
+        var isIndexAnchor = cleanHref.indexOf('index.html#') === 0 || href.charAt(0) === '#';
+
+        if (!isIndexAnchor) {
+            return;
+        }
+
+        var targetId = href.split('#')[1];
+        var $target = $('#' + targetId);
+
+        if ($target.length) {
+            e.preventDefault();
+            $('html, body').stop().animate({
+                scrollTop: $target.offset().top - 60
+            }, 1000);
+        }
+    });
+
+
+    // smooth hash landing on the homepage after links from internal pages
+    if (window.location.hash) {
+        var targetId = window.location.hash.replace('#', '');
+        var $target = $('#' + targetId);
+
+        if ($target.length) {
+            setTimeout(function() {
+                $('html, body').stop().animate({
+                    scrollTop: $target.offset().top - 60
+                }, 1000);
+            }, 50);
+        }
+    }
     
 
     // progress bar
