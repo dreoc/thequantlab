@@ -78,3 +78,5 @@
 @media (max-width: 991px) {
   .blog-grid { grid-template-columns: 1fr; }
 }
+
+.blog-source-note { font-size: 13px; line-height: 1.6; color: #777; margin-bottom: 12px; }

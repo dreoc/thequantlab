@@ -1,81 +1,86 @@
-// I am keeping the blog data in a plain JavaScript array so the site works even when I open it locally.
-// I am also structuring each entry like JSON so it stays easy to edit and expand later.
+// I keep the blog data in one place so the homepage strip and the full blog page stay synchronized.
 window.quantLabBlogPosts = [
-/*  {
-    "id": "erik-ai-modeling",
-    "title": "Why AI still needs scientific modeling",
+  {
+    "id": "volunteer-profile",
+    "title": "Volunteer Profile",
     "author": "Erik Otárola-Castillo",
     "authorKey": "erik",
-    "date": "2026-04-01",
-    "displayDate": "April 1, 2026",
+    "order": 1,
+    "displayDate": "SAA Archaeological Record",
     "category": "Public Writing",
     "tags": [
-      "AI",
-      "Methods",
+      "Service",
       "Public Writing",
-      "Scientific Modeling"
+      "SAA"
     ],
-    "image": "../img/ai/ai_development_worldmap.png",
-    "cardImage": "../img/ai/ai_development_worldmap.png",
-    "excerpt": "AI can expand archaeological and anthropological research, but it works best when it is anchored to explicit scientific models, careful inference, and reproducible evidence.",
-    "url": "blog/erik-ai-modeling.html"
+    "source": "SAA Archaeological Record",
+    "image": "../img/EOC/EOCofficialphoto_225x300.jpg",
+    "cardImage": "../img/EOC/EOCofficialphoto_225x300.jpg",
+    "excerpt": "A short reflection on service, professional community, and why volunteering matters within archaeology.",
+    "url": "https://onlinedigeditions.com/article/Volunteer+Profile/5041119/852385/article.html",
+    "linkLabel": "Original publication"
   },
   {
-    "id": "erik-bayesian-archaeology",
-    "title": "Bayesian inference beyond chronology",
+    "id": "monico-bayesian-story",
+    "title": "Monico Origins, a Bayesian Story",
     "author": "Erik Otárola-Castillo",
     "authorKey": "erik",
-    "date": "2026-03-30",
-    "displayDate": "March 30, 2026",
+    "order": 2,
+    "displayDate": "Cambridge Core Blog · October 10, 2022",
     "category": "Methods",
     "tags": [
-      "Archaeology",
-      "Methods",
       "Bayesian",
-      "Inference"
+      "Archaeology",
+      "Teaching",
+      "Methods"
     ],
+    "source": "Cambridge Core Blog",
     "image": "../img/americas/americas_topomap.jpg",
     "cardImage": "../img/americas/americas_topomap.jpg",
-    "excerpt": "Bayesian methods in archaeology are useful for much more than chronology. They let us formalize competing hypotheses, compare evidence, and quantify uncertainty directly.",
-    "url": "blog/erik-bayesian-archaeology.html"
+    "excerpt": "A public-facing account of how the Monico Bayesian story emerged and why simple narrative examples can help explain Bayesian inference in archaeology.",
+    "url": "https://www.cambridge.org/core/blog/2022/10/10/monico-origins-a-bayesian-story/",
+    "linkLabel": "Original publication"
   },
   {
-    "id": "ben-climate-innovation",
-    "title": "Climate, innovation, and the African Pleistocene record",
-    "author": "Ben Schoville",
+    "id": "sacred-site-3d-scanning",
+    "title": "3D scanning: we recreated a sacred South African site in a way that captures its spirit",
+    "author": "Ben Schoville and collaborators",
     "authorKey": "ben",
-    "date": "2026-03-28",
-    "displayDate": "March 28, 2026",
+    "order": 3,
+    "displayDate": "The Conversation",
     "category": "Archaeology",
     "tags": [
-      "Archaeology",
       "Africa",
-      "Climate",
-      "Human Evolution"
+      "3D Scanning",
+      "Digital Heritage",
+      "Archaeology"
     ],
+    "source": "The Conversation",
     "image": "../img/africa/africa_topo.jpg",
     "cardImage": "../img/africa/africa_topo.jpg",
-    "excerpt": "Climate mattered in the African Pleistocene, but the archaeological record rarely supports simple one-cause stories. Regional history, technology, and human decisions all matter.",
-    "url": "blog/ben-climate-innovation.html"
+    "excerpt": "A short piece on digital reconstruction, place, and how 3D methods can communicate archaeological landscapes beyond conventional site photography.",
+    "url": "https://theconversation.com/3d-scanning-we-recreated-a-sacred-south-african-site-in-a-way-that-captures-its-spirit-219122",
+    "linkLabel": "Original publication"
   },
   {
-    "id": "ben-experimental-archaeology",
-    "title": "What experimental archaeology adds to lithic analysis",
-    "author": "Ben Schoville",
+    "id": "southern-kalahari-human-evolution",
+    "title": "Ancient southern Kalahari was more important to human evolution than previously thought",
+    "author": "Ben Schoville and collaborators",
     "authorKey": "ben",
-    "date": "2026-03-26",
-    "displayDate": "March 26, 2026",
-    "category": "Methods",
+    "order": 4,
+    "displayDate": "The Conversation · March 31, 2021",
+    "category": "Human Evolution",
     "tags": [
-      "Archaeology",
-      "Methods",
-      "Australia",
-      "Lithics",
-      "Experimental"
+      "Africa",
+      "Human Evolution",
+      "Kalahari",
+      "Archaeology"
     ],
-    "image": "../img/australia/australia_banner.jpg",
-    "cardImage": "../img/australia/australia_banner.jpg",
-    "excerpt": "Experimental archaeology gives us a disciplined way to evaluate fracture, performance, and discard. It does not replace archaeology, but it sharpens what we can infer from artifacts.",
-    "url": "blog/ben-experimental-archaeology.html"
-  }*/
+    "source": "The Conversation",
+    "image": "../img/africa/africa_topo.jpg",
+    "cardImage": "../img/africa/africa_topo.jpg",
+    "excerpt": "An accessible explanation of why the southern Kalahari matters for human evolutionary history and how new archaeological evidence reshapes older assumptions.",
+    "url": "https://theconversation.com/ancient-southern-kalahari-was-more-important-to-human-evolution-than-previously-thought-155047",
+    "linkLabel": "Original publication"
+  }
 ];

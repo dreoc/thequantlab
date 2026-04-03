@@ -39,14 +39,14 @@
 </div>
 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 <ul class="nav navbar-nav navbar-right">
-<li><a class="active" href="index.html#home">Home</a></li>
-<li><a href="index.html#research">Research</a></li>
-<li><a href="index.html#projects">Projects</a></li>
-<li><a href="index.html#publications">Publications</a></li>
-<li><a href="index.html#people">People</a></li>
-<li><a href="index.html#news">Recent Highlights</a></li>
-<li><a href="index.html#contact">Contact</a></li>
-<li><a href="pages/blog.html">Blog</a></li>
+<li><a data-nav="home" href="index.html#home" class="active">Home</a></li>
+<li><a data-nav="research" href="index.html#research">Research</a></li>
+<li><a data-nav="projects" href="index.html#projects">Projects</a></li>
+<li><a data-nav="publications" href="index.html#publications">Publications</a></li>
+<li><a data-nav="people" href="index.html#people">People</a></li>
+<li><a data-nav="news" href="index.html#news">Recent Highlights</a></li>
+<li><a data-nav="contact" href="index.html#contact">Contact</a></li>
+<li><a data-nav="blog" href="index.html#blog-home">Blog</a></li>
 </ul>
 </div>
 </div>
@@ -283,7 +283,7 @@
             <div class="info-content">
               <h6>General contact</h6>
               <h5>
-                <a href="mailto:anthropology [at] purdue.edu">anthropology [at] purdue.edu</a>
+                <a href="mailto:anthropology@purdue.edu">anthropology@purdue.edu</a>
               </h5>
             </div>
           </div>
@@ -294,11 +294,7 @@
             </div>
             <div class="info-content">
               <h6>Prospective students and postdocs</h6>
-              <h5>
-            <p style="margin-bottom:16px;">
-              We are currently recruiting undergraduate and graduate students, and postdoctoral researchers.
-            </p>
-              </h5>
+              <h5>We are currently recruiting undergraduate and graduate students, and postdoctoral researchers.</h5>
             </div>
           </div>
 
@@ -357,15 +353,15 @@
 
             <p style="margin-bottom:16px;">
               For general questions, please email
-              <a href="mailto:anthropology [at] purdue.edu">anthropology [at] purdue.edu</a>.
+              <a href="mailto:anthropology@purdue.edu">anthropology@purdue.edu</a>.
             </p>
 
             <p style="margin-bottom:0;">
               For direct inquiries about joining the lab or discussing research fit,
               contact
-              <a href="mailto:eoc [at] purdue.edu">Dr. Erik Otárola-Castillo</a>
+              <a href="mailto:eoc@purdue.edu">Dr. Erik Otárola-Castillo</a>
               or
-              <a href="mailto:bschovil [at] purdue.edu">Dr. Benjamin Schoville</a>.
+              <a href="mailto:bschovil@purdue.edu">Dr. Benjamin Schoville</a>.
             </p>
           </div>
         </div>
@@ -373,6 +369,48 @@
     </div>
   </div>
 </section>
+
+
+<section class="blog-home section-padding" data-scroll-index="7" id="blog-home">
+<div class="container">
+<div class="section-head text-center"><h5 class="tit">From the Blog</h5></div>
+<p class="ql-people-intro text-center">Selected public writing and short-form essays connected to QuantLab research. Scroll down to view all blog posts.</p>
+<div class="blog-home-scroll" id="blogHomeScroll">
+<article class="blog-home-card ql-card">
+<div class="small-label">Public Writing</div>
+<div class="subpage-meta">SAA Archaeological Record · Erik Otárola-Castillo</div>
+<h4>Volunteer Profile</h4>
+<p>A short reflection on service, professional community, and why volunteering matters within archaeology.</p>
+<a class="blog-home-link" href="https://onlinedigeditions.com/article/Volunteer+Profile/5041119/852385/article.html" target="_blank" rel="noopener"><span>Original publication</span></a>
+</article>
+<article class="blog-home-card ql-card">
+<div class="small-label">Methods</div>
+<div class="subpage-meta">Cambridge Core Blog · Erik Otárola-Castillo</div>
+<h4>Monico Origins, a Bayesian Story</h4>
+<p>A public-facing account of how the Monico Bayesian story emerged and why narrative examples can clarify Bayesian inference in archaeology.</p>
+<a class="blog-home-link" href="https://www.cambridge.org/core/blog/2022/10/10/monico-origins-a-bayesian-story/" target="_blank" rel="noopener"><span>Original publication</span></a>
+</article>
+<article class="blog-home-card ql-card">
+<div class="small-label">Archaeology</div>
+<div class="subpage-meta">The Conversation · Ben Schoville and collaborators</div>
+<h4>3D scanning: we recreated a sacred South African site in a way that captures its spirit</h4>
+<p>A short piece on digital reconstruction, place, and how 3D methods can communicate archaeological landscapes beyond conventional site photography.</p>
+<a class="blog-home-link" href="https://theconversation.com/3d-scanning-we-recreated-a-sacred-south-african-site-in-a-way-that-captures-its-spirit-219122" target="_blank" rel="noopener"><span>Original publication</span></a>
+</article>
+<article class="blog-home-card ql-card">
+<div class="small-label">Human Evolution</div>
+<div class="subpage-meta">The Conversation · Ben Schoville and collaborators</div>
+<h4>Ancient southern Kalahari was more important to human evolution than previously thought</h4>
+<p>An accessible explanation of why the southern Kalahari matters for human evolutionary history and how new archaeological evidence reshapes older assumptions.</p>
+<a class="blog-home-link" href="https://theconversation.com/ancient-southern-kalahari-was-more-important-to-human-evolution-than-previously-thought-155047" target="_blank" rel="noopener"><span>Original publication</span></a>
+</article>
+</div>
+<div class="blog-home-footer text-center">
+<a href="pages/blog.html"><button>View all blog posts</button></a>
+</div>
+</div>
+</section>
+
 <script src="js/publications-infinite-scroll.js"></script>
 <script src="js/pub-tabs.js"></script>
 </main>

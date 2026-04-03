@@ -225,3 +225,64 @@ $(window).on("load",function (){
     }
 
 });
+
+// I keep the nav-state logic in one place so internal pages and homepage sections both highlight clearly.
+(function () {
+  function setActiveNav(key) {
+    var links = document.querySelectorAll('.navbar .navbar-nav > li > a[data-nav]');
+    links.forEach(function (link) {
+      link.classList.toggle('active', link.getAttribute('data-nav') === key);
+    });
+  }
+
+  function currentPathKey() {
+    var path = window.location.pathname.toLowerCase();
+    if (/\/pages\/blog(?:\/|\.html)/.test(path)) return 'blog';
+    if (/\/pages\/(people|eoc_page|bjs_page|andrew-van-horn|principal-investigators|team-members|lab-alumni)\.html/.test(path)) return 'people';
+    if (/\/pages\/(pubpage|publications-carousel)\.html/.test(path)) return 'publications';
+    if (/\/pages\/(africa|americas|australia|humev|ai-development)\.html/.test(path)) return 'projects';
+    return 'home';
+  }
+
+  function isIndexPage() {
+    var path = window.location.pathname.toLowerCase();
+    return /(?:\/|^)index\.html$/.test(path) || /\/$/.test(path) || path === '';
+  }
+
+  function bindHomepageSectionHighlight() {
+    var sections = [
+      { id: 'home', key: 'home' },
+      { id: 'research', key: 'research' },
+      { id: 'projects', key: 'projects' },
+      { id: 'publications', key: 'publications' },
+      { id: 'people', key: 'people' },
+      { id: 'news', key: 'news' },
+      { id: 'contact', key: 'contact' },
+      { id: 'blog-home', key: 'blog' }
+    ];
+
+    function updateActiveSection() {
+      var scrollY = window.pageYOffset + 120;
+      var current = 'home';
+      sections.forEach(function (section) {
+        var el = document.getElementById(section.id);
+        if (el && el.offsetTop <= scrollY) {
+          current = section.key;
+        }
+      });
+      setActiveNav(current);
+    }
+
+    window.addEventListener('scroll', updateActiveSection);
+    window.addEventListener('resize', updateActiveSection);
+    updateActiveSection();
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    if (isIndexPage()) {
+      bindHomepageSectionHighlight();
+    } else {
+      setActiveNav(currentPathKey());
+    }
+  });
+})();

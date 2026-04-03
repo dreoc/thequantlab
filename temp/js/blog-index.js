@@ -1,4 +1,4 @@
-// I am rendering the blog index from the shared post data so I only have one place to maintain the metadata.
+// I render the blog index from the shared post data so I only have one place to maintain the metadata.
 (function () {
   function slugify(value) {
     return String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
@@ -38,7 +38,7 @@
 
   function matchesSearch(post, query) {
     if (!query) return true;
-    var haystack = [post.title, post.author, post.category, post.excerpt].concat(post.tags || []).join(' ').toLowerCase();
+    var haystack = [post.title, post.author, post.category, post.excerpt, post.source].concat(post.tags || []).join(' ').toLowerCase();
     return haystack.indexOf(query.toLowerCase()) !== -1;
   }
 
@@ -46,13 +46,14 @@
     var container = document.getElementById('blog-posts-grid');
     var empty = document.getElementById('blog-empty-state');
     if (!container) return;
+
     var filtered = posts.filter(function (post) {
       var authorOk = state.author === 'all' || slugify(post.authorKey || post.author) === state.author;
       var categoryOk = state.category === 'all' || slugify(post.category) === state.category || (post.tags || []).some(function (tag) { return slugify(tag) === state.category; });
       var searchOk = matchesSearch(post, state.search);
       return authorOk && categoryOk && searchOk;
     }).sort(function (a, b) {
-      return new Date(b.date) - new Date(a.date);
+      return (a.order || 999) - (b.order || 999);
     });
 
     if (!filtered.length) {
@@ -68,12 +69,13 @@
       }).join('');
       return [
         '<article class="ql-card blog-card">',
-        '<a class="blog-card-image" href="' + post.url + '"><img src="' + post.cardImage + '" alt="' + post.title.replace(/"/g, '&quot;') + '"></a>',
+        '<a class="blog-card-image" href="' + post.url + '" target="_blank" rel="noopener"><img src="' + post.cardImage + '" alt="' + post.title.replace(/"/g, '&quot;') + '"></a>',
         '<div class="subpage-meta">' + post.displayDate + ' · ' + post.author + '</div>',
-        '<h4><a href="' + post.url + '">' + post.title + '</a></h4>',
+        '<h4><a href="' + post.url + '" target="_blank" rel="noopener">' + post.title + '</a></h4>',
         '<p>' + post.excerpt + '</p>',
+        '<div class="blog-source-note">Originally published at ' + post.source + '. We link to the original source here rather than reproducing the full text.</div>',
         '<div class="blog-tags">' + tags + '</div>',
-        '<div class="blog-card-actions"><a href="' + post.url + '"><button>Read post</button></a></div>',
+        '<div class="blog-card-actions"><a href="' + post.url + '" target="_blank" rel="noopener"><button>' + (post.linkLabel || 'Original publication') + '</button></a></div>',
         '</article>'
       ].join('');
     }).join('');
@@ -91,10 +93,14 @@
   document.addEventListener('DOMContentLoaded', function () {
     var posts = window.quantLabBlogPosts || [];
     var state = parseQuery();
-    var authors = uniqueValues(posts, 'author').map(function (author, index) {
-      return { label: author === 'Erik Otárola-Castillo' ? 'Erik' : author === 'Ben Schoville' ? 'Ben' : author, value: slugify(posts.find(function(p){return p.author===author;}).authorKey || author) };
+    var authors = uniqueValues(posts, 'author').map(function (author) {
+      var post = posts.find(function(p){return p.author===author;});
+      return {
+        label: author === 'Erik Otárola-Castillo' ? 'Erik' : author === 'Ben Schoville and collaborators' ? 'Ben' : author,
+        value: slugify((post && (post.authorKey || post.author)) || author)
+      };
     });
-    var categories = ['AI', 'Archaeology', 'Methods', 'Public Writing'];
+    var categories = uniqueValues(posts, 'category');
 
     var authorContainer = document.getElementById('blog-author-filters');
     if (authorContainer) {
