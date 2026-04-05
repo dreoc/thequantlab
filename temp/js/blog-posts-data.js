@@ -2,7 +2,7 @@
 window.quantLabBlogPosts = [
 	 {
     "id": "erik-bayesian-archaeology",
-    "title": "TEST 1:Bayesian inference beyond chronology",
+    "title": "Bayesian inference beyond chronology",
     "author": "Erik Otárola-Castillo",
     "authorKey": "erik",
     "date": "2026-03-30",
@@ -17,7 +17,7 @@ window.quantLabBlogPosts = [
     "image": "../img/americas/americas_topomap.jpg",
     "cardImage": "../img/americas/americas_topomap.jpg",
     "excerpt": "Bayesian methods in archaeology are useful for much more than chronology. They let us formalize competing hypotheses, compare evidence, and quantify uncertainty directly.",
-    "url": "blog/erik-bayesian-archaeology.html"
+    "url": "pages/blog/erik-bayesian-archaeology.html"
   },
   {
     "id": "volunteer-profile",
