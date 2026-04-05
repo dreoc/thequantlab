@@ -552,3 +552,46 @@ footer p { letter-spacing: 0.4px; }
 .blog-home-empty p {
   margin-bottom: 0;
 }
+
+@media (max-width: 767px) {
+  .ql-research-top {
+    display: block;
+    margin-bottom: 24px;
+  }
+
+  .ql-research-top > [class*="col-"] {
+    width: 100%;
+    float: none;
+  }
+
+  .ql-research-copy {
+    padding-right: 0;
+    margin-bottom: 20px;
+  }
+
+  .ql-research-logo-card {
+    margin-top: 0;
+    padding: 22px 18px;
+  }
+
+  .ql-research-logo {
+    width: 140px;
+  }
+
+  .ql-logo-caption {
+    max-width: 220px;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .ql-research-title {
+    font-size: 28px;
+    line-height: 1.2;
+  }
+
+  .ql-highlight {
+    padding: 14px 16px;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+}
