@@ -18,14 +18,14 @@ posts = json.loads(match.group(1))
 items = []
 for post in sorted(posts, key=lambda p: p.get('order', 999)):
     parts = [
-        '  <item>',
-        f"    <title><![CDATA[{post.get('title', '')}]]></title>",
-        f"    <link>{post.get('canonicalUrl') or post.get('url')}</link>",
-        f"    <guid isPermaLink="true">{post.get('canonicalUrl') or post.get('url')}</guid>",
-        f"    <description><![CDATA[{post.get('excerpt', '')} Originally published at {post.get('source', '')}.]]></description>",
-        f"    <category><![CDATA[{post.get('category', 'Blog')}]]></category>",
-        f"    <author>blog@thequantlab.org ({post.get('author', 'The QuantLab')})</author>",
-    ]
+    '  <item>',
+    f"    <title><![CDATA[{post.get('title', '')}]]></title>",
+    f"    <link>{post.get('canonicalUrl') or post.get('url')}</link>",
+    f'    <guid isPermaLink="true">{post.get("canonicalUrl") or post.get("url")}</guid>',
+    f"    <description><![CDATA[{post.get('excerpt', '')} Originally published at {post.get('source', '')}.]]></description>",
+    f"    <category><![CDATA[{post.get('category', 'Blog')}]]></category>",
+    f"    <author>blog@thequantlab.org ({post.get('author', 'The QuantLab')})</author>",
+]
     if post.get('published'):
         dt = datetime.fromisoformat(post['published']).replace(tzinfo=timezone.utc)
         parts.append(f"    <pubDate>{email.utils.format_datetime(dt)}</pubDate>")
