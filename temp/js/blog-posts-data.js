@@ -1,24 +1,24 @@
 // I keep the blog data in one place so the homepage strip, the full blog page, and the RSS feed stay synchronized.
 window.quantLabBlogPosts = [
 	 {
-  id: "bayesian-inference-beyond-chronology",
-  title: "A TEST: Bayesian inference beyond chronology",
-  author: "Erik Otárola-Castillo",
-  authorKey: "erik",
-  date: "2026-03-30",
-  displayDate: "March 30, 2026",
-  category: "Methods",
-  tags: ["Archaeology", "Methods", "Bayesian", "Inference"],
-  excerpt: "Bayesian methods in archaeology are useful for much more than chronology. They let us formalize competing hypotheses, compare evidence, and quantify uncertainty directly.",
-  description: "Bayesian methods in archaeology are useful for much more than chronology. They let us formalize competing hypotheses, compare evidence, and quantify uncertainty directly.",
-  heroImage: "img/americas/americas_topomap.jpg",
-  heroAlt: "Bayesian inference beyond chronology",
-  url: "pages/blog/bayesian-inference-beyond-chronology.html",
-  externalUrl: "",
-  isExternal: false,
-  featuredOnHome: true,
-  status: "published"
-},
+    "id": "erik-bayesian-archaeology",
+    "title": "TEST 1:Bayesian inference beyond chronology",
+    "author": "Erik Otárola-Castillo",
+    "authorKey": "erik",
+    "date": "2026-03-30",
+    "displayDate": "March 30, 2026",
+    "category": "Methods",
+    "tags": [
+      "Archaeology",
+      "Methods",
+      "Bayesian",
+      "Inference"
+    ],
+    "image": "../img/americas/americas_topomap.jpg",
+    "cardImage": "../img/americas/americas_topomap.jpg",
+    "excerpt": "Bayesian methods in archaeology are useful for much more than chronology. They let us formalize competing hypotheses, compare evidence, and quantify uncertainty directly.",
+    "url": "blog/erik-bayesian-archaeology.html"
+  },
   {
     "id": "volunteer-profile",
     "title": "Volunteer Profile",
