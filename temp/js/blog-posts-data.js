@@ -1,5 +1,24 @@
 // I keep the blog data in one place so the homepage strip, the full blog page, and the RSS feed stay synchronized.
-window.quantLabBlogPosts = [	 
+window.quantLabBlogPosts = [
+	{
+    "id": "erik-bayesian-archaeology",
+    "title": "BLOG TEST 1: Bayesian inference beyond chronology",
+    "author": "Erik Otárola-Castillo",
+    "authorKey": "erik",
+    "date": "2026-04-05",
+    "displayDate": "March 30, 2026",
+    "category": "Methods",
+    "tags": [
+      "Archaeology",
+      "Methods",
+      "Bayesian",
+      "Inference"
+    ],
+    "image": "../img/americas/americas_topomap.jpg",
+    "cardImage": "../img/americas/americas_topomap.jpg",
+    "excerpt": "Bayesian methods in archaeology are useful for much more than chronology. They let us formalize competing hypotheses, compare evidence, and quantify uncertainty directly.",
+    "url": "https://www.thequantlab.org/temp/pages/blog/erik-bayesian-archaeology.html",
+  },
   {
     "id": "volunteer-profile",
     "title": "Volunteer Profile",
