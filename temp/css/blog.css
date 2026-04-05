@@ -80,3 +80,10 @@
 }
 
 .blog-source-note { font-size: 13px; line-height: 1.6; color: #777; margin-bottom: 12px; }
+
+
+.blog-subscribe-strip { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin: 0 0 24px; padding: 14px 18px; border: 1px solid #eee; background: #fafafa; }
+.blog-subscribe-link { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; color: #222; }
+.blog-subscribe-note { color: #777; font-size: 14px; }
+.blog-home-subscribe { margin: 14px 0 0; }
+.blog-home-subscribe a { font-weight: 600; }

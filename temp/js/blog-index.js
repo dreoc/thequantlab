@@ -67,15 +67,17 @@
       var tags = (post.tags || []).map(function (tag) {
         return '<span class="ql-pill">' + tag + '</span>';
       }).join('');
+      var isExternal = /^https?:/i.test(post.url || '');
+      var linkAttrs = isExternal ? ' target="_blank" rel="noopener"' : '';
       return [
         '<article class="ql-card blog-card">',
-        '<a class="blog-card-image" href="' + post.url + '" target="_blank" rel="noopener"><img src="' + post.cardImage + '" alt="' + post.title.replace(/"/g, '&quot;') + '"></a>',
+        '<a class="blog-card-image" href="' + post.url + '"' + linkAttrs + '><img src="' + post.cardImage + '" alt="' + post.title.replace(/"/g, '&quot;') + '"></a>',
         '<div class="subpage-meta">' + post.displayDate + ' · ' + post.author + '</div>',
-        '<h4><a href="' + post.url + '" target="_blank" rel="noopener">' + post.title + '</a></h4>',
+        '<h4><a href="' + post.url + '"' + linkAttrs + '>' + post.title + '</a></h4>',
         '<p>' + post.excerpt + '</p>',
         '<div class="blog-source-note">Originally published at ' + post.source + '. We link to the original source here rather than reproducing the full text.</div>',
         '<div class="blog-tags">' + tags + '</div>',
-        '<div class="blog-card-actions"><a href="' + post.url + '" target="_blank" rel="noopener"><button>' + (post.linkLabel || 'Original publication') + '</button></a></div>',
+        '<div class="blog-card-actions"><a href="' + post.url + '"' + linkAttrs + '><button>' + (post.linkLabel || 'Original publication') + '</button></a></div>',
         '</article>'
       ].join('');
     }).join('');

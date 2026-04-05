@@ -1,4 +1,4 @@
-// I keep the blog data in one place so the homepage strip and the full blog page stay synchronized.
+// I keep the blog data in one place so the homepage strip, the full blog page, and the RSS feed stay synchronized.
 window.quantLabBlogPosts = [
   {
     "id": "volunteer-profile",
@@ -7,6 +7,7 @@ window.quantLabBlogPosts = [
     "authorKey": "erik",
     "order": 1,
     "displayDate": "SAA Archaeological Record",
+    "published": "",
     "category": "Public Writing",
     "tags": [
       "Service",
@@ -18,7 +19,9 @@ window.quantLabBlogPosts = [
     "cardImage": "../img/EOC/EOCofficialphoto_225x300.jpg",
     "excerpt": "A short reflection on service, professional community, and why volunteering matters within archaeology.",
     "url": "https://onlinedigeditions.com/article/Volunteer+Profile/5041119/852385/article.html",
-    "linkLabel": "Original publication"
+    "canonicalUrl": "https://onlinedigeditions.com/article/Volunteer+Profile/5041119/852385/article.html",
+    "linkLabel": "Original publication",
+    "featuredOnHome": true
   },
   {
     "id": "monico-bayesian-story",
@@ -27,6 +30,7 @@ window.quantLabBlogPosts = [
     "authorKey": "erik",
     "order": 2,
     "displayDate": "Cambridge Core Blog · October 10, 2022",
+    "published": "2022-10-10",
     "category": "Methods",
     "tags": [
       "Bayesian",
@@ -39,7 +43,9 @@ window.quantLabBlogPosts = [
     "cardImage": "../img/americas/americas_topomap.jpg",
     "excerpt": "A public-facing account of how the Monico Bayesian story emerged and why simple narrative examples can help explain Bayesian inference in archaeology.",
     "url": "https://www.cambridge.org/core/blog/2022/10/10/monico-origins-a-bayesian-story/",
-    "linkLabel": "Original publication"
+    "canonicalUrl": "https://www.cambridge.org/core/blog/2022/10/10/monico-origins-a-bayesian-story/",
+    "linkLabel": "Original publication",
+    "featuredOnHome": true
   },
   {
     "id": "sacred-site-3d-scanning",
@@ -48,6 +54,7 @@ window.quantLabBlogPosts = [
     "authorKey": "ben",
     "order": 3,
     "displayDate": "The Conversation",
+    "published": "",
     "category": "Archaeology",
     "tags": [
       "Africa",
@@ -60,7 +67,9 @@ window.quantLabBlogPosts = [
     "cardImage": "../img/africa/africa_topo.jpg",
     "excerpt": "A short piece on digital reconstruction, place, and how 3D methods can communicate archaeological landscapes beyond conventional site photography.",
     "url": "https://theconversation.com/3d-scanning-we-recreated-a-sacred-south-african-site-in-a-way-that-captures-its-spirit-219122",
-    "linkLabel": "Original publication"
+    "canonicalUrl": "https://theconversation.com/3d-scanning-we-recreated-a-sacred-south-african-site-in-a-way-that-captures-its-spirit-219122",
+    "linkLabel": "Original publication",
+    "featuredOnHome": true
   },
   {
     "id": "southern-kalahari-human-evolution",
@@ -69,6 +78,7 @@ window.quantLabBlogPosts = [
     "authorKey": "ben",
     "order": 4,
     "displayDate": "The Conversation · March 31, 2021",
+    "published": "2021-03-31",
     "category": "Human Evolution",
     "tags": [
       "Africa",
@@ -81,6 +91,8 @@ window.quantLabBlogPosts = [
     "cardImage": "../img/africa/africa_topo.jpg",
     "excerpt": "An accessible explanation of why the southern Kalahari matters for human evolutionary history and how new archaeological evidence reshapes older assumptions.",
     "url": "https://theconversation.com/ancient-southern-kalahari-was-more-important-to-human-evolution-than-previously-thought-155047",
-    "linkLabel": "Original publication"
+    "canonicalUrl": "https://theconversation.com/ancient-southern-kalahari-was-more-important-to-human-evolution-than-previously-thought-155047",
+    "linkLabel": "Original publication",
+    "featuredOnHome": true
   }
 ];

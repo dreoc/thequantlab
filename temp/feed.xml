@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+<channel>
+  <title><![CDATA[The QuantLab Blog]]></title>
+  <link>https://www.thequantlab.org/pages/blog.html</link>
+  <description><![CDATA[Selected public writing and short-form essays connected to QuantLab research.]]></description>
+  <language>en-us</language>
+  <lastBuildDate>Sun, 05 Apr 2026 03:45:59 +0000</lastBuildDate>
+  <item>
+    <title><![CDATA[Volunteer Profile]]></title>
+    <link>https://onlinedigeditions.com/article/Volunteer+Profile/5041119/852385/article.html</link>
+    <guid isPermaLink="true">https://onlinedigeditions.com/article/Volunteer+Profile/5041119/852385/article.html</guid>
+    <description><![CDATA[A short reflection on service, professional community, and why volunteering matters within archaeology. Originally published at SAA Archaeological Record.]]></description>
+    <category><![CDATA[Public Writing]]></category>
+    <author>blog@thequantlab.org (Erik Otárola-Castillo)</author>
+  </item>
+  <item>
+    <title><![CDATA[Monico Origins, a Bayesian Story]]></title>
+    <link>https://www.cambridge.org/core/blog/2022/10/10/monico-origins-a-bayesian-story/</link>
+    <guid isPermaLink="true">https://www.cambridge.org/core/blog/2022/10/10/monico-origins-a-bayesian-story/</guid>
+    <description><![CDATA[A public-facing account of how the Monico Bayesian story emerged and why simple narrative examples can help explain Bayesian inference in archaeology. Originally published at Cambridge Core Blog.]]></description>
+    <category><![CDATA[Methods]]></category>
+    <author>blog@thequantlab.org (Erik Otárola-Castillo)</author>
+    <pubDate>Mon, 10 Oct 2022 00:00:00 +0000</pubDate>
+  </item>
+  <item>
+    <title><![CDATA[3D scanning: we recreated a sacred South African site in a way that captures its spirit]]></title>
+    <link>https://theconversation.com/3d-scanning-we-recreated-a-sacred-south-african-site-in-a-way-that-captures-its-spirit-219122</link>
+    <guid isPermaLink="true">https://theconversation.com/3d-scanning-we-recreated-a-sacred-south-african-site-in-a-way-that-captures-its-spirit-219122</guid>
+    <description><![CDATA[A short piece on digital reconstruction, place, and how 3D methods can communicate archaeological landscapes beyond conventional site photography. Originally published at The Conversation.]]></description>
+    <category><![CDATA[Archaeology]]></category>
+    <author>blog@thequantlab.org (Ben Schoville and collaborators)</author>
+  </item>
+  <item>
+    <title><![CDATA[Ancient southern Kalahari was more important to human evolution than previously thought]]></title>
+    <link>https://theconversation.com/ancient-southern-kalahari-was-more-important-to-human-evolution-than-previously-thought-155047</link>
+    <guid isPermaLink="true">https://theconversation.com/ancient-southern-kalahari-was-more-important-to-human-evolution-than-previously-thought-155047</guid>
+    <description><![CDATA[An accessible explanation of why the southern Kalahari matters for human evolutionary history and how new archaeological evidence reshapes older assumptions. Originally published at The Conversation.]]></description>
+    <category><![CDATA[Human Evolution]]></category>
+    <author>blog@thequantlab.org (Ben Schoville and collaborators)</author>
+    <pubDate>Wed, 31 Mar 2021 00:00:00 +0000</pubDate>
+  </item>
+</channel>
+</rss>

@@ -5,7 +5,9 @@
     var empty = document.getElementById('blogHomeEmpty');
     if (!container || !empty) return;
 
-    var featured = (posts || []).slice().sort(function (a, b) {
+    var featured = (posts || []).filter(function (post) {
+      return post.featuredOnHome !== false;
+    }).slice().sort(function (a, b) {
       return (a.order || 999) - (b.order || 999);
     }).slice(0, 6);
 
@@ -24,7 +26,7 @@
         '<div class="subpage-meta">' + (post.displayDate || '') + ' · ' + (post.author || '') + '</div>',
         '<h4>' + (post.title || '') + '</h4>',
         '<p>' + (post.excerpt || '') + '</p>',
-        '<a class="blog-home-link" href="' + (post.url || 'pages/blog.html') + '" target="_blank" rel="noopener" aria-label="Open ' + safeTitle + '"><span>' + (post.linkLabel || 'Original publication') + '</span></a>',
+        '<a class="blog-home-link" href="' + (post.url || 'pages/blog.html') + '"' + ((post.url || '').indexOf('http') === 0 ? ' target="_blank" rel="noopener"' : '') + ' aria-label="Open ' + safeTitle + '"><span>' + (post.linkLabel || 'Original publication') + '</span></a>',
         '</article>'
       ].join('');
     }).join('');
