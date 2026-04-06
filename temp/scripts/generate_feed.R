@@ -36,13 +36,19 @@ get_script_path <- function() {
   hit <- grep(file_arg, cmd_args)
   
   if (length(hit) > 0) {
-    return(normalizePath(sub(file_arg, "", cmd_args[hit[1]]),
-                         winslash = "/", mustWork = TRUE))
+    return(normalizePath(
+      sub(file_arg, "", cmd_args[hit[1]]),
+      winslash = "/",
+      mustWork = TRUE
+    ))
   }
   
   if (!is.null(sys.frames()[[1]]$ofile)) {
-    return(normalizePath(sys.frames()[[1]]$ofile,
-                         winslash = "/", mustWork = TRUE))
+    return(normalizePath(
+      sys.frames()[[1]]$ofile,
+      winslash = "/",
+      mustWork = TRUE
+    ))
   }
   
   stop("Could not determine script path. Run with Rscript or set ROOT manually.")
@@ -89,16 +95,13 @@ format_pubdate <- function(value) {
     stop("Empty date.")
   }
   
-  # Date only
   if (grepl("^\\d{4}-\\d{2}-\\d{2}$", raw)) {
     dt <- as.POSIXct(paste0(raw, " 00:00:00"), tz = "UTC")
     return(format(dt, "%a, %d %b %Y %H:%M:%S GMT", tz = "GMT"))
   }
   
-  # Normalize Z
   raw2 <- sub("Z$", "+00:00", raw)
   
-  # Try common ISO-like formats
   dt <- as.POSIXct(raw2, format = "%Y-%m-%dT%H:%M:%OS%z", tz = "UTC")
   if (is.na(dt)) dt <- as.POSIXct(raw2, format = "%Y-%m-%d %H:%M:%OS%z", tz = "UTC")
   if (is.na(dt)) dt <- as.POSIXct(raw2, format = "%Y-%m-%dT%H:%M:%OS", tz = "UTC")
@@ -116,6 +119,169 @@ get_col <- function(df, name, default = "") {
     return(df[[name]])
   }
   rep(default, nrow(df))
+}
+
+find_assignment_start <- function(js_text) {
+  patterns <- c(
+    "window\\s*\\.\\s*quantLabBlogPosts\\s*=",
+    "window\\s*\\[\\s*['\"]quantLabBlogPosts['\"]\\s*\\]\\s*=",
+    "globalThis\\s*\\.\\s*quantLabBlogPosts\\s*=",
+    "self\\s*\\.\\s*quantLabBlogPosts\\s*=",
+    "\\bquantLabBlogPosts\\b\\s*="
+  )
+  
+  starts <- c()
+  
+  for (pat in patterns) {
+    loc <- regexpr(pat, js_text, perl = TRUE)[1]
+    if (loc > 0) {
+      starts <- c(starts, loc + attr(regexpr(pat, js_text, perl = TRUE), "match.length"))
+    }
+  }
+  
+  if (length(starts) == 0) {
+    return(NA_integer_)
+  }
+  
+  min(starts)
+}
+
+extract_assigned_array <- function(js_text) {
+  assign_end <- find_assignment_start(js_text)
+  
+  if (is.na(assign_end)) {
+    return(NULL)
+  }
+  
+  n <- nchar(js_text, type = "chars")
+  chars <- strsplit(js_text, "", fixed = TRUE)[[1]]
+  
+  i <- assign_end + 1L
+  while (i <= n && grepl("\\s", chars[i], perl = TRUE)) {
+    i <- i + 1L
+  }
+  
+  while (i <= n && chars[i] != "[") {
+    if (!grepl("\\s", chars[i], perl = TRUE)) {
+      return(NULL)
+    }
+    i <- i + 1L
+  }
+  
+  if (i > n || chars[i] != "[") {
+    return(NULL)
+  }
+  
+  start_idx <- i
+  depth <- 0L
+  in_single <- FALSE
+  in_double <- FALSE
+  in_backtick <- FALSE
+  in_line_comment <- FALSE
+  in_block_comment <- FALSE
+  escape_next <- FALSE
+  
+  while (i <= n) {
+    ch <- chars[i]
+    nxt <- if (i < n) chars[i + 1L] else ""
+    
+    if (in_line_comment) {
+      if (ch == "\n") {
+        in_line_comment <- FALSE
+      }
+      i <- i + 1L
+      next
+    }
+    
+    if (in_block_comment) {
+      if (ch == "*" && nxt == "/") {
+        in_block_comment <- FALSE
+        i <- i + 2L
+      } else {
+        i <- i + 1L
+      }
+      next
+    }
+    
+    if (in_single) {
+      if (escape_next) {
+        escape_next <- FALSE
+      } else if (ch == "\\") {
+        escape_next <- TRUE
+      } else if (ch == "'") {
+        in_single <- FALSE
+      }
+      i <- i + 1L
+      next
+    }
+    
+    if (in_double) {
+      if (escape_next) {
+        escape_next <- FALSE
+      } else if (ch == "\\") {
+        escape_next <- TRUE
+      } else if (ch == "\"") {
+        in_double <- FALSE
+      }
+      i <- i + 1L
+      next
+    }
+    
+    if (in_backtick) {
+      if (escape_next) {
+        escape_next <- FALSE
+      } else if (ch == "\\") {
+        escape_next <- TRUE
+      } else if (ch == "`") {
+        in_backtick <- FALSE
+      }
+      i <- i + 1L
+      next
+    }
+    
+    if (ch == "/" && nxt == "/") {
+      in_line_comment <- TRUE
+      i <- i + 2L
+      next
+    }
+    
+    if (ch == "/" && nxt == "*") {
+      in_block_comment <- TRUE
+      i <- i + 2L
+      next
+    }
+    
+    if (ch == "'") {
+      in_single <- TRUE
+      i <- i + 1L
+      next
+    }
+    
+    if (ch == "\"") {
+      in_double <- TRUE
+      i <- i + 1L
+      next
+    }
+    
+    if (ch == "`") {
+      in_backtick <- TRUE
+      i <- i + 1L
+      next
+    }
+    
+    if (ch == "[") {
+      depth <- depth + 1L
+    } else if (ch == "]") {
+      depth <- depth - 1L
+      if (depth == 0L) {
+        return(substr(js_text, start_idx, i))
+      }
+    }
+    
+    i <- i + 1L
+  }
+  
+  NULL
 }
 
 # ------------------------------------------------------------
@@ -136,27 +302,29 @@ if (!file.exists(DATA_FILE)) {
 }
 
 # ------------------------------------------------------------
-# Read JS directly with V8
+# Read JS data
 # ------------------------------------------------------------
 
-js_text <- paste(readLines(DATA_FILE, warn = FALSE, encoding = "UTF-8"),
-                 collapse = "\n")
+js_text <- paste(
+  readLines(DATA_FILE, warn = FALSE, encoding = "UTF-8"),
+  collapse = "\n"
+)
 
-ctx <- v8()
-ctx$eval("var window = {};")
-ctx$eval(js_text)
-ctx$eval("var __has_posts__ = Array.isArray(window.quantLabBlogPosts);")
+array_expr <- extract_assigned_array(js_text)
 
-has_posts <- ctx$get("__has_posts__")
-
-if (!isTRUE(has_posts)) {
-  stop("Could not parse js/blog-posts-data.js or window.quantLabBlogPosts is missing.")
+if (is.null(array_expr) || !nzchar(array_expr)) {
+  stop("Could not extract the quantLabBlogPosts array from js/blog-posts-data.js")
 }
 
-ctx$eval("var __quantlab_posts_json__ = JSON.stringify(window.quantLabBlogPosts);")
-posts_json <- ctx$get("__quantlab_posts_json__")
+ctx <- V8::v8()
+invisible(ctx$eval(paste0("var __quantlab_posts__ = ", array_expr)))
+posts_json <- ctx$eval("JSON.stringify(__quantlab_posts__)")
 
-posts <- fromJSON(posts_json, simplifyDataFrame = TRUE)
+if (is.null(posts_json) || !is.character(posts_json) || length(posts_json) != 1 || !nzchar(posts_json)) {
+  stop("Could not serialize extracted blog post data.")
+}
+
+posts <- jsonlite::fromJSON(posts_json, simplifyDataFrame = TRUE)
 
 if (is.null(posts) || nrow(posts) == 0) {
   stop("No blog posts found in js/blog-posts-data.js")
@@ -176,14 +344,14 @@ posts <- posts[order(order_sort), , drop = FALSE]
 # Build RSS items
 # ------------------------------------------------------------
 
-titles       <- get_col(posts, "title", "")
-urls1        <- get_col(posts, "canonicalUrl", "")
-urls2        <- get_col(posts, "url", "")
-excerpts     <- get_col(posts, "excerpt", "")
-sources      <- get_col(posts, "source", "")
-categories   <- get_col(posts, "category", "Blog")
-authors      <- get_col(posts, "author", "The QuantLab")
-published    <- get_col(posts, "published", "")
+titles     <- get_col(posts, "title", "")
+urls1      <- get_col(posts, "canonicalUrl", "")
+urls2      <- get_col(posts, "url", "")
+excerpts   <- get_col(posts, "excerpt", "")
+sources    <- get_col(posts, "source", "")
+categories <- get_col(posts, "category", "Blog")
+authors    <- get_col(posts, "author", "The QuantLab")
+published  <- get_col(posts, "published", "")
 
 items <- character(0)
 
@@ -194,8 +362,10 @@ for (i in seq_len(nrow(posts))) {
   )
   
   if (is.na(item_url) || trimws(item_url) == "") {
-    message(sprintf("Skipping post with missing URL: %s",
-                    ifelse(is.na(titles[i]) || titles[i] == "", "<untitled>", titles[i])))
+    message(sprintf(
+      "Skipping post with missing URL: %s",
+      ifelse(is.na(titles[i]) || titles[i] == "", "<untitled>", titles[i])
+    ))
     next
   }
   
