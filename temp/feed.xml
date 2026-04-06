@@ -5,12 +5,12 @@
   <link>https://www.thequantlab.org/pages/blog.html</link>
   <description><![CDATA[Selected public writing and short-form essays connected to QuantLab research.]]></description>
   <language>en-us</language>
-  <lastBuildDate>Sun, 05 Apr 2026 06:11:05 +0000</lastBuildDate>
+  <lastBuildDate>Mon, 06 Apr 2026 03:34:15 GMT</lastBuildDate>
   <item>
     <title><![CDATA[BLOG TEST 1: Bayesian inference beyond chronology]]></title>
-    <link>pages/blog/erik-bayesian-archaeology.html</link>
-    <guid isPermaLink="true">pages/blog/erik-bayesian-archaeology.html</guid>
-    <description><![CDATA[Bayesian methods in archaeology are useful for much more than chronology. They let us formalize competing hypotheses, compare evidence, and quantify uncertainty directly. Originally published at .]]></description>
+    <link>https://www.thequantlab.org/temp/pages/blog/erik-bayesian-archaeology.html</link>
+    <guid isPermaLink="true">https://www.thequantlab.org/temp/pages/blog/erik-bayesian-archaeology.html</guid>
+    <description><![CDATA[Bayesian methods in archaeology are useful for much more than chronology. They let us formalize competing hypotheses, compare evidence, and quantify uncertainty directly.]]></description>
     <category><![CDATA[Methods]]></category>
     <author>blog@thequantlab.org (Erik Otárola-Castillo)</author>
   </item>
@@ -29,7 +29,7 @@
     <description><![CDATA[A public-facing account of how the Monico Bayesian story emerged and why simple narrative examples can help explain Bayesian inference in archaeology. Originally published at Cambridge Core Blog.]]></description>
     <category><![CDATA[Methods]]></category>
     <author>blog@thequantlab.org (Erik Otárola-Castillo)</author>
-    <pubDate>Mon, 10 Oct 2022 00:00:00 +0000</pubDate>
+    <pubDate>Mon, 10 Oct 2022 00:00:00 GMT</pubDate>
   </item>
   <item>
     <title><![CDATA[3D scanning: we recreated a sacred South African site in a way that captures its spirit]]></title>
@@ -46,7 +46,8 @@
     <description><![CDATA[An accessible explanation of why the southern Kalahari matters for human evolutionary history and how new archaeological evidence reshapes older assumptions. Originally published at The Conversation.]]></description>
     <category><![CDATA[Human Evolution]]></category>
     <author>blog@thequantlab.org (Ben Schoville and collaborators)</author>
-    <pubDate>Wed, 31 Mar 2021 00:00:00 +0000</pubDate>
+    <pubDate>Wed, 31 Mar 2021 00:00:00 GMT</pubDate>
   </item>
 </channel>
 </rss>
+
