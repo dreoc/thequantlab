@@ -247,6 +247,8 @@ textarea:focus
 .navbar .navbar-nav>li>a.active{
 	color: #fff!important;
 	background: none;
+	font-weight: 700;
+	opacity: 1;
 }
 
 /* -------------------------------------------------------
@@ -276,17 +278,13 @@ textarea:focus
 .caption h3{
 	margin: 20px auto;
 	font-size: 50px;
-	padding-left: 39%;
 }
 
 .caption h1{
 	margin: 20px auto;
-	font-size: 85px;
+	font-size: 90px;
 	position:relative;
-	padding-left: 37%;
-	text-emphasis-position: left;
-	word-wrap: break-word;  /* ensure long words wrap */
-	white-space: normal;    /* enable normal wrapping */
+	text-emphasis-position: right;
 }
 
 .button-scroll{
@@ -560,12 +558,33 @@ textarea:focus
 	opacity: 1;
 }
 
+.publications-footer-link {
+  width: 100%;
+  text-align: center;
+  margin-top: 1.75rem;
+  padding-bottom: 0.5rem;
+}
+
+.publications-footer-link a {
+  display: inline-block;
+  font-size: 1.9rem;
+  font-weight: 500;
+  color: #5b84c4;
+  text-decoration: none;
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.publications-footer-link a:hover {
+  color: #3f6ea8;
+  opacity: 0.95;
+}
+
 /* -------------------------------------------------------
                     Clients
 -------------------------------------------------------- */
 
 .clients{
-	background-image: url(../img/clients.jpg);
+	background-image: url(../img/grayback.jpg);
 	background-size: cover;
 	background-attachment: fixed;
 	position: relative;
@@ -590,6 +609,26 @@ textarea:focus
 	font-size: 14px;
 	color: #fff;
 	margin-bottom: 30px;
+}
+
+.client-item .people-photo{
+	max-width: 300px;
+	width: 100%;
+	height: auto;
+	margin: 0 auto;
+	display: block;
+}
+
+@media (max-width: 768px) {
+	.client-item .people-photo {
+		max-width: 250px;
+	}
+}
+
+@media (max-width: 480px) {
+	.client-item .people-photo {
+		max-width: 200px;
+	}
 }
 
 .owl-theme .owl-dots .owl-dot span{
@@ -629,6 +668,28 @@ textarea:focus
 	position: absolute;
 	right: 0;
 	bottom: 0;
+}
+
+/* Give both PI photos the same visible size and crop behavior. */
+.pi-photo {
+  width: 100%;
+  max-width: 370px;
+  height: 370px;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto 18px auto;
+}
+
+/* Nudge Erik's crop slightly upward and in a touch. */
+.pi-photo-erik {
+  object-position: center 1%;
+  transform: scale(1.07);
+}
+
+/* Keep Ben a little less zoomed and slightly high in frame. */
+.pi-photo-ben {
+  object-position: center 1%;
+  transform: scale(1.06);
 }
 
 /* -------------------------------------------------------
@@ -1249,7 +1310,7 @@ footer p{
   .caption h3 {
     font-size: 26px !important;
     margin-top: 10px;
-	position: relative;
+	 position: relative;
     top: 150px; /* move text down roughly 1 inch */
   }
 
@@ -1265,3 +1326,76 @@ footer p{
   }
 }
 
+.pub-entry {
+  margin-left: 8ch;       /* total indent for the body */
+  text-indent: -8ch;      /* pulls the first line back (so year + dash stick out) */
+  line-height: 1.6em;
+  margin-bottom: 1.5em;
+}
+
+.pub-entry .pub-title {
+  display:contents;
+  margin-left: 8ch;       /* aligns with the rest of the indented text */
+}
+
+.posts.posts-video {
+  position: relative;
+  overflow: hidden;
+  background: #000 !important;
+  background-image: none !important;
+  background-attachment: scroll !important;
+  background-blend-mode: normal !important;
+  background-position: center center !important;
+  background-size: cover !important;
+}
+
+.posts.posts-video .hero-video-bg {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  z-index: 0 !important;
+  display: block !important;
+  pointer-events: none !important;
+}
+
+.posts.posts-video .header-overlay {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 1 !important;
+  background: rgba(0,0,0,.35) !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.posts.posts-video .caption {
+  position: relative !important;
+  z-index: 2 !important;
+  width: 100% !important;
+  text-align: center !important;
+}
+
+/* ====================================================== */
+/* Reusable custom hero image system for subpages         */
+/* Usage: add class="posts posts-custom-image subpage-hero"
+/* and set style="--hero-image: url('../img/path/file.jpg');" */
+/* ====================================================== */
+
+.posts.posts-custom-image {
+  background: rgba(0,0,0,.55);
+  background-image: var(--hero-image) !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
+  background-blend-mode: overlay !important;
+  position: relative;
+  overflow: hidden;
+}
