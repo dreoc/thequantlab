@@ -40,8 +40,8 @@ window.quantLabBlogPosts = [
     "image": "../img/americas/americas_topomap.jpg",
     "cardImage": "../img/americas/americas_topomap.jpg",
     "excerpt": "Bayesian methods in archaeology are useful for much more than chronology. They let us formalize competing hypotheses, compare evidence, and quantify uncertainty directly.",
-    "url": "https://www.thequantlab.org/temp/pages/blog/erik-bayesian-archaeology.html",
-    "canonicalUrl": "https://www.thequantlab.org/temp/pages/blog/erik-bayesian-archaeology.html"
+    "url": "https://www.thequantlab.org/pages/blog/erik-bayesian-archaeology.html",
+    "canonicalUrl": "https://www.thequantlab.org/pages/blog/erik-bayesian-archaeology.html"
   },
   {
     "id": "volunteer-profile",
