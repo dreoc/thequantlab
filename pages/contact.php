@@ -1,8 +1,8 @@
 <?php
 
 // configure
-$from = 'Demo contact form <demo@domain.com>';
-$sendTo = 'Demo contact form <demo@domain.com>'; // Add Your Email
+$from = 'The QuantLab <eoc@purdue.edu>';
+$sendTo = 'eoc@purdue.edu';
 $subject = 'New message from contact form';
 $fields = array('name' => 'Name', 'subject' => 'Subject', 'email' => 'Email', 'message' => 'Message'); // array variable name => Text to appear in the email
 $okMessage = 'Contact form successfully submitted. Thank you, I will get back to you soon!';
