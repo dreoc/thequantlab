@@ -1381,3 +1381,21 @@ footer p{
   width: 100% !important;
   text-align: center !important;
 }
+
+/* ====================================================== */
+/* Reusable custom hero image system for subpages         */
+/* Usage: add class="posts posts-custom-image subpage-hero"
+/* and set style="--hero-image: url('../img/path/file.jpg');" */
+/* ====================================================== */
+
+.posts.posts-custom-image {
+  background: rgba(0,0,0,.55);
+  background-image: var(--hero-image) !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
+  background-blend-mode: overlay !important;
+  position: relative;
+  overflow: hidden;
+}
