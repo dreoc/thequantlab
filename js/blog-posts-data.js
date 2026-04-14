@@ -1,6 +1,29 @@
 // I keep the blog data in one place so the homepage strip, the full blog page, and the RSS feed stay synchronized.
 window.quantLabBlogPosts = [
 	{
+    "id": "Schoville North of Kuruman",
+    "title": "UNEARTHING THE KALAHARI’S LONG HUMAN HISTORY",
+    "author": "Ben Schoville",
+    "authorKey": "ben",
+    "date": "2021-04-01",
+    "displayDate": "April 01, 2021",
+    "published": "2021-04-01",
+    "category": "Public Writing",
+    "tags": [
+      "Archaeology",
+      "Public Writing",
+      "Africa"
+    ],
+    "source": "TSWALU FOUNDATION",
+    "image": "../img/blog/BJS/TSWALU/teampic.png",
+    "cardImage": "../img/blog/BJS/TSWALU/handaxe.jpg",
+    "excerpt": "A short summary of Benjamin Schoville's work exploring Tswalu for Earlier and Middle Stone Age evidence of human behavior.",
+    "url": "https://tswalu.com/uncovering-tswalus-long-human-history/",
+    "canonicalUrl": "https://tswalu.com/uncovering-tswalus-long-human-history/",
+    "linkLabel": "Original publication",
+    "featuredOnHome": true
+  },
+	{
     "id": "erik-bayesian-archaeology",
     "title": "BLOG TEST 1: Bayesian inference beyond chronology",
     "author": "Erik Otárola-Castillo",

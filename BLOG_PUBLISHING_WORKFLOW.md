@@ -34,7 +34,7 @@ I keep the blog metadata in one place: `js/blog-posts-data.js`.
 4. Run in the R terminal:
 
 ```terminal
-Rscript C:/Users/eotarola/Box/Box_LCA/Documents/website/thequantlab/temp/scripts/generate_blog_assets.py
+Rscript C:/Users/eotarola/Box/Box_LCA/Documents/website/thequantlab/scripts/generate_feed.R
 ```
 
 5. Commit the updated files and push to GitHub
