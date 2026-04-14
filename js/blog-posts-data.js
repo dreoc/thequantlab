@@ -28,8 +28,8 @@ window.quantLabBlogPosts = [
     "title": "BLOG TEST 1: Bayesian inference beyond chronology",
     "author": "Erik Otárola-Castillo",
     "authorKey": "erik",
-    "date": "2026-04-05",
-    "displayDate": "March 30, 2026",
+    "date": "1926-03-30",
+    "displayDate": "March 30, 1926",
     "category": "Methods",
     "tags": [
       "Archaeology",
