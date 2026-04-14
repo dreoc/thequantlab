@@ -8,7 +8,7 @@ const publicationsData = [
     "year": "2026",
     "category": "Methods",
     "theme": "Geometric morphometrics and shape-space theory",
-    "thumbnail": "img/publications/pub_01.jpg",
+    "thumbnail": "img/quantlablogo1.png",
     "keywords": "shape-space, geometric morphometrics, tangent space, lithics, archaeological method",
     "link": "https://scholar.google.com/citations?hl=en&user=g_SNDWoAAAAJ",
     "abstract": "A Journal of Archaeological Method and Theory manuscript in review that evaluates whether standard geometric morphometric tangent-space assumptions hold for lithic shape analysis."
@@ -20,7 +20,7 @@ const publicationsData = [
     "year": "2026",
     "category": "Americas",
     "theme": "Western Stemmed Tradition and Paleoindian archaeology",
-    "thumbnail": "img/publications/pub_02.jpg",
+    "thumbnail": "img/americas/americas_topomap.jpg",
     "keywords": "Western North America, stemmed points, Terminal Pleistocene, Early Holocene, Paleoamerican Odyssey",
     "link": "https://scholar.google.com/citations?hl=en&user=g_SNDWoAAAAJ",
     "abstract": "A forthcoming chapter on the geography and chronology of stemmed points across western North America and their relevance to early peopling debates."
@@ -32,7 +32,7 @@ const publicationsData = [
     "year": "2026",
     "category": "Americas",
     "theme": "Climate modeling and conservation paleobiology",
-    "thumbnail": "img/publications/pub_03.jpg",
+    "thumbnail": "img/americas/americas_topomap.jpg",
     "keywords": "bison, climate change, species distribution, North America, future habitat",
     "link": "https://doi.org/10.3389/fevo.2025.1695457",
     "abstract": "Projects a major northwest shift in climatically suitable bison habitat by 2100 and connects archaeological baselines to future-facing ecological modeling."
@@ -44,7 +44,7 @@ const publicationsData = [
     "year": "2025",
     "category": "Methods",
     "theme": "Anthropological theory across disciplines",
-    "thumbnail": "img/publications/pub_04.jpg",
+    "thumbnail": "img/quantlablogo1.png",
     "keywords": "anthropological theory, multidisciplinary theory, synthesis, methods",
     "link": "https://scholar.google.com/citations?hl=en&user=g_SNDWoAAAAJ",
     "abstract": "A Bloomsbury chapter that situates anthropology within broader multidisciplinary theory-building and interpretive practice."
@@ -56,7 +56,7 @@ const publicationsData = [
     "year": "2023",
     "category": "Methods",
     "theme": "Bayesian reasoning beyond chronology",
-    "thumbnail": "img/publications/pub_05.jpg",
+    "thumbnail": "img/quantlablogo1.png",
     "keywords": "Bayesian inference, archaeology, probability, hypothesis testing",
     "link": "https://doi.org/10.1002/9781119592112.ch59",
     "abstract": "Presents Bayesian inference as a general archaeological framework rather than a tool limited to chronology."
@@ -68,7 +68,7 @@ const publicationsData = [
     "year": "2023",
     "category": "Methods",
     "theme": "Quantitative taphonomy and archaeological method",
-    "thumbnail": "img/publications/pub_06.jpg",
+    "thumbnail": "img/quantlablogo1.png",
     "keywords": "bone surface modifications, taphonomy, mastodon, morphometrics, quantitative archaeology",
     "link": "https://doi.org/10.1007/s10816-022-09583-5",
     "abstract": "Builds a quantitative framework for measuring bone surface modifications and applies it to the Bowser Road mastodon."
@@ -80,7 +80,7 @@ const publicationsData = [
     "year": "2023",
     "category": "Africa",
     "theme": "Quantitative lithic variability",
-    "thumbnail": "img/publications/pub_07.jpg",
+    "thumbnail": "img/africa/africa_topo.jpg",
     "keywords": "Middle Stone Age, points, variability, standardization, morphometrics",
     "link": "https://doi.org/10.1080/01977261.2023.2233167",
     "abstract": "Compares proximal and distal point variation to distinguish functional constraint from style and assess standardization in Middle Stone Age points."
@@ -92,7 +92,7 @@ const publicationsData = [
     "year": "2023",
     "category": "Human Evolution",
     "theme": "Biocultural health and migration",
-    "thumbnail": "img/publications/pub_08.jpg",
+    "thumbnail": "img/humanev/amnhtree.jpg",
     "keywords": "Peru, migration, urbanization, indigenous health, biocultural anthropology",
     "link": "https://doi.org/10.1002/ajhb.23904",
     "abstract": "Examines how urbanization and migration shape indigenous health outcomes in Peru."
@@ -104,7 +104,7 @@ const publicationsData = [
     "year": "2022",
     "category": "Americas",
     "theme": "Great Plains foraging and dietary change",
-    "thumbnail": "img/publications/pub_09.jpg",
+    "thumbnail": "img/americas/americas_topomap.jpg",
     "keywords": "Great Plains, intensification, diet, big game hunters, North America",
     "link": "https://doi.org/10.3167/9781800734296",
     "abstract": "Develops mechanisms for understanding dietary change and intensification among Great Plains big-game hunters in North America."
@@ -116,7 +116,7 @@ const publicationsData = [
     "year": "2022",
     "category": "Methods",
     "theme": "Bayesian inference and archaeological reasoning",
-    "thumbnail": "img/publications/pub_10.jpg",
+    "thumbnail": "img/quantlablogo1.png",
     "keywords": "bayesian inference, archaeology, chronology, hypothesis testing",
     "link": "https://doi.org/10.1017/aap.2022.10",
     "abstract": "Shows how Bayesian inference can be used to evaluate archaeological hypotheses directly rather than being restricted to dating."
@@ -128,7 +128,7 @@ const publicationsData = [
     "year": "2022",
     "category": "Americas",
     "theme": "Historical ecology and faunal baselines",
-    "thumbnail": "img/publications/pub_11.jpg",
+    "thumbnail": "img/americas/americas_topomap.jpg",
     "keywords": "bison, historical ecology, baseline reconstruction, North America",
     "link": "https://doi.org/10.1002/ecy.3864",
     "abstract": "Builds an evidence-based baseline for historical and pre-1500 occurrence of bison in North America."
@@ -140,7 +140,7 @@ const publicationsData = [
     "year": "2022",
     "category": "Americas",
     "theme": "Early peopling and evidentiary standards",
-    "thumbnail": "img/publications/pub_12.jpg",
+    "thumbnail": "img/americas/americas_topomap.jpg",
     "keywords": "Uruguay, PaleoAmerica, early peopling, evidentiary evaluation",
     "link": "https://doi.org/10.1080/20555563.2022.2135476",
     "abstract": "Critically evaluates claims for extremely early human occupation in Uruguay and wider standards of archaeological evidence."
@@ -152,7 +152,7 @@ const publicationsData = [
     "year": "2022",
     "category": "Human Evolution",
     "theme": "Human biology, growth, and health",
-    "thumbnail": "img/publications/pub_13.jpg",
+    "thumbnail": "img/humanev/amnhtree.jpg",
     "keywords": "child growth, sanitation, birth mode, human biology",
     "link": "https://doi.org/10.1002/ajpa.24563",
     "abstract": "Shows that household sanitary conditions modulate associations between birth mode and child growth."
@@ -164,7 +164,7 @@ const publicationsData = [
     "year": "2022",
     "category": "Methods",
     "theme": "Machine learning in paleoanthropology",
-    "thumbnail": "img/publications/pub_14.jpg",
+    "thumbnail": "img/quantlablogo1.png",
     "keywords": "machine learning, crocodiles, null models, bone surface modifications",
     "link": "https://doi.org/10.1016/j.jhevol.2021.103071",
     "abstract": "Uses machine learning, resampling, and null-model logic to test attribution of bone surface marks while emphasizing uncertainty."
@@ -176,7 +176,7 @@ const publicationsData = [
     "year": "2022",
     "category": "Americas",
     "theme": "Lithic technology in North America",
-    "thumbnail": "img/publications/pub_15.jpg",
+    "thumbnail": "img/americas/americas_topomap.jpg",
     "keywords": "Folsom, lithics, modularity, allometry, North America",
     "link": "https://doi.org/10.1017/aaq.2021.62",
     "abstract": "Uses experimental Folsom points to evaluate reduction, allometry, and modularity in Paleoindian technology."
@@ -188,7 +188,7 @@ const publicationsData = [
     "year": "2025",
     "category": "Africa",
     "theme": "Kalahari lithic systems and social transmission",
-    "thumbnail": "img/publications/pub_16.jpg",
+    "thumbnail": "img/africa/africa_topo.jpg",
     "keywords": "MIS 5, Kalahari, social transmission, lithic technology",
     "link": "https://doi.org/10.1016/j.jhevol.2025.103654",
     "abstract": "Analyzes lithic technology at Ga-Mohana Hill North Rockshelter and argues that technological similarities across MIS 5 sites reflect shared traditions and regional connectivity in the Kalahari Basin."
@@ -200,7 +200,7 @@ const publicationsData = [
     "year": "2025",
     "category": "Africa",
     "theme": "Field archaeology and southern Kalahari occupation",
-    "thumbnail": "img/publications/pub_17.jpg",
+    "thumbnail": "img/africa/africa_topo.jpg",
     "keywords": "Ga-Mohana Hill, Southern Kalahari, hunter-gatherers, rock shelter",
     "link": "https://social-science.uq.edu.au/profile/2023/benjamin-schoville",
     "abstract": "Introduces Ga-Mohana Hill South Rock Shelter as a late Holocene hunter-gatherer site in the southern Kalahari Basin and extends the broader Ga-Mohana research program."
@@ -212,7 +212,7 @@ const publicationsData = [
     "year": "2024",
     "category": "Australia",
     "theme": "Australia-linked synthesis on climate and innovation",
-    "thumbnail": "img/publications/pub_18.jpg",
+    "thumbnail": "img/banner-main-1024x453.jpg",
     "keywords": "Australia collaborations, climate change, innovation, Homo sapiens, Africa",
     "link": "https://doi.org/10.1016/j.qsa.2024.100179",
     "abstract": "Synthesizes competing explanations for the relationship between climate variability and innovation in the African Pleistocene through a collaboration anchored in Australian institutional networks."
@@ -224,7 +224,7 @@ const publicationsData = [
     "year": "2023",
     "category": "Australia",
     "theme": "Australia-linked handbook and field synthesis",
-    "thumbnail": "img/publications/pub_19.jpg",
+    "thumbnail": "img/banner-main-1024x453.jpg",
     "keywords": "Tswalu, Kalahari, handbook, Australian collaborations",
     "link": "https://doi.org/10.1007/978-3-031-20290-2_111",
     "abstract": "A handbook chapter that synthesizes the Tswalu Kalahari Reserve research context and helps situate the broader field program for a wider comparative audience."
@@ -236,7 +236,7 @@ const publicationsData = [
     "year": "2022",
     "category": "Australia",
     "theme": "Digital heritage and archaeological places",
-    "thumbnail": "img/publications/pub_20.jpg",
+    "thumbnail": "img/banner-main-1024x453.jpg",
     "keywords": "digital heritage, 3D replicas, living heritage, archaeology",
     "link": "https://doi.org/10.1007/s11759-022-09460-3",
     "abstract": "Explores how 3D digital replicas intersect with living heritage, place, and potency, showing that documentation is also a social and ethical practice."
@@ -248,7 +248,7 @@ const publicationsData = [
     "year": "2022",
     "category": "Australia",
     "theme": "Experimental archaeology and fracture mechanics",
-    "thumbnail": "img/publications/pub_21.jpg",
+    "thumbnail": "img/banner-main-1024x453.jpg",
     "keywords": "fracture experiments, porcelain points, experimental archaeology, Australia",
     "link": "https://doi.org/10.1016/j.jasrep.2022.103505",
     "abstract": "Uses controlled fracture experiments on cast porcelain points to study breakage, standardization, and the mechanics of point failure in an Australian collaboration setting."
@@ -260,7 +260,7 @@ const publicationsData = [
     "year": "2022",
     "category": "Africa",
     "theme": "Paleoenvironment and occupation history",
-    "thumbnail": "img/publications/pub_22.jpg",
+    "thumbnail": "img/africa/africa_topo.jpg",
     "keywords": "tufas, water availability, human occupation, Kalahari",
     "link": "https://doi.org/10.1371/journal.pone.0270104",
     "abstract": "Shows that tufa deposits can be used to reconstruct long-term water availability and links wet phases to human occupation across the southern Kalahari."
@@ -272,7 +272,7 @@ const publicationsData = [
     "year": "2022",
     "category": "Africa",
     "theme": "Material culture and social networks",
-    "thumbnail": "img/publications/pub_23.jpg",
+    "thumbnail": "img/africa/africa_topo.jpg",
     "keywords": "ostrich eggshell beads, social networks, MIS 2, Kalahari",
     "link": "https://doi.org/10.1371/journal.pone.0268943",
     "abstract": "Uses ostrich eggshell beads from Ga-Mohana Hill to investigate social signaling and network structure in the southern Kalahari during MIS 2."
@@ -284,7 +284,7 @@ const publicationsData = [
     "year": "2021",
     "category": "Africa",
     "theme": "Chronology, geology, and debate",
-    "thumbnail": "img/publications/pub_24.jpg",
+    "thumbnail": "img/africa/africa_topo.jpg",
     "keywords": "flowstones, chronology, Nature reply, South Africa",
     "link": "https://doi.org/10.1038/s41586-021-03587-z",
     "abstract": "Responds to a debate over the interpretation of flowstone age clusters and reinforces the importance of chronological reasoning in paleoanthropological contexts."
@@ -296,7 +296,7 @@ const publicationsData = [
     "year": "2021",
     "category": "Human Evolution",
     "theme": "Projectile technology and archaeological inference",
-    "thumbnail": "img/publications/pub_25.jpg",
+    "thumbnail": "img/humanev/amnhtree.jpg",
     "keywords": "lithic armatures, discard, projectile technology, variability",
     "link": "https://doi.org/10.1016/j.jhevol.2021.102981",
     "abstract": "Investigates how variation in lithic armature discard enters the archaeological record and what that variation can and cannot say about projectile technologies."
@@ -308,7 +308,7 @@ const publicationsData = [
     "year": "2021",
     "category": "Human Evolution",
     "theme": "Origins of behavioral innovation",
-    "thumbnail": "img/publications/pub_26.jpg",
+    "thumbnail": "img/humanev/amnhtree.jpg",
     "keywords": "Homo sapiens, innovation, Kalahari, behavior",
     "link": "https://doi.org/10.1038/s41586-021-03419-0",
     "abstract": "Reports evidence for innovative Homo sapiens behavior in the interior of southern Africa, challenging coastal-only narratives about the emergence of complex behavior."
@@ -320,7 +320,7 @@ const publicationsData = [
     "year": "2021",
     "category": "Africa",
     "theme": "Mobility modeling and provisioning",
-    "thumbnail": "img/publications/pub_27.jpg",
+    "thumbnail": "img/africa/africa_topo.jpg",
     "keywords": "lithic provisioning, mobility, Kalahari, model",
     "link": "https://doi.org/10.1007/s10816-021-09507-9",
     "abstract": "Develops a lithic provisioning model to infer landscape mobility in the southern and middle Kalahari and links technological organization to movement across arid environments."

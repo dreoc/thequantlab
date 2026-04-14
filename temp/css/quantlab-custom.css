@@ -1,0 +1,597 @@
+
+.header .caption h3 { letter-spacing: 2px; }
+.ql-intro { font-size: 16px; line-height: 1.8; }
+.ql-button-group { margin-top: 25px; display: flex; gap: 10px; flex-wrap: wrap; }
+.ql-button-group a button, .ql-button-group button { margin-right: 0; }
+.ql-highlight { background: rgba(255,255,255,0.08); border-left: 4px solid #c7a46b; padding: 18px 20px; margin: 20px 0; }
+.ql-card { background: #fff; border: 1px solid #eee; padding: 26px; margin-bottom: 30px; box-shadow: 0 10px 25px rgba(0,0,0,0.04); }
+.ql-card h4, .ql-card h5 { margin-top: 0; }
+.ql-card .small-label { display: inline-block; font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: #8a8a8a; margin-bottom: 8px; }
+.ql-pill { display: inline-block; padding: 6px 10px; border-radius: 18px; background: #f3f3f3; margin: 0 8px 8px 0; font-size: 12px; }
+.ql-stats { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 18px; }
+.ql-stat { background: #fff; text-align: center; padding: 24px 15px; border: 1px solid #eee; }
+.ql-stat .num { display: block; font-size: 32px; font-weight: 700; color: #1d1d1d; }
+.ql-stat .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #777; }
+.ql-list, .linked-pubs { padding-left: 18px; margin: 15px 0 0; }
+.ql-list li, .linked-pubs li { margin-bottom: 10px; line-height: 1.7; }
+.linked-pubs a { color: #222; font-weight: 600; }
+.linked-pubs .pub-year-inline, .pub-authors-inline { color: #666; font-size: 13px; }
+/* I am widening the desktop project grid to five columns so the new AI card stays on the same row. */
+.project-grid { display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: 24px; }
+.project-card { background: #fff; border: 1px solid #eee; padding: 20px; margin-bottom: 30px; }
+.project-card img { margin-top: 15px; }
+.person-card { text-align: center; background: #fff; border: 1px solid #eee; padding: 28px 20px; }
+.person-card img { margin: 0 auto 18px; width: 180px; height: auto; }
+.person-card h6 { font-size: 18px; margin: 8px 0; }
+.person-card p { min-height: 80px; }
+.person-links { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 15px; }
+.subpage-hero .caption h1 { font-size: 42px; }
+.subpage-meta { color: #888; text-transform: uppercase; letter-spacing: 1.2px; font-size: 12px; }
+.sidebar-links a { display: block; padding: 8px 0; color: #444; }
+.pub-section { margin-bottom: 45px; }
+.pub-section h4 { margin-bottom: 14px; }
+.pub-entry-custom { margin-bottom: 18px; padding-bottom: 18px; border-bottom: 1px solid #eee; }
+.pub-entry-custom:last-child { border-bottom: 0; }
+.pub-entry-custom .title { font-weight: 700; display: block; }
+.pub-entry-custom .meta { color: #666; font-size: 14px; }
+.notice-box { background: #faf7f1; border-left: 4px solid #c7a46b; padding: 18px; margin: 25px 0; }
+.contact-compact p { margin-bottom: 8px; }
+@media (max-width: 991px) {
+  .project-grid, .ql-stats { grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+@media (max-width: 767px) {
+  .project-grid, .ql-stats { grid-template-columns: 1fr; }
+  .ql-button-group { display: block; }
+  .ql-button-group a button, .ql-button-group button { display: block; width: 100%; margin-bottom: 10px; }
+}
+
+
+/* People navigation and pages */
+.navbar-nav .dropdown-menu {
+  border-radius: 0;
+  min-width: 240px;
+}
+.navbar-nav .dropdown-menu > li > a {
+  padding: 10px 18px;
+  color: #333;
+}
+.navbar-nav .dropdown-menu > li > a:hover,
+.navbar-nav .dropdown-menu > li > a:focus {
+  background: #f7f7f7;
+  color: #111;
+}
+.people-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 24px;
+}
+.people-preview-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+.people-member-card img {
+  width: 220px;
+  height: 220px;
+  object-fit: cover;
+}
+.people-member-card p {
+  min-height: 96px;
+}
+.ql-people-intro {
+  max-width: 860px;
+  margin: 0 auto 30px;
+  line-height: 1.8;
+}
+.team-photo-wrapper {
+  margin: 25px 0 35px;
+  background: #fff;
+  border: 1px solid #eee;
+  padding: 20px;
+}
+.team-photo-wrapper img {
+  width: 100%;
+  height: auto;
+}
+.team-photo-caption {
+  color: #777;
+  font-size: 13px;
+  margin-top: 12px;
+}
+.role-group-title {
+  margin: 38px 0 18px;
+}
+.member-group-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #8b8b8b;
+  margin-bottom: 8px;
+}
+.team-grid {
+  margin-bottom: 10px;
+}
+@media (max-width: 991px) {
+  .people-preview-grid {
+    grid-template-columns: repeat(2, minmax(0,1fr));
+  }
+}
+@media (max-width: 767px) {
+  .people-preview-grid {
+    grid-template-columns: 1fr;
+  }
+  .people-preview-card img {
+    height: auto;
+  }
+  .people-member-card img {
+    width: 180px;
+    height: 180px;
+  }
+}
+
+
+.people-single-page .people-anchor-section {
+  scroll-margin-top: 90px;
+  padding-top: 10px;
+  margin-top: 20px;
+}
+.people-single-page .team-photo-wrapper {
+  margin-bottom: 35px;
+}
+.people-single-page .team-photo-wrapper img {
+  border: 1px solid #d7d8dc;
+  background: #f6f7f9;
+}
+
+
+/* 2026 polish pass */
+main { overflow-x: hidden; }
+section[id] { scroll-margin-top: 92px; }
+.header .caption h1 { max-width: 980px; margin: 0 auto; }
+.ql-page-intro, .ql-section-intro { color: #555; line-height: 1.8; margin-bottom: 24px; }
+.project-card,
+.person-card,
+.ql-card,
+.team-photo-wrapper,
+.ql-stat {
+  box-shadow: 0 14px 34px rgba(0,0,0,0.05);
+  border-color: #ececec;
+}
+.project-card img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border: 1px solid #eee;
+}
+.project-card p { min-height: 88px; }
+.person-card { border-radius: 2px; }
+.person-card p { min-height: 88px; }
+.people-member-card p { min-height: 102px; }
+.person-links button,
+.ql-button-group button {
+  min-width: 148px;
+  padding: 10px 18px;
+  font-weight: 600;
+}
+.preview-default p {
+  max-width: 320px;
+  margin: 14px auto 0;
+}
+.preview-link { font-weight: 600; }
+footer .social-icon a { margin: 0 8px; }
+footer p { letter-spacing: 0.4px; }
+@media (max-width: 991px) {
+  .project-card p,
+  .person-card p,
+  .people-member-card p { min-height: 0; }
+}
+
+
+/* I am not touching the other card styles here. I only want the new AI image to inherit the same project-card treatment as the rest of the site. */
+
+
+/* I keep the Recent Highlights scroll module isolated so it does not affect the rest of the homepage. */
+.highlights-search-container {
+  position: relative;
+  max-width: 1080px;
+  margin: 0 auto 28px;
+}
+.highlights-search-input {
+  width: 100%;
+  padding: 16px 54px 16px 18px;
+  border: 1px solid #d9dde2;
+  border-radius: 12px;
+  background: #fff;
+  font-size: 16px;
+  color: #333;
+}
+.highlights-search-input:focus {
+  outline: none;
+  border-color: #c7a86a;
+  box-shadow: 0 0 0 3px rgba(199,168,106,0.12);
+}
+.highlights-search-icon {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+  pointer-events: none;
+}
+.highlights-scroll-wrapper {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+.highlights-scroll-track {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 8px 6px 18px;
+  scroll-snap-type: x proximity;
+  scroll-behavior: smooth;
+}
+.highlights-scroll-track::-webkit-scrollbar {
+  height: 12px;
+}
+.highlights-scroll-track::-webkit-scrollbar-track {
+  background: #dfe4e7;
+  border-radius: 999px;
+}
+.highlights-scroll-track::-webkit-scrollbar-thumb {
+  background: #34495e;
+  border-radius: 999px;
+  border: 2px solid #dfe4e7;
+}
+.highlights-scroll-track {
+  scrollbar-color: #34495e #dfe4e7;
+  scrollbar-width: auto;
+}
+.ql-highlight-card {
+  flex: 0 0 calc((100% - 72px) / 4);
+  min-width: 250px;
+  background: #fff;
+  border: 1px solid #ececec;
+  border-top: 3px solid #c7a86a;
+  box-shadow: 0 14px 34px rgba(0,0,0,0.05);
+  padding: 22px 20px 18px;
+  scroll-snap-align: start;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.ql-highlight-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 36px rgba(0,0,0,0.09);
+}
+.ql-highlight-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.ql-highlight-type,
+.ql-highlight-tag {
+  display: inline-block;
+  font-size: 11px;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  padding: 5px 9px;
+  border-radius: 999px;
+}
+.ql-highlight-type {
+  background: #c7a86a;
+  color: #fff;
+}
+.ql-highlight-tag {
+  background: #f1f3f5;
+  color: #444;
+}
+.ql-highlight-date {
+  font-size: 12px;
+  color: #777;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+.ql-highlight-card h6 {
+  font-size: 22px;
+  line-height: 1.35;
+  margin-bottom: 12px;
+  min-height: 60px;
+}
+.ql-highlight-card p {
+  min-height: 116px;
+  margin-bottom: 14px;
+}
+.ql-highlight-source {
+  font-size: 12px;
+  font-weight: 600;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin-bottom: 14px;
+}
+.ql-highlight-link {
+  display: inline-block;
+  font-weight: 600;
+}
+.ql-highlight-link-static {
+  color: #888;
+  cursor: default;
+}
+.highlights-empty-state {
+  max-width: 1080px;
+  margin: 14px auto 0;
+  color: #777;
+  font-size: 16px;
+}
+@media (max-width: 1199px) {
+  .ql-highlight-card { flex: 0 0 calc((100% - 48px) / 3); }
+}
+@media (max-width: 991px) {
+  .ql-highlight-card { flex: 0 0 calc((100% - 24px) / 2); }
+}
+@media (max-width: 767px) {
+  .ql-highlight-card { flex: 0 0 85%; }
+  .ql-highlight-card h6, .ql-highlight-card p { min-height: 0; }
+  .highlights-scroll-track::-webkit-scrollbar { height: 10px; }
+}
+
+
+/* Research section redesign */
+.ql-research-section {
+  background: linear-gradient(180deg, #fbfbfb 0%, #f6f7f9 100%);
+}
+.ql-research-top {
+  display: flex;
+  align-items: stretch;
+  margin-bottom: 34px;
+}
+.ql-research-copy {
+  padding-right: 18px;
+}
+.ql-section-kicker {
+  display: inline-block;
+  margin-bottom: 10px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1.8px;
+  color: #8b8b8b;
+  font-weight: 700;
+}
+.ql-research-title {
+  font-size: 34px;
+  line-height: 1.2;
+  margin: 0 0 18px;
+  color: #1f1f1f;
+}
+.ql-research-logo-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: #fff;
+  border: 1px solid #ececec;
+  box-shadow: 0 14px 34px rgba(0,0,0,0.05);
+  padding: 28px 24px;
+}
+.ql-research-logo {
+  width: 250px;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto 16px;
+}
+.ql-logo-caption {
+  color: #666;
+  line-height: 1.7;
+  max-width: 280px;
+  margin: 0 auto;
+}
+.ql-pillars-wrap {
+  margin-top: 10px;
+}
+.ql-pillars-head {
+  margin-bottom: 24px;
+}
+.ql-pillars-head .tit {
+  margin-bottom: 8px;
+}
+.ql-pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+.ql-pillar-card {
+  position: relative;
+  background: #fff;
+  border: 1px solid #ececec;
+  box-shadow: 0 14px 34px rgba(0,0,0,0.05);
+  padding: 28px 26px 24px;
+  min-height: 280px;
+}
+.ql-pillar-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #f5efe3;
+  color: #8d6c2c;
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 18px;
+}
+.ql-pillar-card h4 {
+  font-size: 20px;
+  margin: 0 0 12px;
+}
+.ql-pillar-card p {
+  margin: 0;
+  line-height: 1.8;
+  color: #555;
+}
+.ql-research-actions {
+  justify-content: center;
+  margin-top: 28px;
+}
+@media (max-width: 991px) {
+  .ql-research-copy {
+    padding-right: 0;
+  }
+  .ql-pillars-grid {
+    grid-template-columns: 1fr;
+  }
+  .ql-pillar-card {
+    min-height: 0;
+  }
+  .ql-research-logo-card {
+    margin-top: 22px;
+  }
+}
+@media (max-width: 767px) {
+  .ql-research-title {
+    font-size: 28px;
+  }
+}
+
+
+/* I keep the homepage blog strip visually lighter than Highlights, with a horizontal scroll and one clear CTA at the bottom. */
+.blog-home-scroll {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 10px 6px 20px;
+  scroll-snap-type: x proximity;
+  scroll-behavior: smooth;
+}
+.blog-home-scroll::-webkit-scrollbar {
+  height: 12px;
+}
+.blog-home-scroll::-webkit-scrollbar-track {
+  background: #dfe3e6;
+  border-radius: 999px;
+}
+.blog-home-scroll::-webkit-scrollbar-thumb {
+  background: #34495e;
+  border-radius: 999px;
+  border: 2px solid #dfe3e6;
+}
+.blog-home-scroll {
+  scrollbar-color: #34495e #dfe3e6;
+  scrollbar-width: auto;
+}
+.blog-home-card {
+  flex: 0 0 calc((100% - 48px) / 3);
+  min-width: 300px;
+  border-top: 3px solid #c7a46b;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+}
+.blog-home-card h4 {
+  margin-bottom: 12px;
+}
+.blog-home-card p {
+  margin-bottom: 14px;
+  min-height: 88px;
+}
+.blog-home-link {
+  margin-top: auto;
+  font-weight: 600;
+}
+.blog-home-footer {
+  margin-top: 18px;
+}
+.blog-home-footer button {
+  min-width: 220px;
+}
+.blog-source-note {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #777;
+}
+.navbar .navbar-nav>li>a,
+.navbar .navbar-nav>li>a:focus {
+  color: rgba(255,255,255,0.78);
+}
+.navbar .navbar-nav>li>a:hover {
+  color: #fff !important;
+}
+.navbar .navbar-nav>li>a.active {
+  color: #fff !important;
+}
+@media (max-width: 991px) {
+  .blog-home-card {
+    flex: 0 0 calc((100% - 24px) / 2);
+  }
+}
+@media (max-width: 767px) {
+  .blog-home-card {
+    flex: 0 0 85%;
+  }
+  .blog-home-card p {
+    min-height: 0;
+  }
+}
+
+
+/* I keep the homepage blog strip lightweight and data-driven from the shared blog post metadata. */
+.blog-home-empty {
+  max-width: 520px;
+  margin: 0 auto 18px;
+  text-align: left;
+}
+.blog-home-empty h4 {
+  margin-bottom: 12px;
+}
+.blog-home-empty p {
+  margin-bottom: 0;
+}
+
+@media (max-width: 767px) {
+  .ql-research-top {
+    display: block;
+    margin-bottom: 24px;
+  }
+
+  .ql-research-top > [class*="col-"] {
+    width: 100%;
+    float: none;
+  }
+
+  .ql-research-copy {
+    padding-right: 0;
+    margin-bottom: 20px;
+  }
+
+  .ql-research-logo-card {
+    margin-top: 0;
+    padding: 22px 18px;
+  }
+
+  .ql-research-logo {
+    width: 140px;
+  }
+
+  .ql-logo-caption {
+    max-width: 220px;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .ql-research-title {
+    font-size: 28px;
+    line-height: 1.2;
+  }
+
+  .ql-highlight {
+    padding: 14px 16px;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+}

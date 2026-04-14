@@ -10,8 +10,8 @@ $(function (){
     $.scrollIt({
       upKey: 38,                // key code to navigate to the next section
       downKey: 40,              // key code to navigate to the previous section
-      easing: 'swing',         // the easing function for animation
-      scrollTime: 1000,          // how long (in ms) the animation takes
+      easing: 'linear',         // the easing function for animation
+      scrollTime: 600,          // how long (in ms) the animation takes
       activeClass: 'active',    // class given to the active nav element
       onPageChange: null,       // function(pageIndex) that is called when page is changed
       topOffset: -60            // offste (in px) for fixed top navigation
@@ -35,61 +35,17 @@ $(function (){
     });
 
 
-    // smooth button scroll
-    $('.button-scroll').on('click', function(e){
-        e.preventDefault();
-
+    //smooth button scroll
+    $('.button-scroll').on('click', function(){
+      
         var scrollTo = $(this).attr('data-scrollTo');
-        var $target = $('#' + scrollTo);
 
-        if ($target.length) {
-            $('html, body').stop().animate({
-                scrollTop: $target.offset().top - 60
-            }, 1000);
-        }
+        $('body, html').animate({
+
+        "scrollTop": $('#'+scrollTo).offset().top - 60
+        }, 1000 );
+
     });
-
-
-    // smooth internal anchor links on the homepage
-    $('a[href*="#"]').on('click', function(e) {
-        var href = $(this).attr('href');
-
-        if (!href) {
-            return;
-        }
-
-        var cleanHref = href.replace(/^\.\.\//, '');
-        var isIndexAnchor = cleanHref.indexOf('index.html#') === 0 || href.charAt(0) === '#';
-
-        if (!isIndexAnchor) {
-            return;
-        }
-
-        var targetId = href.split('#')[1];
-        var $target = $('#' + targetId);
-
-        if ($target.length) {
-            e.preventDefault();
-            $('html, body').stop().animate({
-                scrollTop: $target.offset().top - 60
-            }, 1000);
-        }
-    });
-
-
-    // smooth hash landing on the homepage after links from internal pages
-    if (window.location.hash) {
-        var targetId = window.location.hash.replace('#', '');
-        var $target = $('#' + targetId);
-
-        if ($target.length) {
-            setTimeout(function() {
-                $('html, body').stop().animate({
-                    scrollTop: $target.offset().top - 60
-                }, 1000);
-            }, 50);
-        }
-    }
     
 
     // progress bar
@@ -196,93 +152,30 @@ $(window).on("load",function (){
     $(".loading").fadeOut(500);
 
      // contact form
-    if ($('#contact-form').length && !$('#contact-form').attr('onsubmit')) {
-        $('#contact-form').validator();
+    $('#contact-form').validator();
 
-        $('#contact-form').on('submit', function (e) {
-            if (!e.isDefaultPrevented()) {
-                var url = "pages/contact.php";
+    $('#contact-form').on('submit', function (e) {
+        if (!e.isDefaultPrevented()) {
+            var url = "contact.php";
 
-                $.ajax({
-                    type: "POST",
-                    url: url,
-                    data: $(this).serialize(),
-                    success: function (data)
-                    {
-                        var messageAlert = 'alert-' + data.type;
-                        var messageText = data.message;
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: $(this).serialize(),
+                success: function (data)
+                {
+                    var messageAlert = 'alert-' + data.type;
+                    var messageText = data.message;
 
-                        var alertBox = '<div class="alert ' + messageAlert + ' alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + messageText + '</div>';
-                        if (messageAlert && messageText) {
-                            $('#contact-form').find('.messages').html(alertBox);
-                            $('#contact-form')[0].reset();
-                        }
+                    var alertBox = '<div class="alert ' + messageAlert + ' alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + messageText + '</div>';
+                    if (messageAlert && messageText) {
+                        $('#contact-form').find('.messages').html(alertBox);
+                        $('#contact-form')[0].reset();
                     }
-                });
-                return false;
-            }
-        });
-    }
+                }
+            });
+            return false;
+        }
+    });
 
 });
-
-// I keep the nav-state logic in one place so internal pages and homepage sections both highlight clearly.
-(function () {
-  function setActiveNav(key) {
-    var links = document.querySelectorAll('.navbar .navbar-nav > li > a[data-nav]');
-    links.forEach(function (link) {
-      link.classList.toggle('active', link.getAttribute('data-nav') === key);
-    });
-  }
-
-  function currentPathKey() {
-    var path = window.location.pathname.toLowerCase();
-    if (/\/pages\/blog(?:\/|\.html)/.test(path)) return 'blog';
-    if (/\/pages\/(people|eoc_page|bjs_page|andrew-van-horn|principal-investigators|team-members|lab-alumni)\.html/.test(path)) return 'people';
-    if (/\/pages\/(pubpage|publications-carousel)\.html/.test(path)) return 'publications';
-    if (/\/pages\/(africa|americas|australia|humev|ai-development)\.html/.test(path)) return 'projects';
-    return 'home';
-  }
-
-  function isIndexPage() {
-    var path = window.location.pathname.toLowerCase();
-    return /(?:\/|^)index\.html$/.test(path) || /\/$/.test(path) || path === '';
-  }
-
-  function bindHomepageSectionHighlight() {
-    var sections = [
-      { id: 'home', key: 'home' },
-      { id: 'research', key: 'research' },
-      { id: 'projects', key: 'projects' },
-      { id: 'publications', key: 'publications' },
-      { id: 'people', key: 'people' },
-      { id: 'news', key: 'news' },
-      { id: 'contact', key: 'contact' },
-      { id: 'blog-home', key: 'blog' }
-    ];
-
-    function updateActiveSection() {
-      var scrollY = window.pageYOffset + 120;
-      var current = 'home';
-      sections.forEach(function (section) {
-        var el = document.getElementById(section.id);
-        if (el && el.offsetTop <= scrollY) {
-          current = section.key;
-        }
-      });
-      setActiveNav(current);
-    }
-
-    window.addEventListener('scroll', updateActiveSection);
-    window.addEventListener('resize', updateActiveSection);
-    updateActiveSection();
-  }
-
-  document.addEventListener('DOMContentLoaded', function () {
-    if (isIndexPage()) {
-      bindHomepageSectionHighlight();
-    } else {
-      setActiveNav(currentPathKey());
-    }
-  });
-})();
