@@ -5,7 +5,7 @@ window.quantLabBlogPosts = [
     "title": "UNEARTHING THE KALAHARI’S LONG HUMAN HISTORY",
     "author": "Ben Schoville",
     "authorKey": "ben",
-    "date": "2021-04-01",
+    "date": "2026-04-14",
     "displayDate": "April 01, 2021",
     "published": "2021-04-01",
     "category": "Public Writing",
