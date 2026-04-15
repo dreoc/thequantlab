@@ -2,7 +2,7 @@
 window.quantLabBlogPosts = [
 	{
     "id": "Schoville North of Kuruman",
-    "title": "UNEARTHING THE KALAHARI’S LONG HUMAN HISTORY",
+    "title": "Unearthing the Kalahari's Long Human History",
     "author": "Ben Schoville",
     "authorKey": "ben",
     "date": "2026-04-14",
@@ -29,8 +29,8 @@ window.quantLabBlogPosts = [
     "author": "Erik Otárola-Castillo",
     "authorKey": "erik",
     "date": "2025-09-30",
-    "displayDate": "SAA Archaeological Record",
-    "published": "",
+    "displayDate": "September 30, 2026",
+    "published": "2025-09-30",
     "category": "Public Writing",
     "tags": [
       "Service",
