@@ -4,8 +4,8 @@
 <meta charset="utf-8"/>
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="GUImorph: a geomorph-native 3D digitizer for R. Place landmarks and surface semilandmarks on PLY meshes, run Procrustes analysis, and export straight to geomorph." name="description"/>
-<meta content="GUImorph, geomorph, geometric morphometrics, 3D digitizing, landmarks, semilandmarks, Procrustes, PLY, R, Purdue, QuantLab" name="keywords"/>
+<meta content="GUImorph: an rgl-independent, geomorph-native 3D digitizer for R. Load PLY meshes, place landmarks and surface semilandmarks, run Procrustes analysis, and continue in geomorph." name="description"/>
+<meta content="GUImorph, geomorph, geometric morphometrics, 3D digitizing, landmarks, semilandmarks, anchors, Procrustes, PLY, R, Purdue, QuantLab" name="keywords"/>
 <title>QuantLab | GUImorph</title>
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Montserrat:200,300,400,500,600,700,900" rel="stylesheet"/>
 <link href="../css/font-awesome.min.css" rel="stylesheet"/>
@@ -23,9 +23,9 @@
 <script src="../js/html5shiv.min.js"></script>
 <style>
 /* ============================================================
-   GUImorph guide - scoped under .dm-guide so nothing leaks
-   into the rest of the QuantLab site. Palette and type match
-   the existing theme (gold #c7a46b, slate #34495e, Montserrat
+   GUImorph guide, scoped under .dm-guide so nothing leaks into
+   the rest of the QuantLab site. Palette and type match the
+   existing theme (gold #c7a46b, slate #34495e, Montserrat
    headings, Open Sans body).
    ============================================================ */
 .dm-guide { color:#333; }
@@ -43,13 +43,14 @@
 .dm-badge { display:inline-flex; align-items:center; gap:8px; font-size:12px; font-weight:600; letter-spacing:.4px; padding:8px 13px; border-radius:999px; border:1px solid #e4e4e4; }
 .dm-badge.ok  { background:#f2f8f4; border-color:#cfe6d8; color:#2e7d54; }
 .dm-badge.wip { background:#fbf6ee; border-color:#ecdcbf; color:#a9803c; }
+.dm-badge.ver { background:#f4f7fa; border-color:#d6e0ea; color:#34495e; }
 
 /* one-glance map */
 .dm-map { counter-reset:dmmap; list-style:none; padding-left:0; margin:16px 0 0; }
 .dm-map li { counter-increment:dmmap; position:relative; padding:7px 0 7px 36px; color:#3b3b3b; line-height:1.55; }
 .dm-map li::before { content:counter(dmmap); position:absolute; left:0; top:6px; width:23px; height:23px; border-radius:50%; background:#f0e6d2; color:#8a6d33; font-size:12px; font-weight:700; display:flex; align-items:center; justify-content:center; font-family:'Montserrat',sans-serif; }
 
-/* numbered step rail - the page signature: a sequence of placed points */
+/* numbered step rail, the page signature: a sequence of placed points */
 .dm-steps { position:relative; margin:26px 0 0; }
 .dm-steps::before { content:""; position:absolute; left:19px; top:16px; bottom:16px; width:2px; background:linear-gradient(#e7d9bd,#efe7d6); }
 .dm-step { position:relative; padding:0 0 30px 60px; }
@@ -57,6 +58,9 @@
 .dm-stepnum { position:absolute; left:0; top:0; width:40px; height:40px; border-radius:50%; background:#c7a46b; color:#fff; font-family:'Montserrat',sans-serif; font-weight:700; font-size:17px; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 12px rgba(199,164,107,.35); z-index:1; }
 .dm-step h4 { margin:5px 0 8px; font-size:20px; }
 .dm-step p { margin:0 0 10px; }
+
+/* tab badge, echoes the app's notebook tabs */
+.dm-tab { display:inline-flex; align-items:center; gap:6px; font-family:'Montserrat',sans-serif; font-weight:600; font-size:11px; letter-spacing:.6px; text-transform:uppercase; color:#8a6d33; background:#f6efe0; border:1px solid #e7d9bd; padding:3px 9px; border-radius:4px; margin-bottom:8px; }
 
 /* action line */
 .dm-do { display:flex; gap:12px; align-items:flex-start; background:#fbfbfb; border:1px solid #eee; border-left:3px solid #34495e; padding:12px 15px; margin:12px 0; }
@@ -72,7 +76,7 @@
 .dm-guide code, code.dm-inline { font-family:'SFMono-Regular',Consolas,'Liberation Mono',Menlo,monospace; font-size:13px; background:#f1f3f5; color:#1f3346; padding:2px 6px; border-radius:4px; }
 .dm-guide kbd { font-family:'SFMono-Regular',Consolas,Menlo,monospace; font-size:12px; background:#fff; color:#333; border:1px solid #d6d6d6; border-bottom-width:2px; border-radius:5px; padding:2px 7px; box-shadow:0 1px 0 rgba(0,0,0,.04); white-space:nowrap; }
 
-/* R / shell code block */
+/* code block */
 .dm-code { position:relative; background:#1c2733; border-radius:8px; margin:16px 0; overflow:hidden; box-shadow:0 12px 30px rgba(28,39,51,.18); }
 .dm-code pre { margin:0; padding:18px 52px 18px 18px; overflow-x:auto; }
 .dm-code code { display:block; background:transparent; padding:0; color:#e6ecf2; font-family:'SFMono-Regular',Consolas,Menlo,monospace; font-size:13.5px; line-height:1.7; }
@@ -160,38 +164,39 @@
 <div class="s-post">
 <div class="content-post dm-guide">
 
-<div class="subpage-meta"><a href="ai-development.html">AI Development</a> &nbsp;&middot;&nbsp; Tools &amp; workflows</div>
+<div class="subpage-meta"><a href="ai-development.html">AI Development</a> &nbsp;&middot;&nbsp; Tools &amp; workflows &nbsp;&middot;&nbsp; v0.9.0 beta</div>
 <span class="dm-kicker">3D geometric morphometrics in R</span>
-<h5 style="margin-top:0;">GUImorph: a geomorph-native 3D digitizer</h5>
+<h5 style="margin-top:0;">GUImorph: an rgl-independent, geomorph-native 3D digitizer</h5>
 
-<p class="dm-lead">GUImorph places 3D landmarks and surface semilandmarks on scanned meshes, runs Generalized Procrustes Analysis, and passes the result straight to geomorph. It runs inside R, using a Tcl/Tk interface with an interactive OpenGL 3D view. This page walks a first-time user through the full workflow, one click at a time.</p>
+<p class="dm-lead">GUImorph is an R package with a graphical interface for 3D geometric morphometrics. You load PLY mesh specimens, place landmarks, anchors, and surface semilandmarks, run a Procrustes fit through geomorph, and carry the aligned coordinates on into your analysis. This page walks a first-time user through the whole workflow, one action at a time.</p>
 
-<p>Geometric morphometrics turns the shape of an object into coordinates that can be measured and compared. For a Folsom point, that means recording the same anatomical landmarks and a dense set of surface points on every specimen, then aligning them so only shape differences remain. GUImorph is built to make that recording step approachable.</p>
+<p>Geometric morphometrics turns the shape of an object into coordinates that can be measured and compared. For a Folsom point, that means recording the same anatomical landmarks and a dense set of surface points on every specimen, then aligning them so that only shape differences remain. GUImorph is built to make that recording step approachable, and to keep it entirely inside R.</p>
 
-<p>The need is concrete. In 2026, geomorph 4.1 removed its interactive 3D digitizing functions (<code>digit.fixed</code>, <code>buildtemplate</code>, <code>digitsurface</code>), because the newest macOS dropped OpenGL support and the underlying rgl graphics are no longer maintained there. A frozen copy of geomorph 4.0.9 remains on GitHub, unmaintained, for anyone with an older setup. GUImorph restores that template-based workflow as its own R package, and it writes data in the exact array format that geomorph's <code>gpagen</code> expects. No file conversion, and no separate application to install.</p>
+<p>The need is concrete. As of geomorph 4.1, the interactive 3D digitizing functions (<code>digit.fixed</code>, <code>digitsurface</code>, <code>buildtemplate</code>) are deprecated, because rgl and OpenGL are no longer supported on current macOS. GUImorph keeps that template-based surface-semilandmark workflow available through its own native OpenGL engine, and feeds results straight into geomorph. There is no separate application to install and no file conversion between programs.</p>
 
 <div class="dm-badges">
+<span class="dm-badge ver"><i class="fa fa-code-fork"></i> GUImorph 0.9.0</span>
 <span class="dm-badge ok"><i class="fa fa-check-circle"></i> Windows: supported</span>
-<span class="dm-badge wip"><i class="fa fa-clock-o"></i> macOS: in progress</span>
+<span class="dm-badge wip"><i class="fa fa-ban"></i> macOS / Linux: not yet</span>
 </div>
 
-<div class="notice-box"><strong>Which computer to use.</strong> Run GUImorph on Windows for now. The same OpenGL change that ended geomorph's digitizer also affects the 3D view on the newest macOS, so a browser-based version is planned for cross-platform use. Everything below assumes Windows.</div>
+<div class="notice-box"><strong>Which computer to use.</strong> This beta runs on Windows only. The 3D view uses a native OpenGL component (<code>tkogl2.dll</code>) that is not built for macOS or Linux yet, which is the same OpenGL limitation that ended geomorph's own digitizer. A cross-platform, browser-based version is the longer-term plan. Everything below assumes Windows 10 or newer.</div>
 
 <h3 id="overview">What you will do</h3>
-<p>The workflow is a fixed sequence. Here is the whole thing at a glance, before the detailed steps.</p>
+<p>The workflow follows the tabs in the GUImorph window, in order, with a few File-menu steps for loading and saving. Here is the whole thing at a glance.</p>
 <ol class="dm-map">
-<li>Install R and the GUImorph package.</li>
+<li>Install R and Git, then clone and launch GUImorph.</li>
 <li>Prepare your PLY meshes (remove stray and origin points).</li>
-<li>Launch GUImorph and load your first specimen.</li>
-<li>Learn to rotate, zoom, and pan the 3D view.</li>
-<li>Place the fixed (anatomical) landmarks.</li>
-<li>Place anchors or curve points, if your protocol uses them.</li>
-<li>Build the surface template once, on a reference specimen.</li>
-<li>Apply the template to every other specimen.</li>
+<li>Load your first specimen from the File menu.</li>
+<li>Learn to rotate, zoom, place, and delete in the 3D view.</li>
+<li>Place the fixed landmarks on the <strong>3D Digitizing</strong> tab.</li>
+<li>Place anchors on the <strong>Anchors</strong> tab, if you need them.</li>
+<li>Build the surface template on the <strong>Surface Sliders</strong> tab.</li>
+<li>Downsample every specimen against that template.</li>
 <li>Save each specimen to a <code>.dgt</code> file.</li>
 <li>Merge the <code>.dgt</code> files into one dataset.</li>
-<li>Run GPA and inspect the results.</li>
-<li>Hand the coordinates to geomorph.</li>
+<li>Run the Procrustes fit on the <strong>GPA</strong> tab, then plot.</li>
+<li>Continue the analysis in geomorph.</li>
 </ol>
 
 <hr class="dm-hr"/>
@@ -199,123 +204,158 @@
 <!-- ================= PART 1: SETUP ================= -->
 <h3 id="setup">Part 1 &middot; Before you start</h3>
 
-<h4>Install R</h4>
-<p>GUImorph runs inside R. If you do not have it, install R from the official site, and optionally RStudio as a friendlier console. Any recent version of R for Windows works.</p>
-<div class="dm-do"><span class="lab">Get it</span><span class="txt">Download R for Windows from <a href="https://cran.r-project.org/" target="_blank">cran.r-project.org</a>. Install with the default options.</span></div>
-
-<h4>Install the GUImorph package</h4>
-<p>Use the prebuilt Windows package. This is the simplest path and needs no compiler. Save the package file somewhere you can find it, then run the command below in the R console, editing the path to match where you saved it.</p>
+<h4>Install the prerequisites</h4>
+<p>You do not need to compile anything. GUImorph ships with its prebuilt OpenGL engine. You need 64-bit R and Git. On Windows, the quickest way is <code>winget</code> in a terminal.</p>
 <div class="dm-code">
 <button class="dm-copy" type="button">Copy</button>
-<pre><code><span class="cmt"># Install GUImorph on Windows (prebuilt package).</span>
-<span class="cmt"># Edit the path to wherever you saved the file.</span>
-install.packages(<span class="str">"C:/Users/you/Downloads/GUImorph_1.0.0.zip"</span>, repos = NULL)
-
-<span class="cmt"># Load it. Do this once at the start of every session:</span>
-library(GUImorph)</code></pre>
+<pre><code><span class="cmt"># In a Windows terminal (PowerShell or Command Prompt):</span>
+winget install -e --id RProject.R
+winget install -e --id Git.Git</code></pre>
 </div>
-<div class="dm-check"><i class="fa fa-check"></i><span>It worked if <code>library(GUImorph)</code> returns to the prompt with no red error text.</span></div>
+<p>Restart your terminal after installing R, so that <code>R</code> is on your PATH.</p>
+
+<h4>Clone and launch (recommended)</h4>
+<div class="dm-note"><span class="h">Access note</span><p>The GUImorph repository is currently private. If you are collaborating with the QuantLab, ask to be granted access before you clone, or the commands below will fail.</p></div>
+<p>Clone the repository, then open R and load the package.</p>
+<div class="dm-code">
+<button class="dm-copy" type="button">Copy</button>
+<pre><code><span class="cmt"># In your terminal:</span>
+git clone https://github.com/dreoc/GUImorph.git C:\dev\GUImorph
+cd C:\dev\GUImorph</code></pre>
+</div>
+<p>Now open R (or RStudio) and run:</p>
+<div class="dm-code">
+<button class="dm-copy" type="button">Copy</button>
+<pre><code>pkg <- <span class="str">"C:/dev/GUImorph/integrated-guimorph-development_EOC/Project/GUImorphDevelopment"</span>
+<span class="fn">setwd</span>(pkg)
+
+<span class="cmt"># restore the pinned package versions, then load and run:</span>
+if (!requireNamespace(<span class="str">"renv"</span>, quietly = TRUE)) install.packages(<span class="str">"renv"</span>)
+renv::<span class="fn">restore</span>()
+
+if (!requireNamespace(<span class="str">"devtools"</span>, quietly = TRUE)) install.packages(<span class="str">"devtools"</span>)
+devtools::<span class="fn">load_all</span>(<span class="str">"."</span>)
+<span class="fn">GUImorph</span>()</code></pre>
+</div>
+<div class="dm-check"><i class="fa fa-check"></i><span>A startup banner shows the version with no <code>loading tkogl2 failed</code> warning, and the <strong>3D GUImorph</strong> window opens.</span></div>
 
 <details class="dm-details">
-<summary>Building from source (advanced)</summary>
+<summary>Alternative: install from GitHub</summary>
 <div class="body">
-<p>If you were given the source folder instead of a prebuilt package, you can compile it, but this requires a C toolchain to build the OpenGL engine.</p>
 <div class="dm-code">
 <button class="dm-copy" type="button">Copy</button>
-<pre><code>install.packages(<span class="str">"C:/path/to/GUImorph"</span>, repos = NULL, type = <span class="str">"source"</span>)</code></pre>
+<pre><code>if (!requireNamespace(<span class="str">"remotes"</span>, quietly = TRUE)) install.packages(<span class="str">"remotes"</span>)
+
+remotes::<span class="fn">install_github</span>(
+  <span class="str">"dreoc/GUImorph"</span>,
+  subdir  = <span class="str">"integrated-guimorph-development_EOC/Project/GUImorphDevelopment"</span>,
+  upgrade = <span class="str">"never"</span>
+)
+
+<span class="fn">library</span>(GUImorph)
+<span class="fn">GUImorph</span>()</code></pre>
 </div>
-<p>Build the C component with Visual Studio 2022 Build Tools and CMake. Do not compile it with MinGW or the default gcc from Rtools for this part. That toolchain renders the mesh solid black. If your specimen shows up as a featureless black shape, this is almost always the cause.</p>
+<p>If dependency versions mismatch after installing this way, run <code>renv::restore()</code> from the installed package source. The clone-and-run route above is more predictable for a first setup. For verbose diagnostics at any time, launch with <code>GUImorph(debug = TRUE)</code>.</p>
 </div>
 </details>
 
 <h4>Prepare your meshes</h4>
-<p>GUImorph reads PLY surface files. Export your scans as <code>.ply</code> with per-vertex color kept. Before digitizing, remove junk points from each mesh. Scanner exports (for example from NextEngine or ScanStudio) usually carry unreferenced vertices that belong to no face, and null vertices sitting at the exact origin, the point <code>(0, 0, 0)</code>. These points are invisible while you work, but they land far from your specimen and become extreme outliers once you run GPA. One uncleaned mesh can distort the alignment of the whole dataset.</p>
+<p>GUImorph reads PLY surface files. Export your scans as <code>.ply</code> with per-vertex color kept. Before digitizing, remove junk points from each mesh. Scanner exports (for example from NextEngine or ScanStudio) usually carry unreferenced vertices that belong to no face, and null vertices sitting at the exact origin, the point <code>(0, 0, 0)</code>. These points are invisible while you work, but they land far from your specimen and become extreme outliers once you run the Procrustes fit. One uncleaned mesh can distort the alignment of the whole dataset.</p>
 <div class="dm-do"><span class="lab">Do this</span><span class="txt">In MeshLab, open each mesh and run <span class="dm-path">Filters &#9656; Cleaning and Repairing &#9656; Remove Unreferenced Vertices</span>, then <span class="dm-path">Remove Duplicate Vertices</span>. Delete any vertex sitting at the origin. Keep all faces and colors. Export back to <code>.ply</code>.</span></div>
-<div class="dm-warn"><span class="h">Common mistake</span><p>Skipping this step. It is the single most frequent reason one specimen looks wildly wrong in the final plot. If a point cloud or mesh includes a vertex at exactly <code>(0, 0, 0)</code>, remove it before you digitize.</p></div>
+<div class="dm-warn"><span class="h">Common mistake</span><p>Skipping this step. It is the single most frequent reason one specimen looks wildly wrong in the final plot. If a mesh includes a vertex at exactly <code>(0, 0, 0)</code>, remove it before you digitize.</p></div>
 
 <hr class="dm-hr"/>
 
 <!-- ================= PART 2: WORKFLOW ================= -->
 <h3 id="workflow">Part 2 &middot; The digitizing workflow</h3>
-<p>Work through these in order. Each step tells you what to do, and how to tell it worked.</p>
+<p>Work through these in order. Each step names the tab or menu to use, tells you what to do, and tells you how to know it worked.</p>
 
 <div class="dm-steps">
 
 <div class="dm-step" id="s-launch">
 <div class="dm-stepnum">1</div>
 <h4>Launch GUImorph</h4>
-<p>With the package loaded, open the interface from the R console.</p>
+<p>With the package loaded (see Part 1), the interface opens from the R console.</p>
 <div class="dm-code">
 <button class="dm-copy" type="button">Copy</button>
-<pre><code>library(GUImorph)
-<span class="fn">GUImorph</span>()</code></pre>
+<pre><code><span class="fn">GUImorph</span>()</code></pre>
 </div>
-<p>A window opens with a menu bar across the top and a large dark panel. That dark panel is the 3D view. It is empty until you load a specimen.</p>
-<div class="dm-check"><i class="fa fa-check"></i><span>The GUImorph window is open and you can see the File menu.</span></div>
+<p>The <strong>3D GUImorph</strong> window opens. On the left is a large dark panel, the 3D view, empty until you load a specimen. On the right is a set of tabs: 3D Digitizing, Anchors, Surface Sliders, Curves, and GPA. You will move left to right through those tabs as you work.</p>
+<div class="dm-check"><i class="fa fa-check"></i><span>The window is open and you can see the File menu and the tabs on the right.</span></div>
 </div>
 
 <div class="dm-step" id="s-load">
 <div class="dm-stepnum">2</div>
 <h4>Load your first specimen</h4>
-<p>Open one of your cleaned meshes.</p>
-<div class="dm-do"><span class="lab">Menu</span><span class="txt"><span class="dm-path">File &#9656; Add PLY</span>, then choose one of your <code>.ply</code> files.</span></div>
-<p>Your specimen appears in the 3D view, in its scanned color. If it looks small or off-center, that is fine. You will orient it in the next step.</p>
-<div class="dm-check"><i class="fa fa-check"></i><span>Your specimen is visible in the 3D panel.</span></div>
+<p>Open one of your cleaned meshes from the File menu.</p>
+<div class="dm-do"><span class="lab">Menu</span><span class="txt"><span class="dm-path">File &#9656; Load PLY File&#8230;</span>, then choose one of your <code>.ply</code> files.</span></div>
+<p>Your specimen appears in the 3D view, in its scanned color. If it looks small or off-center, that is fine. You orient it in the next step.</p>
+<div class="dm-tip"><span class="h">Adding more specimens later</span><p>To bring another mesh into the same working session, use <span class="dm-path">File &#9656; Add PLY to Current DGT&#8230;</span>. To reopen a session you saved earlier, use <span class="dm-path">File &#9656; Load DGT File&#8230;</span>.</p></div>
+<div class="dm-check"><i class="fa fa-check"></i><span>Your specimen is visible in the 3D panel, not blank or black.</span></div>
 </div>
 
 <div class="dm-step" id="s-view">
 <div class="dm-stepnum">3</div>
-<h4>Move the 3D view</h4>
-<p>Before placing any points, learn to move the specimen so the region you want to landmark faces you. The view controls are mouse-driven.</p>
-<div class="dm-do"><span class="lab">Rotate</span><span class="txt">Hold the <kbd>left mouse</kbd> button and drag.</span></div>
+<h4>Learn the 3D view controls</h4>
+<p>Before placing any points, learn how to move the specimen and how points are placed. All four actions happen with the mouse, directly on the 3D view.</p>
+<div class="dm-do"><span class="lab">Rotate</span><span class="txt"><kbd>Drag</kbd> with the left mouse button held down.</span></div>
 <div class="dm-do"><span class="lab">Zoom</span><span class="txt">Scroll the <kbd>mouse wheel</kbd> in and out.</span></div>
-<div class="dm-do"><span class="lab">Pan</span><span class="txt">Hold the <kbd>right mouse</kbd> button and drag to slide the specimen sideways.</span></div>
-<div class="dm-tip"><span class="h">Tip</span><p>Rotating the specimen does not move the landmarks you have already placed. They stay locked to the surface. Turn the specimen freely to check your points from every angle.</p></div>
-<div class="dm-check"><i class="fa fa-check"></i><span>You can turn, zoom, and slide the specimen at will.</span></div>
+<div class="dm-do"><span class="lab">Place a point</span><span class="txt"><kbd>Double-click</kbd> directly on the surface.</span></div>
+<div class="dm-do"><span class="lab">Delete a point</span><span class="txt"><kbd>Right-click</kbd> on the point you want to remove.</span></div>
+<div class="dm-tip"><span class="h">Tip</span><p>Rotating the specimen does not move the points you have already placed. They stay locked to the surface. Turn the specimen freely to check your points from every angle.</p></div>
+<div class="dm-check"><i class="fa fa-check"></i><span>You can turn and zoom the specimen, and you know double-click places and right-click deletes.</span></div>
 </div>
 
 <div class="dm-step" id="s-fixed">
 <div class="dm-stepnum">4</div>
 <h4>Place the fixed landmarks</h4>
+<span class="dm-tab"><i class="fa fa-crosshairs"></i> 3D Digitizing tab</span>
 <p>Fixed landmarks are your numbered anatomical points, the same points in the same order on every specimen. This defined order is what lets you compare specimens later, so decide your landmark scheme first and follow it exactly.</p>
-<div class="dm-do"><span class="lab">Start</span><span class="txt">Enter fixed-landmark mode (the digitize control), then <kbd>left-click</kbd> directly on the surface at each landmark, in order: 1, 2, 3, and so on.</span></div>
-<p>A marker drops onto the surface at each click. The marker sits slightly above the mesh so it is easy to see and does not disappear into the surface.</p>
-<div class="dm-do"><span class="lab">Undo</span><span class="txt">To remove the last point you placed, delete it and click again. Placing points in the correct order matters more than placing them quickly.</span></div>
-<div class="dm-tip"><span class="h">Tip</span><p>Zoom in before clicking a precise landmark. A point placed while zoomed out can be off by more than you expect. Rotate the specimen afterward to confirm the marker sits exactly where you intended.</p></div>
-<div class="dm-check"><i class="fa fa-check"></i><span>All fixed landmarks are placed, numbered in order, each sitting on the surface.</span></div>
+<div class="dm-do"><span class="lab">Do this</span><span class="txt">Open the <strong>3D Digitizing</strong> tab and set the number of landmarks. Then <kbd>double-click</kbd> each landmark on the surface, in order: 1, 2, 3, and so on. Markers appear in red. To remove one, <kbd>right-click</kbd> it.</span></div>
+<p>GUImorph tracks your progress. Once every fixed landmark is placed on a specimen, that specimen is ready for the Procrustes fit.</p>
+<div class="dm-tip"><span class="h">Tip</span><p>Zoom in before placing a precise landmark. A point placed while zoomed out can be off by more than you expect. Rotate the specimen afterward to confirm the marker sits where you intended.</p></div>
+<div class="dm-check"><i class="fa fa-check"></i><span>All fixed landmarks are placed, in order, in red, each sitting on the surface.</span></div>
 </div>
 
 <div class="dm-step" id="s-anchors">
 <div class="dm-stepnum">5</div>
-<h4>Place anchors or curve points</h4>
-<p>Some protocols add anchors, points along an edge or ridge that guide where the surface points go. If your scheme does not use them, skip this step.</p>
-<div class="dm-do"><span class="lab">Do this</span><span class="txt">Switch to anchor mode, then <kbd>left-click</kbd> along the feature to mark it. Use the same anchors on every specimen.</span></div>
-<div class="dm-check"><i class="fa fa-check"></i><span>Your anchors trace the same feature you will trace on the other specimens.</span></div>
+<h4>Place anchors: capturing features the downsample would miss</h4>
+<span class="dm-tab"><i class="fa fa-thumb-tack"></i> Anchors tab &middot; optional</span>
+<p>This step is worth understanding, because it is the one place your judgment corrects the automatic sampling. Surface points are not placed by hand. In the next step, GUImorph builds a template by running k-means over the specimen's full point cloud and keeping a representative subset of points. K-means spreads those points to represent the overall cloud, so it samples the surface evenly and works well on average.</p>
+<p>It has one blind spot. K-means represents the distribution of points, not the topography. It has no way to know which ridges, valleys, or flute margins carry important shape information, so a diagnostic feature can be under-sampled, or left out entirely, even when the sample looks representative.</p>
+<p>Anchors are the correction. They are extra points you place by hand, on exactly the features you judge to be important. When you build the template with <span class="dm-path">Use Anchors for Downsampling</span> turned on, GUImorph adds your anchors to the template alongside the k-means points, so those features are guaranteed to be represented. The automatic sample is objective and feature-blind. Anchors are your targeted, subjective additions, the place where your knowledge of the specimen supplements the algorithm.</p>
+<div class="dm-do"><span class="lab">Do this</span><span class="txt">Open the <strong>Anchors</strong> tab and set the number of anchors. <kbd>Double-click</kbd> on each feature the downsample should capture, for example the crest of a ridge or the margin of a flute. Anchors appear in green. Place the same anchors, in the same order, on every specimen.</span></div>
+<p>If your landmark scheme does not use anchors, skip this tab.</p>
+<div class="dm-check"><i class="fa fa-check"></i><span>The features you consider diagnostic are marked in green, ready to be pulled into the template.</span></div>
 </div>
 
 <div class="dm-step" id="s-template">
 <div class="dm-stepnum">6</div>
 <h4>Build the surface template (once)</h4>
-<p>Surface semilandmarks are a dense grid of points spread over the surface between your fixed landmarks. To make them correspond across specimens, you first build a <strong>template</strong> on one good reference specimen. You do this a single time for the whole study.</p>
-<div class="dm-do"><span class="lab">Do this</span><span class="txt">With the reference specimen loaded and its fixed landmarks placed, run the build-template step. When asked, enter how many surface points you want. GUImorph spreads that many points over the surface and saves a file named <code>template.txt</code> in your working folder.</span></div>
+<span class="dm-tab"><i class="fa fa-th"></i> Surface Sliders tab</span>
+<p>Surface semilandmarks are a dense set of points spread over the surface between your fixed landmarks. To make them correspond across specimens, you first build a <strong>template</strong> on one good reference specimen. You do this a single time for the whole study.</p>
+<div class="dm-do"><span class="lab">Do this</span><span class="txt">With the reference specimen loaded and its fixed landmarks placed, open the <strong>Surface Sliders</strong> tab and set the number of surface points. If you placed anchors, tick <span class="dm-path">Use Anchors for Downsampling</span>. Then click <span class="dm-path">Build Template</span>.</span></div>
+<p>GUImorph reads the mesh, spreads the surface points across it with k-means, adds your fixed landmarks (and anchors, if selected), and saves the result as <code>template.txt</code> in your working folder.</p>
 <div class="dm-note"><span class="h">What the template is for</span><p>The template records the pattern of surface points on the reference. Every other specimen will receive the same pattern, warped to fit its own surface, so point number 50 means the same location on every specimen. This follows the method of Gunz, Mitteroecker and Bookstein (2005), the same approach geomorph used.</p></div>
-<div class="dm-check"><i class="fa fa-check"></i><span>A <code>template.txt</code> file exists in your folder, and surface points cover the reference specimen.</span></div>
+<div class="dm-check"><i class="fa fa-check"></i><span>A <code>template.txt</code> file exists in your folder, and the message confirms the template was created.</span></div>
 </div>
 
 <div class="dm-step" id="s-surface">
 <div class="dm-stepnum">7</div>
-<h4>Apply the template to every other specimen</h4>
-<p>Now digitize the rest of your specimens. Each one gets its fixed landmarks first, then the surface points come from the template automatically.</p>
-<div class="dm-do"><span class="lab">Repeat per specimen</span><span class="txt">Load the next specimen with <span class="dm-path">File &#9656; Add PLY</span>. Place the same fixed landmarks in the same order. Then run the surface step. GUImorph aligns the template to this specimen and drops the surface points into their corresponding places.</span></div>
-<div class="dm-note"><span class="h">Give it a moment when switching specimens</span><p>When you move to a new specimen, GUImorph re-sends the surface data to the 3D engine, which clears it on each load. A brief pause after loading is normal.</p></div>
-<div class="dm-check"><i class="fa fa-check"></i><span>Each specimen ends with the same number of surface points as the template, in matching positions.</span></div>
+<h4>Downsample every specimen against the template</h4>
+<span class="dm-tab"><i class="fa fa-th"></i> Surface Sliders tab</span>
+<p>Now apply the template to each specimen. This is where the corresponding surface points are placed on the other specimens.</p>
+<div class="dm-do"><span class="lab">Repeat per specimen</span><span class="txt">Load a specimen. Place its fixed landmarks on the <strong>3D Digitizing</strong> tab (and the same anchors on the <strong>Anchors</strong> tab, if you are using them). Then, on the <strong>Surface Sliders</strong> tab, click <span class="dm-path">Downsample specimen</span>.</span></div>
+<p>GUImorph warps the template onto this specimen using its landmarks, then places the surface points in their corresponding positions.</p>
+<div class="dm-note"><span class="h">Give it a moment when switching specimens</span><p>Moving to a new specimen reloads its surface data into the 3D engine. A brief pause after loading or downsampling is normal.</p></div>
+<div class="dm-check"><i class="fa fa-check"></i><span>Each specimen ends with surface points that match the template, in corresponding positions.</span></div>
 </div>
 
 <div class="dm-step" id="s-save">
 <div class="dm-stepnum">8</div>
 <h4>Save each specimen</h4>
 <p>Save every specimen as you finish it. Do not wait until the end.</p>
-<div class="dm-do"><span class="lab">Menu</span><span class="txt"><span class="dm-path">File &#9656; Save</span>. This writes a <code>.dgt</code> file holding that specimen's landmark coordinates. Name the file after the specimen so you can tell them apart.</span></div>
+<div class="dm-do"><span class="lab">Menu</span><span class="txt"><span class="dm-path">File &#9656; Save to DGT&#8230;</span>. This writes a <code>.dgt</code> file holding that specimen's landmarks, anchors, curves, and template. Name the file after the specimen so you can tell them apart.</span></div>
 <div class="dm-check"><i class="fa fa-check"></i><span>You have one <code>.dgt</code> file per specimen, clearly named.</span></div>
 </div>
 
@@ -323,45 +363,39 @@ library(GUImorph)</code></pre>
 <div class="dm-stepnum">9</div>
 <h4>Merge the specimen files</h4>
 <p>Combine your individual <code>.dgt</code> files into one dataset that holds every specimen together.</p>
-<div class="dm-do"><span class="lab">Menu</span><span class="txt"><span class="dm-path">File &#9656; Merge DGT</span>, then select all of your <code>.dgt</code> files at once.</span></div>
-<div class="dm-check"><i class="fa fa-check"></i><span>One merged dataset now contains all specimens, ready for analysis.</span></div>
+<div class="dm-do"><span class="lab">Menu</span><span class="txt"><span class="dm-path">File &#9656; Merge DGT Files&#8230;</span>, then select all of your <code>.dgt</code> files.</span></div>
+<p>GUImorph checks that the specimens share the same template and curves, so that the surface semilandmarks are comparable, and refuses to merge if they do not match. Then open the merged file with <span class="dm-path">File &#9656; Load DGT File&#8230;</span> to bring all specimens into one session.</p>
+<div class="dm-check"><i class="fa fa-check"></i><span>One merged dataset contains all specimens, loaded and ready for the fit.</span></div>
 </div>
 
 <div class="dm-step" id="s-gpa">
 <div class="dm-stepnum">10</div>
-<h4>Run GPA</h4>
-<p>Generalized Procrustes Analysis removes differences in position, rotation, and size, so that only shape remains. This is the step that makes specimens comparable.</p>
-<div class="dm-do"><span class="lab">Do this</span><span class="txt">Open the GPA panel and run the analysis on your merged dataset.</span></div>
-<div class="dm-check"><i class="fa fa-check"></i><span>GUImorph reports aligned coordinates and a mean shape.</span></div>
+<h4>Run the Procrustes fit (GPA)</h4>
+<span class="dm-tab"><i class="fa fa-sliders"></i> GPA tab</span>
+<p>Generalized Procrustes Analysis removes differences in position, rotation, and size, so that only shape remains. This is the step that makes specimens comparable, and GUImorph runs it through geomorph for you.</p>
+<div class="dm-do"><span class="lab">Set options</span><span class="txt">On the <strong>GPA</strong> tab, choose your options. The common ones are <span class="dm-path">Slide semilandmarks on surfaces</span>, <span class="dm-path">Slide semilandmarks on curves</span>, <span class="dm-path">Project into tangent space</span>, and, for speed on large datasets, <span class="dm-path">Parallel processing</span> and <span class="dm-path">Approximate TPS</span>.</span></div>
+<div class="dm-do"><span class="lab">Run it</span><span class="txt">Click <span class="dm-path">Compute</span>. GUImorph assembles the coordinates and runs geomorph's <code>gpagen</code>.</span></div>
+<div class="dm-note"><span class="h">Anchors at fit time</span><p>The GPA tab also lets you treat anchors as sliding semilandmarks, through <span class="dm-path">Use anchors as surface semilandmarks</span> and <span class="dm-path">Use anchors as curve semilandmarks</span>. This is separate from using anchors to guide the downsample. Leave these off unless your protocol calls for it.</p></div>
+<div class="dm-check"><i class="fa fa-check"></i><span>The fit completes without a landmark-count error, and a result is ready to plot.</span></div>
 </div>
 
 <div class="dm-step" id="s-inspect">
 <div class="dm-stepnum">11</div>
-<h4>Inspect the results</h4>
-<p>Use the plotting buttons to check your work before moving on.</p>
-<div class="dm-do"><span class="lab">Specimens</span><span class="txt"><code>plotspecs</code> shows every specimen overlaid, so you can spot one that is misaligned.</span></div>
-<div class="dm-do"><span class="lab">Mean</span><span class="txt"><code>plotMeanShape</code> shows the average shape of the sample.</span></div>
-<div class="dm-do"><span class="lab">Variation</span><span class="txt"><code>plotPCA</code> places specimens on principal component axes, so you can see how they spread.</span></div>
-<div class="dm-warn"><span class="h">Reading the PCA</span><p>If one specimen sits far away from all the others in the PCA plot, that is usually a mesh-cleaning miss, an unreferenced or origin vertex that survived. Go back, re-clean that mesh, and re-digitize it if needed.</p></div>
+<h4>Plot and inspect the results</h4>
+<span class="dm-tab"><i class="fa fa-sliders"></i> GPA tab</span>
+<p>Use the plot buttons on the same tab to check your work before moving on.</p>
+<div class="dm-do"><span class="lab">Specimens</span><span class="txt"><span class="dm-path">Plot Aligned Specimens</span> shows every specimen overlaid, so you can spot one that is misaligned.</span></div>
+<div class="dm-do"><span class="lab">Variation</span><span class="txt"><span class="dm-path">PCA (morphospace)</span> places specimens on principal component axes, so you can see how they spread.</span></div>
+<div class="dm-do"><span class="lab">Mean</span><span class="txt"><span class="dm-path">Plot Mean Shape</span> shows the average shape. Adjust point size and the mesh options next to it if needed.</span></div>
+<div class="dm-warn"><span class="h">Reading the PCA</span><p>If one specimen sits far away from all the others in the morphospace, that is usually a mesh-cleaning miss, an unreferenced or origin vertex that survived. Go back, re-clean that mesh, and re-digitize it.</p></div>
 <div class="dm-check"><i class="fa fa-check"></i><span>Specimens overlay sensibly, and no point sits impossibly far from the rest.</span></div>
 </div>
 
 <div class="dm-step" id="s-geomorph">
 <div class="dm-stepnum">12</div>
-<h4>Take it into geomorph</h4>
-<p>This is the payoff. GUImorph's coordinates are already in the three-dimensional array format that geomorph's <code>gpagen</code> reads, so there is no conversion step and no export to another program.</p>
-<div class="dm-code">
-<button class="dm-copy" type="button">Copy</button>
-<pre><code>library(geomorph)
-
-<span class="cmt"># 'coords' is the landmark array from your merged GUImorph dataset.</span>
-gpa <- <span class="fn">gpagen</span>(coords)
-<span class="fn">plot</span>(gpa)
-
-<span class="cmt"># From here, the full geomorph toolkit is available:</span>
-<span class="cmt"># principal components, allometry, Procrustes ANOVA, and more.</span></code></pre>
-</div>
-<div class="dm-check"><i class="fa fa-check"></i><span><code>gpagen</code> runs without a shape error, and your analysis continues in geomorph.</span></div>
+<h4>Continue the analysis in geomorph</h4>
+<p>The fit you just ran is a standard geomorph result, produced by <code>gpagen</code>, so nothing needs converting. Use <span class="dm-path">Save Result</span> on the GPA tab to write it out, and continue in R with the full geomorph toolkit: principal components, allometry, Procrustes ANOVA, and more. Because everything stays in R, there is no export to another program and no format translation.</p>
+<div class="dm-check"><i class="fa fa-check"></i><span>You have an aligned geomorph result and can carry it into any geomorph analysis.</span></div>
 </div>
 
 </div><!-- /dm-steps -->
@@ -371,30 +405,33 @@ gpa <- <span class="fn">gpagen</span>(coords)
 <!-- ================= PART 3: TROUBLESHOOTING ================= -->
 <h3 id="trouble">Part 3 &middot; Troubleshooting</h3>
 
-<h4>The package will not load, or cannot find <code>tkogl2.dll</code></h4>
-<p>On 64-bit Windows, an older build could fail to locate its OpenGL engine file. Install the current GUImorph package, which corrects the file path it searches. If you built from source, rebuild and reinstall.</p>
+<h4>A <code>loading tkogl2 failed</code> warning at startup</h4>
+<p>The OpenGL engine did not load. Make sure you are running 64-bit R 4.6 or newer on Windows, and that you cloned the full repository, which ships the prebuilt engine under <code>inst/libs/x64/</code>. Re-run the clone-and-run steps in Part 1.</p>
 
-<h4>The specimen shows up as a solid black shape</h4>
-<p>The OpenGL engine was compiled with the wrong toolchain. Use the prebuilt package, or rebuild the C component with Visual Studio 2022 Build Tools and CMake. MinGW and the default gcc produce a black mesh.</p>
+<h4>The specimen shows up blank or as a solid black shape</h4>
+<p>If the mesh is black, the OpenGL engine was compiled with the wrong toolchain. The shipped build uses the MSVC toolchain (Visual Studio 2022 Build Tools and CMake). MinGW and the default gcc produce a black mesh. Use the prebuilt engine that comes with the repository rather than recompiling with another compiler.</p>
+
+<h4>Double-clicking the mesh does not place a point</h4>
+<p>Check two things. First, make sure you are on the right tab: fixed landmarks go on <strong>3D Digitizing</strong>, anchors on <strong>Anchors</strong>. Second, use a <kbd>double-click</kbd> to place, not a single click. A single drag rotates the view.</p>
 
 <h4>One specimen is a wild outlier in the PCA</h4>
-<p>Almost always a cleaning miss. Reopen that mesh, remove unreferenced vertices and any vertex at the origin <code>(0, 0, 0)</code>, and re-run. See <a href="#setup">Prepare your meshes</a>.</p>
+<p>Almost always a cleaning miss. Reopen that mesh, remove unreferenced vertices and any vertex at the origin <code>(0, 0, 0)</code>, and digitize it again. See <a href="#setup">Prepare your meshes</a>.</p>
 
-<h4>Clicking the mesh does nothing</h4>
-<p>Check which mode you are in. You must be in fixed-landmark, anchor, or surface mode before a click registers as a point. Rotating and clicking are separate actions.</p>
+<h4>Merge refuses to combine my files</h4>
+<p>GUImorph will not merge specimens whose templates or curves differ, because their surface semilandmarks would not be comparable. Make sure every specimen was downsampled against the same template before you save and merge.</p>
 
-<h4>The 3D window will not open on my Mac</h4>
-<p>Expected on the newest macOS. The OpenGL support GUImorph relies on for the 3D view was removed there, which is the same change that retired geomorph's own digitizer. Use Windows for now. A browser-based version is planned for full cross-platform support.</p>
+<h4>The window will not open on my Mac or Linux machine</h4>
+<p>Expected in this beta. GUImorph 0.9.0 is Windows only. The 3D view depends on an OpenGL component that is not built for macOS or Linux yet, the same limitation that retired geomorph's own digitizer. A cross-platform version is planned.</p>
 
 <hr class="dm-hr"/>
 
 <!-- ================= PART 4: CREDITS ================= -->
 <h3 id="cite">Part 4 &middot; Source, citation, and credits</h3>
-<p><strong>Getting GUImorph.</strong> The Windows package and sample meshes are available from the QuantLab. See the <a href="ai-development.html">AI Development</a> area or contact the lab.</p>
+<p><strong>Getting GUImorph.</strong> The repository is currently private. QuantLab collaborators can request access; see the <a href="ai-development.html">AI Development</a> area or contact the lab.</p>
 <!-- When the repository is public, add: <a href="https://github.com/dreoc/GUImorph" target="_blank">github.com/dreoc/GUImorph</a> -->
-<p><strong>Background.</strong> GUImorph restores the interactive 3D digitizing workflow removed from <a href="https://doi.org/10.1111/2041-210X.12035" target="_blank">geomorph</a> in version 4.1 (2026), and it exports data directly into geomorph for analysis.</p>
+<p><strong>Background.</strong> GUImorph restores the interactive 3D digitizing workflow deprecated in <a href="https://doi.org/10.1111/2041-210X.12035" target="_blank">geomorph</a> 4.1, and feeds results directly into geomorph for analysis.</p>
 <p><strong>Citation.</strong> A methods paper describing GUImorph is in preparation. Until it appears, please cite this page together with geomorph (Adams and Otárola-Castillo, 2013). The surface semilandmark method follows Gunz, Mitteroecker and Bookstein (2005).</p>
-<p><strong>Credits.</strong> Developed by Erik Otárola-Castillo (QuantLab, Purdue), with interface contributions from Austin Lutterbach.</p>
+<p><strong>Credits.</strong> Developed by Erik Otárola-Castillo (QuantLab, Purdue), with interface contributions from Austin Lutterbach. Version 0.9.0 (Windows beta).</p>
 
 </div><!-- /content-post -->
 </div><!-- /s-post -->
@@ -416,7 +453,8 @@ gpa <- <span class="fn">gpagen</span>(coords)
 <div class="dm-side-card">
 <h6>Platform</h6>
 <div class="plat"><span class="ok"><i class="fa fa-check-circle"></i></span> Windows: supported</div>
-<div class="plat"><span class="no"><i class="fa fa-hourglass-half"></i></span> macOS: in progress</div>
+<div class="plat"><span class="no"><i class="fa fa-ban"></i></span> macOS / Linux: not yet</div>
+<div class="plat" style="color:#777;font-size:12.5px;margin-top:10px;">GUImorph 0.9.0 beta &middot; R 4.6+ (64-bit)</div>
 </div>
 
 <div class="side-title mb-30"><span></span><h6>Quick links</h6></div>
