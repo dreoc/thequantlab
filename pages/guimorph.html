@@ -386,8 +386,49 @@ install.packages(
 
 <hr class="dm-hr"/>
 
-<!-- ================= PART 3: TROUBLESHOOTING ================= -->
-<h3 id="trouble">Part 3 &middot; Troubleshooting</h3>
+<!-- ================= PART 3: THE DGT FILE ================= -->
+<h3 id="dgt">Part 3 &middot; The .dgt file: your project</h3>
+<p>When you save your work, GUImorph writes a <code>.dgt</code> file. This is GUImorph's project file: every point you placed, for every specimen, stored in one plain-text file you can save, reopen, and keep working on later. If the <code>.ply</code> scans are the raw material, the <code>.dgt</code> is your saved progress. You can open one in Notepad and read it.</p>
+
+<h4>What it holds</h4>
+<p>A <code>.dgt</code> stores the coordinates of the points you placed, not the mesh. It begins with the parts that are shared across the whole study, then repeats one block for each specimen. Here is the shape of a real file, with notes added:</p>
+<div class="dm-code">
+<button class="dm-copy" type="button">Copy</button>
+<pre><code>Curve=3                 <span class="cmt"># 3 curve sliders; each row is:  start  slider  end</span>
+1 2 3                   <span class="cmt"># slider 2 slides between fixed landmarks 1 and 3</span>
+1 6 5
+5 4 3
+
+TemplateNumber=1017     <span class="cmt"># surface template: 1017 reference points</span>
+A6_1_clean.ply          <span class="cmt"># the specimen the template was built from</span>
+"V1" "V2" "V3"
+-11.68  -13.71  -5.54   <span class="cmt"># one x y z per row, for all 1017 template points</span>
+...
+
+LM3=6                   <span class="cmt"># ---- specimen block: repeats once per specimen ----</span>
+...                     <span class="cmt"># 6 fixed-landmark rows (x y z)</span>
+AC3=10                  <span class="cmt"># 10 anchors</span>
+...                     <span class="cmt"># 10 anchor rows (x y z)</span>
+ID=A6_1_clean.ply       <span class="cmt"># which .ply scan this specimen is</span>
+Template=A6_1_clean.ply <span class="cmt"># the template it was downsampled against</span>
+Surface=1000            <span class="cmt"># 1000 surface semilandmarks</span>
+...                     <span class="cmt"># 1000 surface rows (x y z)</span></code></pre>
+</div>
+<p>The two shared sections at the top are the curve rules (<code>Curve=</code>), which say which curve slider sits between which two fixed landmarks, and the surface template (<code>TemplateNumber=</code>), the reference pattern of surface points taken from one specimen. Both are written once, because they are the same for every specimen.</p>
+<p>Each specimen block then carries its own fixed landmarks (<code>LM3=</code>, where the 3 means three-dimensional), its anchors (<code>AC3=</code>), the name of the scan it came from (<code>ID=</code>), the template it was downsampled against (<code>Template=</code>), and its surface semilandmarks (<code>Surface=</code>). A study of six specimens produces one <code>.dgt</code> holding all six blocks in sequence.</p>
+
+<h4>What it does not hold</h4>
+<p>The <code>.dgt</code> does not contain the 3D meshes. Those stay in their own <code>.ply</code> files, and the <code>.dgt</code> only records where on each object your points sit, referring to the scan by name in the <code>ID=</code> line. This is why a <code>.dgt</code> stays small while a scan can be large. Think of it as the difference between a tracing and the thing you traced. The <code>.dgt</code> is the tracing.</p>
+<div class="dm-warn"><span class="h">Keep them together</span><p>Store your <code>.ply</code> scans alongside the <code>.dgt</code>. Reopening a session expects the scans to still be findable under the names recorded in the file.</p></div>
+
+<h4>Working with .dgt files</h4>
+<p>Four File-menu actions cover the life cycle. <span class="dm-path">Save to DGT&#8230;</span> writes everything you have placed, all specimens and all point types, into one file. <span class="dm-path">Load DGT File&#8230;</span> reads it back and reconstructs the whole session, every specimen with its points where you left them. <span class="dm-path">Add PLY to Current DGT&#8230;</span> brings a new scan into the open dataset so you can digitize it alongside the others. <span class="dm-path">Merge DGT Files&#8230;</span> combines several <code>.dgt</code> files into one, provided they share the same template, curves, and point counts.</p>
+<div class="dm-note"><span class="h">Getting the data into geomorph</span><p>The <code>.dgt</code> is GUImorph's own format, for working in GUImorph. To analyze your shapes, run the Procrustes fit on the <strong>GPA</strong> tab with <span class="dm-path">Compute</span>, which assembles the coordinates and runs geomorph's <code>gpagen</code> for you, then plot or save the result. See step 10.</p></div>
+
+<hr class="dm-hr"/>
+
+<!-- ================= PART 4: TROUBLESHOOTING ================= -->
+<h3 id="trouble">Part 4 &middot; Troubleshooting</h3>
 
 <h4>"there is no package called 'geomorph'" (or Rvcg, Morpho, and so on)</h4>
 <p>A dependency did not install. Install them directly, then load GUImorph again:</p>
@@ -416,8 +457,8 @@ install.packages(
 
 <hr class="dm-hr"/>
 
-<!-- ================= PART 4: CREDITS ================= -->
-<h3 id="cite">Part 4 &middot; Source, citation, and credits</h3>
+<!-- ================= PART 5: CREDITS ================= -->
+<h3 id="cite">Part 5 &middot; Source, citation, and credits</h3>
 <p><strong>Getting GUImorph.</strong> The GUImorph Windows package is available from the QuantLab. See the <a href="ai-development.html">AI Development</a> area or contact the lab.</p>
 <p><strong>Background.</strong> GUImorph restores the interactive 3D digitizing workflow deprecated in <a href="https://doi.org/10.1111/2041-210X.12035" target="_blank">geomorph</a> 4.1, and feeds results directly into geomorph for analysis.</p>
 <p><strong>Citation.</strong> A methods paper describing GUImorph is in preparation. Until it appears, please cite this page together with geomorph (Adams and Otárola-Castillo, 2013). The surface semilandmark method follows Gunz, Mitteroecker and Bookstein (2005).</p>
@@ -436,8 +477,9 @@ install.packages(
 <li><a href="#overview">What you will do</a></li>
 <li><a href="#setup">1 &middot; Before you start</a></li>
 <li><a href="#workflow">2 &middot; The workflow</a></li>
-<li><a href="#trouble">3 &middot; Troubleshooting</a></li>
-<li><a href="#cite">4 &middot; Source &amp; citation</a></li>
+<li><a href="#dgt">3 &middot; The .dgt file</a></li>
+<li><a href="#trouble">4 &middot; Troubleshooting</a></li>
+<li><a href="#cite">5 &middot; Source &amp; citation</a></li>
 </ul>
 
 <div class="dm-side-card">
