@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="GUImorph: a geomorph-native 3D digitizer for R. Place landmarks and surface semilandmarks on PLY meshes, run Procrustes analysis, and export straight to geomorph." name="description"/>
+<meta content="GUImorph, geomorph, geometric morphometrics, 3D digitizing, landmarks, semilandmarks, Procrustes, PLY, R, Purdue, QuantLab" name="keywords"/>
+<title>QuantLab | GUImorph</title>
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Montserrat:200,300,400,500,600,700,900" rel="stylesheet"/>
+<link href="../css/font-awesome.min.css" rel="stylesheet"/>
+<link href="../css/et-line.css" rel="stylesheet"/>
+<link href="../css/bootstrap.min.css" rel="stylesheet"/>
+<link href="../css/magnific-popup.css" rel="stylesheet"/>
+<link href="../css/owl.carousel.min.css" rel="stylesheet"/>
+<link href="../css/owl.theme.default.min.css" rel="stylesheet"/>
+<link href="../css/style.css" rel="stylesheet"/>
+<link href="../css/publications-grid.css" rel="stylesheet"/>
+<link href="../css/pub-tabs.css" rel="stylesheet"/>
+<link href="../css/responsive.css" rel="stylesheet"/>
+<link href="../css/quantlab-custom.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+<script src="../js/html5shiv.min.js"></script>
+<style>
+/* ============================================================
+   GUImorph guide - scoped under .dm-guide so nothing leaks
+   into the rest of the QuantLab site. Palette and type match
+   the existing theme (gold #c7a46b, slate #34495e, Montserrat
+   headings, Open Sans body).
+   ============================================================ */
+.dm-guide { color:#333; }
+.dm-guide p { color:#333; line-height:1.75; }
+.dm-guide h3 { font-size:26px; margin:34px 0 6px; color:#1f1f1f; }
+.dm-guide h4 { font-size:19px; margin:22px 0 8px; color:#1f1f1f; }
+.dm-guide a { color:#34495e; font-weight:600; }
+.dm-guide a:hover { color:#111; }
+.dm-kicker { display:inline-block; font-size:12px; letter-spacing:1.8px; text-transform:uppercase; color:#b6924e; font-weight:700; margin:4px 0 10px; }
+.dm-lead { font-size:17px; color:#444; line-height:1.85; }
+.dm-hr { border:0; border-top:1px solid #ececec; margin:44px 0; }
+
+/* platform badges */
+.dm-badges { display:flex; gap:10px; flex-wrap:wrap; margin:18px 0 6px; }
+.dm-badge { display:inline-flex; align-items:center; gap:8px; font-size:12px; font-weight:600; letter-spacing:.4px; padding:8px 13px; border-radius:999px; border:1px solid #e4e4e4; }
+.dm-badge.ok  { background:#f2f8f4; border-color:#cfe6d8; color:#2e7d54; }
+.dm-badge.wip { background:#fbf6ee; border-color:#ecdcbf; color:#a9803c; }
+
+/* one-glance map */
+.dm-map { counter-reset:dmmap; list-style:none; padding-left:0; margin:16px 0 0; }
+.dm-map li { counter-increment:dmmap; position:relative; padding:7px 0 7px 36px; color:#3b3b3b; line-height:1.55; }
+.dm-map li::before { content:counter(dmmap); position:absolute; left:0; top:6px; width:23px; height:23px; border-radius:50%; background:#f0e6d2; color:#8a6d33; font-size:12px; font-weight:700; display:flex; align-items:center; justify-content:center; font-family:'Montserrat',sans-serif; }
+
+/* numbered step rail - the page signature: a sequence of placed points */
+.dm-steps { position:relative; margin:26px 0 0; }
+.dm-steps::before { content:""; position:absolute; left:19px; top:16px; bottom:16px; width:2px; background:linear-gradient(#e7d9bd,#efe7d6); }
+.dm-step { position:relative; padding:0 0 30px 60px; }
+.dm-step:last-child { padding-bottom:0; }
+.dm-stepnum { position:absolute; left:0; top:0; width:40px; height:40px; border-radius:50%; background:#c7a46b; color:#fff; font-family:'Montserrat',sans-serif; font-weight:700; font-size:17px; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 12px rgba(199,164,107,.35); z-index:1; }
+.dm-step h4 { margin:5px 0 8px; font-size:20px; }
+.dm-step p { margin:0 0 10px; }
+
+/* action line */
+.dm-do { display:flex; gap:12px; align-items:flex-start; background:#fbfbfb; border:1px solid #eee; border-left:3px solid #34495e; padding:12px 15px; margin:12px 0; }
+.dm-do .lab { font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:#34495e; white-space:nowrap; padding-top:3px; font-family:'Montserrat',sans-serif; }
+.dm-do .txt { color:#333; line-height:1.6; }
+
+/* success check */
+.dm-check { display:flex; gap:10px; align-items:flex-start; margin:10px 0 2px; color:#2e7d54; font-size:14px; line-height:1.55; }
+.dm-check i { margin-top:3px; }
+
+/* menu path + inline code + keyboard keys */
+.dm-path { font-family:'Montserrat',sans-serif; font-weight:600; font-size:13px; background:#f1f3f5; color:#2b2b2b; padding:2px 8px; border-radius:4px; white-space:nowrap; }
+.dm-guide code, code.dm-inline { font-family:'SFMono-Regular',Consolas,'Liberation Mono',Menlo,monospace; font-size:13px; background:#f1f3f5; color:#1f3346; padding:2px 6px; border-radius:4px; }
+.dm-guide kbd { font-family:'SFMono-Regular',Consolas,Menlo,monospace; font-size:12px; background:#fff; color:#333; border:1px solid #d6d6d6; border-bottom-width:2px; border-radius:5px; padding:2px 7px; box-shadow:0 1px 0 rgba(0,0,0,.04); white-space:nowrap; }
+
+/* R / shell code block */
+.dm-code { position:relative; background:#1c2733; border-radius:8px; margin:16px 0; overflow:hidden; box-shadow:0 12px 30px rgba(28,39,51,.18); }
+.dm-code pre { margin:0; padding:18px 52px 18px 18px; overflow-x:auto; }
+.dm-code code { display:block; background:transparent; padding:0; color:#e6ecf2; font-family:'SFMono-Regular',Consolas,Menlo,monospace; font-size:13.5px; line-height:1.7; }
+.dm-code .cmt { color:#7f93a6; }
+.dm-code .fn  { color:#7cc7a0; }
+.dm-code .str { color:#e0b17a; }
+.dm-copy { position:absolute; top:8px; right:8px; background:rgba(255,255,255,.08); color:#cfe0d6; border:1px solid rgba(255,255,255,.14); border-radius:6px; font-size:11px; font-weight:600; letter-spacing:.5px; padding:5px 10px; cursor:pointer; transition:all .15s; }
+.dm-copy:hover { background:rgba(255,255,255,.16); color:#fff; }
+
+/* callouts */
+.dm-tip, .dm-warn, .dm-note { padding:16px 18px; margin:18px 0; border-left:4px solid #c7a46b; background:#faf7f1; line-height:1.7; }
+.dm-tip .h, .dm-warn .h, .dm-note .h { display:block; font-family:'Montserrat',sans-serif; font-weight:700; font-size:13px; letter-spacing:.6px; text-transform:uppercase; margin-bottom:6px; }
+.dm-tip .h { color:#a9803c; }
+.dm-warn { background:#fbf1ef; border-left-color:#c0553f; }
+.dm-warn .h { color:#b8492f; }
+.dm-note { background:#f4f7fa; border-left-color:#34495e; }
+.dm-note .h { color:#34495e; }
+.dm-tip p:last-child, .dm-warn p:last-child, .dm-note p:last-child { margin-bottom:0; }
+
+/* advanced disclosure */
+.dm-details { border:1px solid #ececec; border-radius:6px; margin:16px 0; background:#fcfcfc; }
+.dm-details summary { cursor:pointer; padding:12px 16px; font-family:'Montserrat',sans-serif; font-weight:600; font-size:14px; color:#34495e; list-style:none; }
+.dm-details summary::-webkit-details-marker { display:none; }
+.dm-details summary::before { content:"\25B8"; margin-right:10px; color:#c7a46b; }
+.dm-details[open] summary::before { content:"\25BE"; }
+.dm-details .body { padding:2px 16px 16px; }
+
+/* sidebar */
+.dm-sticky { position:-webkit-sticky; position:sticky; top:90px; }
+.dm-toc { list-style:none; padding:0; margin:0; }
+.dm-toc a { display:block; padding:7px 0 7px 12px; border-left:2px solid #ececec; color:#555; font-size:13.5px; line-height:1.4; }
+.dm-toc a:hover { color:#111; border-left-color:#c7a46b; }
+.dm-toc a.on { color:#111; border-left-color:#c7a46b; font-weight:600; }
+.dm-side-card { background:#fff; border:1px solid #ececec; box-shadow:0 14px 34px rgba(0,0,0,.05); padding:18px; margin-bottom:26px; }
+.dm-side-card h6 { font-family:'Montserrat',sans-serif; font-weight:700; margin:0 0 12px; font-size:13px; letter-spacing:1px; text-transform:uppercase; color:#333; }
+.dm-side-card .plat { display:flex; align-items:center; gap:8px; font-size:13.5px; margin:8px 0; color:#444; }
+.dm-side-card .plat .ok { color:#2e7d54; }
+.dm-side-card .plat .no { color:#b8492f; }
+.dm-quicklinks a { display:block; padding:8px 0; color:#34495e; font-weight:600; font-size:14px; }
+.dm-quicklinks a i { width:18px; color:#c7a46b; }
+
+@media (max-width:767px){
+  .dm-step { padding-left:52px; }
+  .dm-stepnum { width:34px; height:34px; font-size:15px; }
+  .dm-steps::before { left:16px; }
+}
+</style>
+</head>
+<body>
+<div class="loading"><div class="spinner"><div class="rect1"></div><div class="rect2"></div><div class="rect3"></div><div class="rect4"></div><div class="rect5"></div></div></div>
+<main>
+<nav class="navbar">
+<div class="container">
+<div class="navbar-header">
+<button aria-expanded="false" class="navbar-toggle collapsed" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button">
+<span class="sr-only">Toggle navigation</span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
+<a class="navbar-brand" href="../index.html">The QuantLab</a>
+</div>
+<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+<ul class="nav navbar-nav navbar-right">
+<li><a data-nav="home" href="../index.html">Home</a></li>
+<li><a data-nav="research" href="../index.html#research">Research</a></li>
+<li><a class="active" data-nav="projects" href="../index.html#projects">Projects</a></li>
+<li><a data-nav="publications" href="../index.html#publications">Publications</a></li>
+<li><a data-nav="people" href="../index.html#people">People</a></li>
+<li><a data-nav="news" href="../index.html#news">Highlights</a></li>
+<li><a data-nav="contact" href="../index.html#contact">Contact</a></li>
+<li><a data-nav="blog" href="../index.html#blog-home">Blog</a></li>
+</ul>
+</div>
+</div>
+</nav>
+<header class="posts subpage-hero" data-stellar-background-ratio="0.5" id="home">
+<div class="header-overlay">
+<div class="caption v-middle text-center"><h1>GUImorph</h1></div>
+</div>
+</header>
+<div class="container">
+<div class="row">
+<div class="col-sm-9">
+<div class="s-post">
+<div class="content-post dm-guide">
+
+<div class="subpage-meta"><a href="ai-development.html">AI Development</a> &nbsp;&middot;&nbsp; Tools &amp; workflows</div>
+<span class="dm-kicker">3D geometric morphometrics in R</span>
+<h5 style="margin-top:0;">GUImorph: a geomorph-native 3D digitizer</h5>
+
+<p class="dm-lead">GUImorph places 3D landmarks and surface semilandmarks on scanned meshes, runs Generalized Procrustes Analysis, and passes the result straight to geomorph. It runs inside R, using a Tcl/Tk interface with an interactive OpenGL 3D view. This page walks a first-time user through the full workflow, one click at a time.</p>
+
+<p>Geometric morphometrics turns the shape of an object into coordinates that can be measured and compared. For a Folsom point, that means recording the same anatomical landmarks and a dense set of surface points on every specimen, then aligning them so only shape differences remain. GUImorph is built to make that recording step approachable.</p>
+
+<p>The need is concrete. In 2026, geomorph 4.1 removed its interactive 3D digitizing functions (<code>digit.fixed</code>, <code>buildtemplate</code>, <code>digitsurface</code>), because the newest macOS dropped OpenGL support and the underlying rgl graphics are no longer maintained there. A frozen copy of geomorph 4.0.9 remains on GitHub, unmaintained, for anyone with an older setup. GUImorph restores that template-based workflow as its own R package, and it writes data in the exact array format that geomorph's <code>gpagen</code> expects. No file conversion, and no separate application to install.</p>
+
+<div class="dm-badges">
+<span class="dm-badge ok"><i class="fa fa-check-circle"></i> Windows: supported</span>
+<span class="dm-badge wip"><i class="fa fa-clock-o"></i> macOS: in progress</span>
+</div>
+
+<div class="notice-box"><strong>Which computer to use.</strong> Run GUImorph on Windows for now. The same OpenGL change that ended geomorph's digitizer also affects the 3D view on the newest macOS, so a browser-based version is planned for cross-platform use. Everything below assumes Windows.</div>
+
+<h3 id="overview">What you will do</h3>
+<p>The workflow is a fixed sequence. Here is the whole thing at a glance, before the detailed steps.</p>
+<ol class="dm-map">
+<li>Install R and the GUImorph package.</li>
+<li>Prepare your PLY meshes (remove stray and origin points).</li>
+<li>Launch GUImorph and load your first specimen.</li>
+<li>Learn to rotate, zoom, and pan the 3D view.</li>
+<li>Place the fixed (anatomical) landmarks.</li>
+<li>Place anchors or curve points, if your protocol uses them.</li>
+<li>Build the surface template once, on a reference specimen.</li>
+<li>Apply the template to every other specimen.</li>
+<li>Save each specimen to a <code>.dgt</code> file.</li>
+<li>Merge the <code>.dgt</code> files into one dataset.</li>
+<li>Run GPA and inspect the results.</li>
+<li>Hand the coordinates to geomorph.</li>
+</ol>
+
+<hr class="dm-hr"/>
+
+<!-- ================= PART 1: SETUP ================= -->
+<h3 id="setup">Part 1 &middot; Before you start</h3>
+
+<h4>Install R</h4>
+<p>GUImorph runs inside R. If you do not have it, install R from the official site, and optionally RStudio as a friendlier console. Any recent version of R for Windows works.</p>
+<div class="dm-do"><span class="lab">Get it</span><span class="txt">Download R for Windows from <a href="https://cran.r-project.org/" target="_blank">cran.r-project.org</a>. Install with the default options.</span></div>
+
+<h4>Install the GUImorph package</h4>
+<p>Use the prebuilt Windows package. This is the simplest path and needs no compiler. Save the package file somewhere you can find it, then run the command below in the R console, editing the path to match where you saved it.</p>
+<div class="dm-code">
+<button class="dm-copy" type="button">Copy</button>
+<pre><code><span class="cmt"># Install GUImorph on Windows (prebuilt package).</span>
+<span class="cmt"># Edit the path to wherever you saved the file.</span>
+install.packages(<span class="str">"C:/Users/you/Downloads/GUImorph_1.0.0.zip"</span>, repos = NULL)
+
+<span class="cmt"># Load it. Do this once at the start of every session:</span>
+library(GUImorph)</code></pre>
+</div>
+<div class="dm-check"><i class="fa fa-check"></i><span>It worked if <code>library(GUImorph)</code> returns to the prompt with no red error text.</span></div>
+
+<details class="dm-details">
+<summary>Building from source (advanced)</summary>
+<div class="body">
+<p>If you were given the source folder instead of a prebuilt package, you can compile it, but this requires a C toolchain to build the OpenGL engine.</p>
+<div class="dm-code">
+<button class="dm-copy" type="button">Copy</button>
+<pre><code>install.packages(<span class="str">"C:/path/to/GUImorph"</span>, repos = NULL, type = <span class="str">"source"</span>)</code></pre>
+</div>
+<p>Build the C component with Visual Studio 2022 Build Tools and CMake. Do not compile it with MinGW or the default gcc from Rtools for this part. That toolchain renders the mesh solid black. If your specimen shows up as a featureless black shape, this is almost always the cause.</p>
+</div>
+</details>
+
+<h4>Prepare your meshes</h4>
+<p>GUImorph reads PLY surface files. Export your scans as <code>.ply</code> with per-vertex color kept. Before digitizing, remove junk points from each mesh. Scanner exports (for example from NextEngine or ScanStudio) usually carry unreferenced vertices that belong to no face, and null vertices sitting at the exact origin, the point <code>(0, 0, 0)</code>. These points are invisible while you work, but they land far from your specimen and become extreme outliers once you run GPA. One uncleaned mesh can distort the alignment of the whole dataset.</p>
+<div class="dm-do"><span class="lab">Do this</span><span class="txt">In MeshLab, open each mesh and run <span class="dm-path">Filters &#9656; Cleaning and Repairing &#9656; Remove Unreferenced Vertices</span>, then <span class="dm-path">Remove Duplicate Vertices</span>. Delete any vertex sitting at the origin. Keep all faces and colors. Export back to <code>.ply</code>.</span></div>
+<div class="dm-warn"><span class="h">Common mistake</span><p>Skipping this step. It is the single most frequent reason one specimen looks wildly wrong in the final plot. If a point cloud or mesh includes a vertex at exactly <code>(0, 0, 0)</code>, remove it before you digitize.</p></div>
+
+<hr class="dm-hr"/>
+
+<!-- ================= PART 2: WORKFLOW ================= -->
+<h3 id="workflow">Part 2 &middot; The digitizing workflow</h3>
+<p>Work through these in order. Each step tells you what to do, and how to tell it worked.</p>
+
+<div class="dm-steps">
+
+<div class="dm-step" id="s-launch">
+<div class="dm-stepnum">1</div>
+<h4>Launch GUImorph</h4>
+<p>With the package loaded, open the interface from the R console.</p>
+<div class="dm-code">
+<button class="dm-copy" type="button">Copy</button>
+<pre><code>library(GUImorph)
+<span class="fn">GUImorph</span>()</code></pre>
+</div>
+<p>A window opens with a menu bar across the top and a large dark panel. That dark panel is the 3D view. It is empty until you load a specimen.</p>
+<div class="dm-check"><i class="fa fa-check"></i><span>The GUImorph window is open and you can see the File menu.</span></div>
+</div>
+
+<div class="dm-step" id="s-load">
+<div class="dm-stepnum">2</div>
+<h4>Load your first specimen</h4>
+<p>Open one of your cleaned meshes.</p>
+<div class="dm-do"><span class="lab">Menu</span><span class="txt"><span class="dm-path">File &#9656; Add PLY</span>, then choose one of your <code>.ply</code> files.</span></div>
+<p>Your specimen appears in the 3D view, in its scanned color. If it looks small or off-center, that is fine. You will orient it in the next step.</p>
+<div class="dm-check"><i class="fa fa-check"></i><span>Your specimen is visible in the 3D panel.</span></div>
+</div>
+
+<div class="dm-step" id="s-view">
+<div class="dm-stepnum">3</div>
+<h4>Move the 3D view</h4>
+<p>Before placing any points, learn to move the specimen so the region you want to landmark faces you. The view controls are mouse-driven.</p>
+<div class="dm-do"><span class="lab">Rotate</span><span class="txt">Hold the <kbd>left mouse</kbd> button and drag.</span></div>
+<div class="dm-do"><span class="lab">Zoom</span><span class="txt">Scroll the <kbd>mouse wheel</kbd> in and out.</span></div>
+<div class="dm-do"><span class="lab">Pan</span><span class="txt">Hold the <kbd>right mouse</kbd> button and drag to slide the specimen sideways.</span></div>
+<div class="dm-tip"><span class="h">Tip</span><p>Rotating the specimen does not move the landmarks you have already placed. They stay locked to the surface. Turn the specimen freely to check your points from every angle.</p></div>
+<div class="dm-check"><i class="fa fa-check"></i><span>You can turn, zoom, and slide the specimen at will.</span></div>
+</div>
+
+<div class="dm-step" id="s-fixed">
+<div class="dm-stepnum">4</div>
+<h4>Place the fixed landmarks</h4>
+<p>Fixed landmarks are your numbered anatomical points, the same points in the same order on every specimen. This defined order is what lets you compare specimens later, so decide your landmark scheme first and follow it exactly.</p>
+<div class="dm-do"><span class="lab">Start</span><span class="txt">Enter fixed-landmark mode (the digitize control), then <kbd>left-click</kbd> directly on the surface at each landmark, in order: 1, 2, 3, and so on.</span></div>
+<p>A marker drops onto the surface at each click. The marker sits slightly above the mesh so it is easy to see and does not disappear into the surface.</p>
+<div class="dm-do"><span class="lab">Undo</span><span class="txt">To remove the last point you placed, delete it and click again. Placing points in the correct order matters more than placing them quickly.</span></div>
+<div class="dm-tip"><span class="h">Tip</span><p>Zoom in before clicking a precise landmark. A point placed while zoomed out can be off by more than you expect. Rotate the specimen afterward to confirm the marker sits exactly where you intended.</p></div>
+<div class="dm-check"><i class="fa fa-check"></i><span>All fixed landmarks are placed, numbered in order, each sitting on the surface.</span></div>
+</div>
+
+<div class="dm-step" id="s-anchors">
+<div class="dm-stepnum">5</div>
+<h4>Place anchors or curve points</h4>
+<p>Some protocols add anchors, points along an edge or ridge that guide where the surface points go. If your scheme does not use them, skip this step.</p>
+<div class="dm-do"><span class="lab">Do this</span><span class="txt">Switch to anchor mode, then <kbd>left-click</kbd> along the feature to mark it. Use the same anchors on every specimen.</span></div>
+<div class="dm-check"><i class="fa fa-check"></i><span>Your anchors trace the same feature you will trace on the other specimens.</span></div>
+</div>
+
+<div class="dm-step" id="s-template">
+<div class="dm-stepnum">6</div>
+<h4>Build the surface template (once)</h4>
+<p>Surface semilandmarks are a dense grid of points spread over the surface between your fixed landmarks. To make them correspond across specimens, you first build a <strong>template</strong> on one good reference specimen. You do this a single time for the whole study.</p>
+<div class="dm-do"><span class="lab">Do this</span><span class="txt">With the reference specimen loaded and its fixed landmarks placed, run the build-template step. When asked, enter how many surface points you want. GUImorph spreads that many points over the surface and saves a file named <code>template.txt</code> in your working folder.</span></div>
+<div class="dm-note"><span class="h">What the template is for</span><p>The template records the pattern of surface points on the reference. Every other specimen will receive the same pattern, warped to fit its own surface, so point number 50 means the same location on every specimen. This follows the method of Gunz, Mitteroecker and Bookstein (2005), the same approach geomorph used.</p></div>
+<div class="dm-check"><i class="fa fa-check"></i><span>A <code>template.txt</code> file exists in your folder, and surface points cover the reference specimen.</span></div>
+</div>
+
+<div class="dm-step" id="s-surface">
+<div class="dm-stepnum">7</div>
+<h4>Apply the template to every other specimen</h4>
+<p>Now digitize the rest of your specimens. Each one gets its fixed landmarks first, then the surface points come from the template automatically.</p>
+<div class="dm-do"><span class="lab">Repeat per specimen</span><span class="txt">Load the next specimen with <span class="dm-path">File &#9656; Add PLY</span>. Place the same fixed landmarks in the same order. Then run the surface step. GUImorph aligns the template to this specimen and drops the surface points into their corresponding places.</span></div>
+<div class="dm-note"><span class="h">Give it a moment when switching specimens</span><p>When you move to a new specimen, GUImorph re-sends the surface data to the 3D engine, which clears it on each load. A brief pause after loading is normal.</p></div>
+<div class="dm-check"><i class="fa fa-check"></i><span>Each specimen ends with the same number of surface points as the template, in matching positions.</span></div>
+</div>
+
+<div class="dm-step" id="s-save">
+<div class="dm-stepnum">8</div>
+<h4>Save each specimen</h4>
+<p>Save every specimen as you finish it. Do not wait until the end.</p>
+<div class="dm-do"><span class="lab">Menu</span><span class="txt"><span class="dm-path">File &#9656; Save</span>. This writes a <code>.dgt</code> file holding that specimen's landmark coordinates. Name the file after the specimen so you can tell them apart.</span></div>
+<div class="dm-check"><i class="fa fa-check"></i><span>You have one <code>.dgt</code> file per specimen, clearly named.</span></div>
+</div>
+
+<div class="dm-step" id="s-merge">
+<div class="dm-stepnum">9</div>
+<h4>Merge the specimen files</h4>
+<p>Combine your individual <code>.dgt</code> files into one dataset that holds every specimen together.</p>
+<div class="dm-do"><span class="lab">Menu</span><span class="txt"><span class="dm-path">File &#9656; Merge DGT</span>, then select all of your <code>.dgt</code> files at once.</span></div>
+<div class="dm-check"><i class="fa fa-check"></i><span>One merged dataset now contains all specimens, ready for analysis.</span></div>
+</div>
+
+<div class="dm-step" id="s-gpa">
+<div class="dm-stepnum">10</div>
+<h4>Run GPA</h4>
+<p>Generalized Procrustes Analysis removes differences in position, rotation, and size, so that only shape remains. This is the step that makes specimens comparable.</p>
+<div class="dm-do"><span class="lab">Do this</span><span class="txt">Open the GPA panel and run the analysis on your merged dataset.</span></div>
+<div class="dm-check"><i class="fa fa-check"></i><span>GUImorph reports aligned coordinates and a mean shape.</span></div>
+</div>
+
+<div class="dm-step" id="s-inspect">
+<div class="dm-stepnum">11</div>
+<h4>Inspect the results</h4>
+<p>Use the plotting buttons to check your work before moving on.</p>
+<div class="dm-do"><span class="lab">Specimens</span><span class="txt"><code>plotspecs</code> shows every specimen overlaid, so you can spot one that is misaligned.</span></div>
+<div class="dm-do"><span class="lab">Mean</span><span class="txt"><code>plotMeanShape</code> shows the average shape of the sample.</span></div>
+<div class="dm-do"><span class="lab">Variation</span><span class="txt"><code>plotPCA</code> places specimens on principal component axes, so you can see how they spread.</span></div>
+<div class="dm-warn"><span class="h">Reading the PCA</span><p>If one specimen sits far away from all the others in the PCA plot, that is usually a mesh-cleaning miss, an unreferenced or origin vertex that survived. Go back, re-clean that mesh, and re-digitize it if needed.</p></div>
+<div class="dm-check"><i class="fa fa-check"></i><span>Specimens overlay sensibly, and no point sits impossibly far from the rest.</span></div>
+</div>
+
+<div class="dm-step" id="s-geomorph">
+<div class="dm-stepnum">12</div>
+<h4>Take it into geomorph</h4>
+<p>This is the payoff. GUImorph's coordinates are already in the three-dimensional array format that geomorph's <code>gpagen</code> reads, so there is no conversion step and no export to another program.</p>
+<div class="dm-code">
+<button class="dm-copy" type="button">Copy</button>
+<pre><code>library(geomorph)
+
+<span class="cmt"># 'coords' is the landmark array from your merged GUImorph dataset.</span>
+gpa <- <span class="fn">gpagen</span>(coords)
+<span class="fn">plot</span>(gpa)
+
+<span class="cmt"># From here, the full geomorph toolkit is available:</span>
+<span class="cmt"># principal components, allometry, Procrustes ANOVA, and more.</span></code></pre>
+</div>
+<div class="dm-check"><i class="fa fa-check"></i><span><code>gpagen</code> runs without a shape error, and your analysis continues in geomorph.</span></div>
+</div>
+
+</div><!-- /dm-steps -->
+
+<hr class="dm-hr"/>
+
+<!-- ================= PART 3: TROUBLESHOOTING ================= -->
+<h3 id="trouble">Part 3 &middot; Troubleshooting</h3>
+
+<h4>The package will not load, or cannot find <code>tkogl2.dll</code></h4>
+<p>On 64-bit Windows, an older build could fail to locate its OpenGL engine file. Install the current GUImorph package, which corrects the file path it searches. If you built from source, rebuild and reinstall.</p>
+
+<h4>The specimen shows up as a solid black shape</h4>
+<p>The OpenGL engine was compiled with the wrong toolchain. Use the prebuilt package, or rebuild the C component with Visual Studio 2022 Build Tools and CMake. MinGW and the default gcc produce a black mesh.</p>
+
+<h4>One specimen is a wild outlier in the PCA</h4>
+<p>Almost always a cleaning miss. Reopen that mesh, remove unreferenced vertices and any vertex at the origin <code>(0, 0, 0)</code>, and re-run. See <a href="#setup">Prepare your meshes</a>.</p>
+
+<h4>Clicking the mesh does nothing</h4>
+<p>Check which mode you are in. You must be in fixed-landmark, anchor, or surface mode before a click registers as a point. Rotating and clicking are separate actions.</p>
+
+<h4>The 3D window will not open on my Mac</h4>
+<p>Expected on the newest macOS. The OpenGL support GUImorph relies on for the 3D view was removed there, which is the same change that retired geomorph's own digitizer. Use Windows for now. A browser-based version is planned for full cross-platform support.</p>
+
+<hr class="dm-hr"/>
+
+<!-- ================= PART 4: CREDITS ================= -->
+<h3 id="cite">Part 4 &middot; Source, citation, and credits</h3>
+<p><strong>Getting GUImorph.</strong> The Windows package and sample meshes are available from the QuantLab. See the <a href="ai-development.html">AI Development</a> area or contact the lab.</p>
+<!-- When the repository is public, add: <a href="https://github.com/dreoc/GUImorph" target="_blank">github.com/dreoc/GUImorph</a> -->
+<p><strong>Background.</strong> GUImorph restores the interactive 3D digitizing workflow removed from <a href="https://doi.org/10.1111/2041-210X.12035" target="_blank">geomorph</a> in version 4.1 (2026), and it exports data directly into geomorph for analysis.</p>
+<p><strong>Citation.</strong> A methods paper describing GUImorph is in preparation. Until it appears, please cite this page together with geomorph (Adams and Otárola-Castillo, 2013). The surface semilandmark method follows Gunz, Mitteroecker and Bookstein (2005).</p>
+<p><strong>Credits.</strong> Developed by Erik Otárola-Castillo (QuantLab, Purdue), with interface contributions from Austin Lutterbach.</p>
+
+</div><!-- /content-post -->
+</div><!-- /s-post -->
+</div><!-- /col-sm-9 -->
+
+<div class="col-sm-3">
+<div class="side-bar">
+<div class="dm-sticky">
+
+<div class="side-title mb-30"><span></span><h6>On this page</h6></div>
+<ul class="dm-toc mb-50">
+<li><a href="#overview">What you will do</a></li>
+<li><a href="#setup">1 &middot; Before you start</a></li>
+<li><a href="#workflow">2 &middot; The workflow</a></li>
+<li><a href="#trouble">3 &middot; Troubleshooting</a></li>
+<li><a href="#cite">4 &middot; Source &amp; citation</a></li>
+</ul>
+
+<div class="dm-side-card">
+<h6>Platform</h6>
+<div class="plat"><span class="ok"><i class="fa fa-check-circle"></i></span> Windows: supported</div>
+<div class="plat"><span class="no"><i class="fa fa-hourglass-half"></i></span> macOS: in progress</div>
+</div>
+
+<div class="side-title mb-30"><span></span><h6>Quick links</h6></div>
+<div class="dm-quicklinks mb-50">
+<a href="https://cran.r-project.org/" target="_blank"><i class="fa fa-download"></i> Download R</a>
+<a href="https://cran.r-project.org/package=geomorph" target="_blank"><i class="fa fa-cube"></i> geomorph on CRAN</a>
+<a href="ai-development.html"><i class="fa fa-arrow-left"></i> AI Development</a>
+<a href="EOC_page.html" target="_blank"><i class="fa fa-user"></i> Erik profile</a>
+</div>
+
+</div>
+</div>
+</div><!-- /col-sm-3 -->
+
+</div><!-- /row -->
+</div><!-- /container -->
+</main>
+<footer>
+<div class="container">
+<div class="social-icon">
+<a href="https://www.thequantlab.org/" target="_blank"><span><i aria-hidden="true" class="fa fa-globe"></i></span></a>
+<a href="https://www.cla.purdue.edu/directory/profiles/erik-otarola-castillo.html" target="_blank"><span><i aria-hidden="true" class="fa fa-user"></i></span></a>
+<a href="https://www.cla.purdue.edu/directory/profiles/ben-schoville.html" target="_blank"><span><i aria-hidden="true" class="fa fa-users"></i></span></a>
+<a href="https://scholar.google.com/citations?hl=en&amp;user=g_SNDWoAAAAJ" target="_blank"><span><i aria-hidden="true" class="fa fa-graduation-cap"></i></span></a>
+</div>
+<p>Copyright 2026 © The QuantLab</p>
+</div>
+</footer>
+<script src="../js/jquery-3.0.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-migrate-3.0.0.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/scrollIt.min.js"></script>
+<script src="../js/jquery.magnific-popup.min.js"></script>
+<script src="../js/owl.carousel.min.js"></script>
+<script src="../js/jquery.stellar.min.js"></script>
+<script src="../js/app.js"></script>
+<script src="../js/custom.js"></script>
+<script>
+/* GUImorph guide interactions: copy buttons + active table of contents.
+   Scoped to .dm-* elements, runs after the site scripts, fails quietly. */
+(function(){
+  document.querySelectorAll('.dm-copy').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var codeEl = btn.parentElement.querySelector('code');
+      var text = codeEl ? codeEl.innerText : '';
+      if (navigator.clipboard && text){
+        navigator.clipboard.writeText(text).then(function(){
+          var prev = btn.textContent;
+          btn.textContent = 'Copied';
+          setTimeout(function(){ btn.textContent = prev; }, 1400);
+        });
+      }
+    });
+  });
+  var links = Array.prototype.slice.call(document.querySelectorAll('.dm-toc a'));
+  var targets = links.map(function(a){ return document.getElementById(a.getAttribute('href').slice(1)); });
+  function onScroll(){
+    var y = window.pageYOffset + 130, idx = 0;
+    for (var i=0; i<targets.length; i++){ if (targets[i] && targets[i].offsetTop <= y) idx = i; }
+    links.forEach(function(a,i){ a.classList.toggle('on', i === idx); });
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+})();
+</script>
+</body>
+</html>
